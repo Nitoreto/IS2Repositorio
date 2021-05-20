@@ -1,0 +1,135 @@
+package GUIVenta;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import main.Controlador;
+
+public class MostrarVenta extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
+	private JPanel panel;
+	private JPanel panelMostrarVenta;
+	private JPanel panelDatos;
+	private JTable tabla;
+	private JTextArea textoMostrarVenta;
+	private JButton botonBuscar;
+	private JButton botonCancelar;
+	private JTextArea textoIdVenta;
+	private JTextField textoCampoIdVenta;
+	private Controlador controlador;
+
+	public MostrarVenta(Controlador controlador) {
+		super("PCComponentes Uchuva");
+		this.controlador = controlador;
+		initComponentes();
+	}
+
+	private void initComponentes() {
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		panelMostrarVenta = new JPanel();
+		panelDatos = new JPanel();
+		textoMostrarVenta = new JTextArea();
+		botonBuscar = new JButton();
+		botonCancelar = new JButton();
+		textoIdVenta = new JTextArea();
+		textoCampoIdVenta = new JTextField();
+		panel = new JPanel();
+
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setPreferredSize(new Dimension(1920, 720));
+
+		this.getContentPane().setLayout(new BorderLayout());
+
+		textoMostrarVenta.setEditable(false);
+		textoMostrarVenta.setText("Mostrar Venta");
+		textoMostrarVenta.setBackground(Color.green);
+		textoMostrarVenta.setForeground(Color.white);
+		textoMostrarVenta.setFocusable(false);
+		textoMostrarVenta.setFont(new Font("Consolas", 2, 100));
+		
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
+		panelMostrarVenta.setLayout(new BorderLayout());
+		panelDatos.setLayout(new GridLayout(1, 2, 0, 100));
+
+		textoIdVenta.setText("ID Venta");
+		textoIdVenta.setFont(new Font("Consolas", 4, 80));
+		textoIdVenta.setForeground(Color.green);
+		textoIdVenta.setEditable(false);
+		textoIdVenta.setFocusable(false);
+		panelDatos.add(textoIdVenta);
+		textoCampoIdVenta.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoCampoIdVenta);
+
+		botonBuscar.setText("Buscar");
+		botonBuscar.setFont(new Font("Consolas", 4, 80));
+		botonBuscar.setForeground(Color.green);
+		botonBuscar.setContentAreaFilled(false);
+		botonBuscar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonBuscarActionPerformed(evt);
+			}
+		});
+		panel.add(botonBuscar);
+
+		botonCancelar.setText("Cancelar");
+		botonCancelar.setFont(new Font("Consolas", 4, 80));
+		botonCancelar.setForeground(Color.red);
+		botonCancelar.setContentAreaFilled(false);
+		botonCancelar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				botonCancelarActionPerformed(evt);
+			}
+		});
+		panel.add(botonCancelar);
+
+		panelMostrarVenta.add(panelDatos, BorderLayout.NORTH);
+		this.getContentPane().add(textoMostrarVenta, BorderLayout.NORTH);
+		this.getContentPane().add(panelMostrarVenta, BorderLayout.CENTER);
+		this.getContentPane().add(panel, BorderLayout.SOUTH);
+		this.pack();
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+	}
+
+	private void botonBuscarActionPerformed(ActionEvent evt) {
+		String[] datos = { textoCampoIdVenta.getText() };
+		String inf = controlador.buscar("Venta", datos);
+
+		if (inf != "Exito") {
+			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
+		} else {
+			tabla = new JTable(controlador.actualizarTabla());
+			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+			tabla.setRowHeight(50);
+			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+			JScrollPane paneScroll = new JScrollPane(tabla);
+			panelMostrarVenta.add(paneScroll, BorderLayout.CENTER);
+			this.validate();
+		}
+
+	}
+
+	private void botonCancelarActionPerformed(ActionEvent evt) {
+		new PantallaPrincipalVentas(controlador);
+		this.dispose();
+	}
+
+}
