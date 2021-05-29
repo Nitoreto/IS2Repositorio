@@ -1,9 +1,10 @@
 package DAOProductos;
 
 import java.sql.SQLException;
+
+import dao_Transfer_Singelton.DAOSuper;
+import dao_Transfer_Singelton.Transfer;
 import factoria.Producto;
-import DAOAndTransfer.DAOSuper;
-import DAOAndTransfer.Transfer;
 
 public class DAOMostrarHistorialProducto extends DAOSuper {
 

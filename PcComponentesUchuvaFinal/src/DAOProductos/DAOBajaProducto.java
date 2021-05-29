@@ -2,7 +2,7 @@ package DAOProductos;
 
 import java.sql.SQLException;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Producto;
 
 public class DAOBajaProducto extends DAOSuper {

@@ -1,6 +1,6 @@
 package DAOVentas;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Venta;
 
 public class DAODesactivarVenta extends DAOSuper {

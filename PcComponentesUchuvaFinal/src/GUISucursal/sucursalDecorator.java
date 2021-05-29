@@ -23,12 +23,10 @@ public class sucursalDecorator extends JFrame{
 		
 		
 		JPanel mainPanel = new BorderDecorator();
-		this.setSize(1300, 900);
+		this.setSize(500,500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setContentPane(mainPanel);
 		mainPanel.add(new buttonsPanelDecorator(), BorderLayout.CENTER);
-	
-		this.add(mainPanel);
 		this.setVisible(true);
 	}
 	 public static void main(String[] args) {

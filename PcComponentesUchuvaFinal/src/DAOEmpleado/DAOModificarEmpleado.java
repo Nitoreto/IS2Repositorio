@@ -1,6 +1,6 @@
 package DAOEmpleado;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Empleado;
 
 public class DAOModificarEmpleado extends DAOSuper {

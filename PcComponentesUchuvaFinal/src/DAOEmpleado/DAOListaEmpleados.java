@@ -2,9 +2,9 @@ package DAOEmpleado;
 
 import java.sql.SQLException;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
+import dao_Transfer_Singelton.Transfer;
 import factoria.Empleado;
-import DAOAndTransfer.Transfer;
 
 public class DAOListaEmpleados extends DAOSuper {
 

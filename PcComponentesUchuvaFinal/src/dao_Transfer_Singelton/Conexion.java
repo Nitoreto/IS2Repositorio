@@ -1,4 +1,4 @@
-package DAOAndTransfer;
+package dao_Transfer_Singelton;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-public class DAOSuper {
+public class Conexion extends SingletonConexion{
 
 	protected Connection conexion;
 	protected String query;
@@ -14,14 +14,9 @@ public class DAOSuper {
 	protected Transfer transfer;
 	private Boolean instancia;
 
-	public DAOSuper() {
+	public Conexion() {
 		instancia = true;
-
-		try {
-			conexion = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
-		} catch (SQLException e1) {
-		}
+		
 	}
 
 	protected int conectarUpdate() throws SQLException {
@@ -31,7 +26,6 @@ public class DAOSuper {
 		statement.close();
 		conexion.close();
 		instancia = false;
-		;
 
 		return row;
 	}
@@ -42,14 +36,6 @@ public class DAOSuper {
 		resultado = statement.executeQuery(query);
 
 		return resultado;
-	}
-
-	public Object[][] generarTabla() {
-		return this.transfer.generarObject();
-	}
-
-	public String[] generarTitulos() {
-		return this.transfer.generarTitulos();
 	}
 
 	public void close() {
