@@ -2,7 +2,7 @@ package factoria;
 
 import java.sql.SQLException;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 
 public abstract class ShopObject implements Acciones {
 	private String nombreClase;

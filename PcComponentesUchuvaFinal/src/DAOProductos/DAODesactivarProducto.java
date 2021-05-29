@@ -1,6 +1,6 @@
 package DAOProductos;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Producto;
 
 public class DAODesactivarProducto extends DAOSuper {

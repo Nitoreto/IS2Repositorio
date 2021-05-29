@@ -1,2 +1,8 @@
-/GUIPersonal/
-/imagenes/
+/DAOAndTransfer/
+/DAOClientes/
+/DAOEmpleado/
+/DAOMarca/
+/DAOProductos/
+/DAOVentas/
+/dao_Transfer_Singelton/
+/factoria/

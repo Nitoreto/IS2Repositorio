@@ -3,8 +3,8 @@ package DAOEmpleado;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import DAOAndTransfer.DAOSuper;
-import DAOAndTransfer.Transfer;
+import dao_Transfer_Singelton.DAOSuper;
+import dao_Transfer_Singelton.Transfer;
 import factoria.Empleado;
 
 public class DAOMuestraHistorialEmpleado extends DAOSuper {

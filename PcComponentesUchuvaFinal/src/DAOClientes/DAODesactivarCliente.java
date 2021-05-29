@@ -1,6 +1,6 @@
 package DAOClientes;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Cliente;
 
 public class DAODesactivarCliente extends DAOSuper {
