@@ -2,7 +2,7 @@ package DAOMarca;
 
 import java.sql.*;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Marca;
 
 public class DAOAltaMarca extends DAOSuper {

@@ -1,4 +1,4 @@
-package DAOAndTransfer;
+package dao_Transfer_Singelton;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

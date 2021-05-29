@@ -11,6 +11,8 @@ public class BorderDecorator extends JPanel{
 	}
 	public void initGUI() {
 		this.setLayout(new BorderLayout());
+		
+		add(comp);
 	}
 
 }

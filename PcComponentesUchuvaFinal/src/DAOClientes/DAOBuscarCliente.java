@@ -2,8 +2,9 @@ package DAOClientes;
 
 
 import java.sql.SQLException;
-import DAOAndTransfer.DAOSuper;
-import DAOAndTransfer.Transfer;
+
+import dao_Transfer_Singelton.DAOSuper;
+import dao_Transfer_Singelton.Transfer;
 import factoria.Cliente;
 
 public class DAOBuscarCliente extends DAOSuper {

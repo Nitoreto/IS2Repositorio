@@ -2,8 +2,8 @@ package DAOMarca;
 
 import java.sql.SQLException;
 
-import DAOAndTransfer.DAOSuper;
-import DAOAndTransfer.Transfer;
+import dao_Transfer_Singelton.DAOSuper;
+import dao_Transfer_Singelton.Transfer;
 import factoria.Marca;
 
 public class DAOListarMarcas extends DAOSuper {

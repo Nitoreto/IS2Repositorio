@@ -1,6 +1,6 @@
 package DAOMarca;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Marca;
 
 public class DAODesactivarMarca extends DAOSuper {

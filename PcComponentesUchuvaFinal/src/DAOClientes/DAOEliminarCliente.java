@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
-import DAOAndTransfer.DAOSuper;
+import dao_Transfer_Singelton.DAOSuper;
 import factoria.Cliente;
 
 public class DAOEliminarCliente extends DAOSuper {
