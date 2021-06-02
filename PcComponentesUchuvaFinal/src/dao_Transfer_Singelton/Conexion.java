@@ -16,6 +16,11 @@ public class Conexion extends SingletonConexion{
 
 	public Conexion() {
 		instancia = true;
+		try {
+			conexion = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
+		} catch (SQLException e1) {
+		}
 		
 	}
 
