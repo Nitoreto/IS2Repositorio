@@ -1,22 +1,4 @@
-<<<<<<< HEAD
-/DAOAndTransfer/
-=======
 /imagenes/
-/DAOAndTransfer/
-/DAOClientes/
 /DAOEmpleado/
-/DAOMarca/
-/DAOProductos/
-/DAOVentas/
-/dao_Transfer_Singelton/
 /factoria/
->>>>>>> refs/remotes/origin/main
-/GUISucursal/
-/imagenes/
-/DAOClientes/
-/DAOEmpleado/
 /DAOMarca/
-/DAOProductos/
-/DAOVentas/
-/GUIPersonal/
-/factoria/
