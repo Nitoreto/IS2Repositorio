@@ -66,7 +66,7 @@ public class BuscarEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarEmpleado.setEditable(false);
-		textoBuscarEmpleado.setText("Buscar Empleado");
+		textoBuscarEmpleado.setText("Buscar ControladorEmpleado");
 		textoBuscarEmpleado.setBackground(Color.cyan);
 		textoBuscarEmpleado.setForeground(Color.white);
 		textoBuscarEmpleado.setFocusable(false);
@@ -122,7 +122,7 @@ public class BuscarEmpleado extends JFrame {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString(), tabla.getValueAt(0, 6).toString() };
-		String inf = controlador.modificar("Empleado", datos, campoID.getText());
+		String inf = controlador.modificar("ControladorEmpleado", datos, campoID.getText());
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -135,7 +135,7 @@ public class BuscarEmpleado extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoID.getText() };
-		String inf = controlador.buscar("Empleado", datos);
+		String inf = controlador.buscar("ControladorEmpleado", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

@@ -9,13 +9,13 @@ import DAOMarca.DAOListarMarcas;
 import DAOMarca.DAOModificarMarca;
 import main.Controlador;
 
-public class Marca extends ShopObject {
+public class ControladorMarca extends ShopObject {
 
 	private String CIFMarca, nombre, pais;
 	private Boolean activo;
 
-	public Marca() {
-		super("Marca");
+	public ControladorMarca() {
+		super("ControladorMarca");
 	}
 
 	public String getCIFMarca() {

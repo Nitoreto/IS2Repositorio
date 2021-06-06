@@ -68,7 +68,7 @@ public class AltaMarca extends JFrame {
 		setPreferredSize(new Dimension(1280, 720));
 		
 		textoAltaMarca.setEditable(false);
-		textoAltaMarca.setText("Alta Marca");
+		textoAltaMarca.setText("Alta ControladorMarca");
 		textoAltaMarca.setFocusable(false);
 		textoAltaMarca.setBackground(Color.orange);
 		textoAltaMarca.setForeground(Color.white);
@@ -80,7 +80,7 @@ public class AltaMarca extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 
 		textoCifMarca.setEditable(false);
-		textoCifMarca.setText("CIF Marca");
+		textoCifMarca.setText("CIF ControladorMarca");
 		textoCifMarca.setForeground(Color.orange);
 		textoCifMarca.setFocusable(false);
 		textoCifMarca.setFont(new Font("Consolas", 4, 80));
@@ -143,7 +143,7 @@ public class AltaMarca extends JFrame {
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoCifMarca.getText(), campoNombre.getText(), campoPais.getText() };
-		String inf = controlador.alta("Marca", datos);
+		String inf = controlador.alta("ControladorMarca", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		} else {

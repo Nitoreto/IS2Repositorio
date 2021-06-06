@@ -1,4 +1,4 @@
-package DAO_Conexion;
+package factoria;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -18,7 +18,7 @@ public class Transfer {
 		this.metaDat = resultado.getMetaData();
 	}
 
-	public Object[][] generarObject() {
+	public Object[][] generarTabla() {
 		try {
 			int columTam = metaDat.getColumnCount();
 			resultado.last();

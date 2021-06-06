@@ -13,7 +13,7 @@ public abstract  class SingletonConexion{
 		return conexion;
 	}
 	
-	protected abstract int conectarUpdate() throws SQLException;
-	protected abstract ResultSet conectarExecute() throws SQLException;
+	public abstract int conectarUpdate(String query) throws SQLException;
+	public abstract ResultSet conectarExecute(String query) throws SQLException;
 	public abstract void close();
 }

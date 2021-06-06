@@ -11,14 +11,14 @@ import DAOVentas.DAOModificarVenta;
 import DAOVentas.DAOMostrarVenta;
 import DAOVentas.DAORegistrarVenta;
 
-public class Venta extends ShopObject {
+public class ControladorVenta extends ShopObject {
 
 	private int idVentas, idEmpleado, precioTotal;
 	private String DNICliente, listaProductos;
 	private Boolean activo;
 
-	public Venta() {
-		super("Venta");
+	public ControladorVenta() {
+		super("ControladorVenta");
 
 	}
 

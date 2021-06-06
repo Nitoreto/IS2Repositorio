@@ -58,7 +58,7 @@ public class EliminarCliente extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoCliente.setEditable(false);
-		textoCliente.setText("Baja Cliente");
+		textoCliente.setText("Baja ControladorCliente");
 		textoCliente.setBackground(Color.lightGray);
 		textoCliente.setForeground(Color.white);
 		textoCliente.setFocusable(false);
@@ -119,9 +119,9 @@ public class EliminarCliente extends JFrame {
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("Cliente", Datos);
+			inf = controlador.baja("ControladorCliente", Datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("Cliente", Datos);
+			inf = controlador.desactivar("ControladorCliente", Datos);
 		}
 
 		if (inf != "Exito") {

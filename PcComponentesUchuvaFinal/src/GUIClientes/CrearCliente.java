@@ -69,7 +69,7 @@ public class CrearCliente extends JFrame {
 		setPreferredSize(new Dimension(1250, 720));
 
 		textoAltaCliente.setEditable(false);
-		textoAltaCliente.setText("Alta Cliente");
+		textoAltaCliente.setText("Alta ControladorCliente");
 		textoAltaCliente.setBackground(Color.lightGray);
 		textoAltaCliente.setForeground(Color.white);
 		textoAltaCliente.setFocusable(false);
@@ -144,7 +144,7 @@ public class CrearCliente extends JFrame {
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText() };
-		String inf = controlador.alta("Cliente", datos);
+		String inf = controlador.alta("ControladorCliente", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

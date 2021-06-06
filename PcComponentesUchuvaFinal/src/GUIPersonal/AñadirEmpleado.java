@@ -78,7 +78,7 @@ public class AñadirEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1750, 650));
 
 		textoAltaEmpleado.setEditable(false);
-		textoAltaEmpleado.setText("Alta Empleado");
+		textoAltaEmpleado.setText("Alta ControladorEmpleado");
 		textoAltaEmpleado.setBackground(Color.cyan);
 		textoAltaEmpleado.setForeground(Color.white);
 		textoAltaEmpleado.setFocusable(false);
@@ -184,7 +184,7 @@ public class AñadirEmpleado extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoId_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
 				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), };
-		String inf = controlador.alta("Empleado", datos);
+		String inf = controlador.alta("ControladorEmpleado", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		} else {

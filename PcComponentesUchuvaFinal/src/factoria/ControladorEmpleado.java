@@ -9,13 +9,13 @@ import DAOEmpleado.DAOModificarEmpleado;
 import DAOEmpleado.DAOMuestraHistorialEmpleado;
 import main.Controlador;
 
-public class Empleado extends ShopObject {
+public class ControladorEmpleado extends ShopObject {
 	private String name, apellido, dni, direccion;
 	private int telefono, id_empledo;
 	private Boolean activo;
 
-	public Empleado() {
-		super("Empleado");
+	public ControladorEmpleado() {
+		super("ControladorEmpleado");
 	}
 
 	public String getName() {

@@ -67,7 +67,7 @@ public class MostrarProducto extends JFrame {
 		setPreferredSize(new Dimension(1920, 900));
 
 		textoMostrarProducto.setEditable(false);
-		textoMostrarProducto.setText("Mostrar Producto");
+		textoMostrarProducto.setText("Mostrar ControladorProducto");
 		textoMostrarProducto.setFocusable(false);
 		textoMostrarProducto.setFont(new Font("Consolas", 4, 80));
 		textoMostrarProducto.setBackground(Color.pink);
@@ -122,7 +122,7 @@ public class MostrarProducto extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] Datos = { campoID.getText() };
-		String inf = controlador.buscar("Producto", Datos);
+		String inf = controlador.buscar("ControladorProducto", Datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -154,7 +154,7 @@ public class MostrarProducto extends JFrame {
 		String[] Datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString() };
-		String inf = controlador.modificar("Producto", Datos, campoID.getText());
+		String inf = controlador.modificar("ControladorProducto", Datos, campoID.getText());
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL MODIFCAR", JOptionPane.ERROR_MESSAGE);
 		} else {

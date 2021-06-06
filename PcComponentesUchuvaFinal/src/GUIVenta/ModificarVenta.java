@@ -68,7 +68,7 @@ public class ModificarVenta extends JFrame {
 		panelMostrar.setLayout(new BorderLayout());
 
 		textoIdVenta.setEditable(false);
-		textoIdVenta.setText("ID Venta a modificar");
+		textoIdVenta.setText("ID ControladorVenta a modificar");
 		textoIdVenta.setForeground(Color.green);
 		textoIdVenta.setFont(new Font("Consolas", 4, 80));
 		textoIdVenta.setFocusable(false);
@@ -123,7 +123,7 @@ public class ModificarVenta extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = controlador.buscar("Venta", datos);
+		String inf = controlador.buscar("ControladorVenta", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "ID no encontrado", "Error: ", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -140,9 +140,9 @@ public class ModificarVenta extends JFrame {
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("Venta", datos);
+			inf = controlador.baja("ControladorVenta", datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("Venta", datos);
+			inf = controlador.desactivar("ControladorVenta", datos);
 		}
 
 		if (inf != "Exito") {

@@ -2,12 +2,13 @@ package DAO_Conexion;
 
 import java.sql.SQLException;
 
-import factoria.Empleado;
+import factoria.ControladorEmpleado;
+import factoria.Transfer;
 
 public class DAOEmpleado {
 	private String DNI;
 	
-	public DAOEmpleado(Empleado E1) {
+	public DAOEmpleado(ControladorEmpleado E1) {
 		super();
 		DNI = E1.getDni();
 		

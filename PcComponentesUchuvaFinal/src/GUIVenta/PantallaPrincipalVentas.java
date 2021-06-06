@@ -68,7 +68,7 @@ public class PantallaPrincipalVentas extends JFrame {
 		});
 		panel.add(botonListarVentas);
 		
-		botonModificarVenta.setText("Modificar Venta");
+		botonModificarVenta.setText("Modificar ControladorVenta");
 		botonModificarVenta.setFont(new Font("Consolas", 4, 80));
 		botonModificarVenta.setBackground(Color.white);
 		botonModificarVenta.setForeground(Color.green);
@@ -80,7 +80,7 @@ public class PantallaPrincipalVentas extends JFrame {
 		});
 		panel.add(botonModificarVenta);
 
-		botonMostrarVenta.setText("Mostrar Venta");
+		botonMostrarVenta.setText("Mostrar ControladorVenta");
 		botonMostrarVenta.setFont(new Font("Consolas", 4, 80));
 		botonMostrarVenta.setBackground(Color.white);
 		botonMostrarVenta.setForeground(Color.green);
@@ -92,7 +92,7 @@ public class PantallaPrincipalVentas extends JFrame {
 		});
 		panel.add(botonMostrarVenta);
 
-		botonRegistrarVenta.setText("Registrar Venta");
+		botonRegistrarVenta.setText("Registrar ControladorVenta");
 		botonRegistrarVenta.setFont(new Font("Consolas", 4, 80));
 		botonRegistrarVenta.setBackground(Color.white);
 		botonRegistrarVenta.setForeground(Color.green);

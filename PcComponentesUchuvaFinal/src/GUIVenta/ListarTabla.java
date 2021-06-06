@@ -77,7 +77,7 @@ public class ListarTabla extends JFrame {
 
 	private String CrearTabla() {
 		String[] datos = { "rand", DNICliente };
-		String inf = controlador.mostrarHistorial("Venta", datos);
+		String inf = controlador.mostrarHistorial("ControladorVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

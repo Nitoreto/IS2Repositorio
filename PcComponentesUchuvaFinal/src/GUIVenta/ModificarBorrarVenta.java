@@ -52,7 +52,7 @@ public class ModificarBorrarVenta extends JFrame {
 		setPreferredSize(new Dimension(1920, 720));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Modificar Venta" + idVenta);
+		textoVenta.setText("Modificar ControladorVenta" + idVenta);
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -95,7 +95,7 @@ public class ModificarBorrarVenta extends JFrame {
 	
 	public void CrearTabla() {
 		String[] datos = {this.idVenta};
-		String inf = controlador.buscar("Venta", datos);
+		String inf = controlador.buscar("ControladorVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -115,7 +115,7 @@ public class ModificarBorrarVenta extends JFrame {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString() };
-		String inf = controlador.modificar("Venta", datos, idVenta);
+		String inf = controlador.modificar("ControladorVenta", datos, idVenta);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);

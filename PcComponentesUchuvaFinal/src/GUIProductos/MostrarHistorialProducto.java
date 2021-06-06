@@ -51,14 +51,14 @@ public class MostrarHistorialProducto extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoMostrarHistorialProducto.setEditable(false);
-		textoMostrarHistorialProducto.setText("Mostrar Historial Producto");
+		textoMostrarHistorialProducto.setText("Mostrar Historial ControladorProducto");
 		textoMostrarHistorialProducto.setFocusable(false);
 		textoMostrarHistorialProducto.setFont(new Font("Consolas", 4, 80));
 		textoMostrarHistorialProducto.setBackground(Color.pink);
 		textoMostrarHistorialProducto.setForeground(Color.white);
 		this.getContentPane().add(textoMostrarHistorialProducto, BorderLayout.NORTH);
 
-		String inf = controlador.listar("Producto");
+		String inf = controlador.listar("ControladorProducto");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

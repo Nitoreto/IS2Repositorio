@@ -47,7 +47,7 @@ public class ListarMarcas extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 		CrearTabla();
 		textoListarMarca.setEditable(false);
-		textoListarMarca.setText("Listar Marca");
+		textoListarMarca.setText("Listar ControladorMarca");
 		textoListarMarca.setFocusable(false);
 		textoListarMarca.setFont(new Font("Consolas", 2, 100));
 		textoListarMarca.setBackground(Color.orange);
@@ -99,14 +99,14 @@ public class ListarMarcas extends JFrame {
 			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("Marca", datos);
-				controlador.listar("Marca");
+				inf = controlador.baja("ControladorMarca", datos);
+				controlador.listar("ControladorMarca");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("Marca", datos);
-				controlador.listar("Marca");
+				inf = controlador.desactivar("ControladorMarca", datos);
+				controlador.listar("ControladorMarca");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
@@ -123,7 +123,7 @@ public class ListarMarcas extends JFrame {
 	}
 
 	private void CrearTabla() {
-		String inf = controlador.listar("Marca");
+		String inf = controlador.listar("ControladorMarca");
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		}

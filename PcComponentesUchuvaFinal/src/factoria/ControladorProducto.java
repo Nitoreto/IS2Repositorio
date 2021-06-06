@@ -8,15 +8,15 @@ import DAOProductos.DAOMostrarHistorialProducto;
 import DAOProductos.DAOMostrarProducto;
 import main.Controlador;
 
-public class Producto extends ShopObject {
+public class ControladorProducto extends ShopObject {
 
 	private String  Nombre, Descripcion, NombreMarca;
 	private int ID;
 	private float Precio;
 	private Boolean Activo;
 
-	public Producto() {
-		super("Producto");
+	public ControladorProducto() {
+		super("ControladorProducto");
 	}
 
 	public int getID() {

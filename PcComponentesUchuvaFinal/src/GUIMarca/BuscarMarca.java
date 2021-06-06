@@ -66,7 +66,7 @@ public class BuscarMarca extends JFrame {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarMarca.setEditable(false);
-		textoBuscarMarca.setText("Buscar Marca");
+		textoBuscarMarca.setText("Buscar ControladorMarca");
 		textoBuscarMarca.setBackground(Color.orange);
 		textoBuscarMarca.setForeground(Color.white);
 		textoBuscarMarca.setFocusable(false);
@@ -121,7 +121,7 @@ public class BuscarMarca extends JFrame {
 	private void botonModificarActionPerformed(ActionEvent evt) {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString() };
-		String inf = controlador.modificar("Marca", datos, campoCIF.getText());
+		String inf = controlador.modificar("ControladorMarca", datos, campoCIF.getText());
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -134,7 +134,7 @@ public class BuscarMarca extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoCIF.getText() };
-		String inf = controlador.buscar("Marca", datos);
+		String inf = controlador.buscar("ControladorMarca", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

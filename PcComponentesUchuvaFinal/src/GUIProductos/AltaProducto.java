@@ -79,7 +79,7 @@ public class AltaProducto extends JFrame {
 		setPreferredSize(new Dimension(1250, 850));
 
 		textoAltaProducto.setEditable(false);
-		textoAltaProducto.setText("Alta Producto");
+		textoAltaProducto.setText("Alta ControladorProducto");
 		textoAltaProducto.setBackground(Color.pink);
 		textoAltaProducto.setForeground(Color.white);
 		textoAltaProducto.setFocusable(false);
@@ -111,7 +111,7 @@ public class AltaProducto extends JFrame {
 		panelDatos.add(campoNombre);
 		
 		textoNombreMarca.setEditable(false);
-		textoNombreMarca.setText("Marca");
+		textoNombreMarca.setText("ControladorMarca");
 		textoNombreMarca.setForeground(Color.pink);
 		textoNombreMarca.setFocusable(false);
 		textoNombreMarca.setFont(new Font("Consolas", 4, 80));
@@ -176,7 +176,7 @@ public class AltaProducto extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] Datos = { campoID.getText(), campoNombre.getText(), campoNombreMarca.getText(),
 				campoDescripcion.getText(), campoPrecio.getText(), };
-		String inf = controlador.alta("Producto", Datos);
+		String inf = controlador.alta("ControladorProducto", Datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		} else {

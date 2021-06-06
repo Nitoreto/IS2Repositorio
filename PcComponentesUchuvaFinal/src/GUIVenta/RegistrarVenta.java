@@ -72,7 +72,7 @@ public class RegistrarVenta extends JFrame {
 		setPreferredSize(new Dimension(1750, 800));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Registrar Venta");
+		textoVenta.setText("Registrar ControladorVenta");
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -83,7 +83,7 @@ public class RegistrarVenta extends JFrame {
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(4, 1, 0, 15));
 
-		textoDNICliente.setText("DNI Cliente");
+		textoDNICliente.setText("DNI ControladorCliente");
 		textoDNICliente.setFont(new Font("Consolas", 4, 80));
 		textoDNICliente.setForeground(Color.green);
 		textoDNICliente.setEditable(false);
@@ -95,7 +95,7 @@ public class RegistrarVenta extends JFrame {
 
 		panelDatos.add(textoCampoDNICliente);
 
-		textoIdEmpleado.setText("ID Empleado");
+		textoIdEmpleado.setText("ID ControladorEmpleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);
 		textoIdEmpleado.setEditable(false);
@@ -163,7 +163,7 @@ public class RegistrarVenta extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { "rand", textoCampoDNICliente.getText(), textoCampoIdEmpleado.getText(),
 				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText() };
-		inf = controlador.alta("Venta", datos);
+		inf = controlador.alta("ControladorVenta", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
 		} else {

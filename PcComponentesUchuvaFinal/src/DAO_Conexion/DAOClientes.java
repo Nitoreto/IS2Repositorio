@@ -2,25 +2,25 @@ package DAO_Conexion;
 
 import java.sql.SQLException;
 
-import factoria.Cliente;
+import factoria.ControladorCliente;
+import factoria.Transfer;
 
 public class DAOClientes {
-	private String DNI;
 	private Conexion conexion;
 	
 	public DAOClientes(Conexion conexion) {
 		super();
+		this.conexion=conexion;
 	}
 
 	public String Buscar() {
 		try {
-			this.query = "SELECT *FROM clientes WHERE DNI = '" + cliente.getDNI() + "'";
-			this.transfer = new Transfer( super.conectarExecute());
+			String query = "SELECT *FROM clientes WHERE DNI = '" + cliente.getDNI() + "'";
+			this.transfer = new Transfer( conexion.conectarExecute(query));
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
 		return "Exito";
-
 	}
 	
 	public String Crear() {
@@ -30,11 +30,8 @@ public class DAOClientes {
 					+ "', '" + cliente.getDNI() + "', '" + cliente.getTelefono() + "')";
 			if (DNI.equals("")) {
 				throw new Exception("Campo dni esta vacio");
-
 			}
-
 			super.conectarUpdate();
-
 		} catch (Exception e) {
 			return e.getMessage();
 		}
@@ -75,16 +72,12 @@ public class DAOClientes {
 	}
 	
     public String Listar() {
-
-
 		try {
 			this.query = "SELECT * FROM clientes";
-			this.transfer = new Transfer(super.conectarExecute());
-			
+			this.transfer = new Transfer(super.conectarExecute());	
 		} catch (SQLException e) {
 			return e.getMessage();
-		}
-		
+		}		
 		return "Exito";
 	}   
     
@@ -106,6 +99,4 @@ public class DAOClientes {
 		}
 		return "Exito";
 	}
-	
-
 }

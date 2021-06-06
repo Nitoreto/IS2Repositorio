@@ -2,13 +2,14 @@ package DAO_Conexion;
 
 import java.sql.SQLException;
 
-import factoria.Venta;
+import factoria.Transfer;
+import factoria.ControladorVenta;
 
 public class DAOVentas {
 	private String DNI;
 	private int idEmpleado = -1;
 	
-	public DAOVentas(Venta venta) {
+	public DAOVentas(ControladorVenta venta) {
 		super();
 		
 	}
@@ -68,7 +69,7 @@ public class DAOVentas {
 				throw new Exception("El campo DNI de cliente está vacío.");
 			}
 			if (idEmpleado == -1) {
-				throw new Exception("El campo ID de Empleado está vacío.");
+				throw new Exception("El campo ID de ControladorEmpleado está vacío.");
 			}
 			row = super.conectarUpdate();
 
@@ -106,7 +107,7 @@ public class DAOVentas {
 				throw new Exception("El campo DNI cliente está vacío. ");
 			}
 			if (idEmpleado == -1) {
-				throw new Exception("El campo ID de Empleado está vacío.");
+				throw new Exception("El campo ID de ControladorEmpleado está vacío.");
 			}
 			row = super.conectarUpdate();
 

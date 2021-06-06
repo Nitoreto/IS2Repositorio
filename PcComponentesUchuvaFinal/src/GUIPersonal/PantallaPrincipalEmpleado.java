@@ -50,7 +50,7 @@ public class PantallaPrincipalEmpleado extends JFrame {
 		panel.setLayout(new GridLayout(6, 1));
 
 		textoEmpleado.setEditable(false);
-		textoEmpleado.setText("Empleado");
+		textoEmpleado.setText("ControladorEmpleado");
 		textoEmpleado.setBackground(Color.cyan);
 		textoEmpleado.setForeground(Color.white);
 		textoEmpleado.setFocusable(true);

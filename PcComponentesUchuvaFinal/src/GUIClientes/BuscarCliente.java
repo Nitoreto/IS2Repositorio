@@ -67,7 +67,7 @@ public class BuscarCliente extends JFrame {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarCliente.setEditable(false);
-		textoBuscarCliente.setText("Buscar Cliente");
+		textoBuscarCliente.setText("Buscar ControladorCliente");
 		textoBuscarCliente.setBackground(Color.lightGray);
 		textoBuscarCliente.setForeground(Color.white);
 		textoBuscarCliente.setFocusable(false);
@@ -122,7 +122,7 @@ public class BuscarCliente extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.buscar("Cliente", datos);
+		String inf = controlador.buscar("ControladorCliente", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -153,7 +153,7 @@ public class BuscarCliente extends JFrame {
 
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString() };
-		String inf = controlador.modificar("Cliente", datos, campoDNI.getText());
+		String inf = controlador.modificar("ControladorCliente", datos, campoDNI.getText());
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

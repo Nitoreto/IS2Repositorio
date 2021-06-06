@@ -46,14 +46,14 @@ public class ListarClientes extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoListarClientes.setEditable(false);
-		textoListarClientes.setText("Listar Cliente");
+		textoListarClientes.setText("Listar ControladorCliente");
 		textoListarClientes.setFocusable(false);
 		textoListarClientes.setBackground(Color.lightGray);
 		textoListarClientes.setForeground(Color.white);
 		textoListarClientes.setFont(new Font("Consolas", 1, 100));
 		this.getContentPane().add(textoListarClientes, BorderLayout.NORTH);
 
-		String inf = controlador.listar("Cliente");
+		String inf = controlador.listar("ControladorCliente");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

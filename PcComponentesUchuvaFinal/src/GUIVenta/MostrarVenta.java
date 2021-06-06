@@ -57,7 +57,7 @@ public class MostrarVenta extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoMostrarVenta.setEditable(false);
-		textoMostrarVenta.setText("Mostrar Venta");
+		textoMostrarVenta.setText("Mostrar ControladorVenta");
 		textoMostrarVenta.setBackground(Color.green);
 		textoMostrarVenta.setForeground(Color.white);
 		textoMostrarVenta.setFocusable(false);
@@ -67,7 +67,7 @@ public class MostrarVenta extends JFrame {
 		panelMostrarVenta.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(1, 2, 0, 100));
 
-		textoIdVenta.setText("ID Venta");
+		textoIdVenta.setText("ID ControladorVenta");
 		textoIdVenta.setFont(new Font("Consolas", 4, 80));
 		textoIdVenta.setForeground(Color.green);
 		textoIdVenta.setEditable(false);
@@ -111,7 +111,7 @@ public class MostrarVenta extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = controlador.buscar("Venta", datos);
+		String inf = controlador.buscar("ControladorVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);

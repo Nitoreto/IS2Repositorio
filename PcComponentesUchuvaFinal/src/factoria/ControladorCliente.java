@@ -8,14 +8,14 @@ import DAOClientes.DAOListarClientes;
 import DAOClientes.DAOModificarCliente;
 import main.Controlador;
 
-public class Cliente extends ShopObject {
+public class ControladorCliente extends ShopObject {
 
 	private String nombre, DNI;
 	private int telefono;
 	private Boolean activo;
 
-	public Cliente() {
-		super("Cliente");
+	public ControladorCliente() {
+		super("ControladorCliente");
 	}
 
 	public String getDNI() {

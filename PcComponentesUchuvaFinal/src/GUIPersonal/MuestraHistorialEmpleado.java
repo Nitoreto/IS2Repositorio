@@ -66,7 +66,7 @@ public class MuestraHistorialEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1500, 720));
 
 		textoBuscarHistorialEmpleado.setEditable(false);
-		textoBuscarHistorialEmpleado.setText("Mostrar Historial Empleado");
+		textoBuscarHistorialEmpleado.setText("Mostrar Historial ControladorEmpleado");
 		textoBuscarHistorialEmpleado.setBackground(Color.cyan);
 		textoBuscarHistorialEmpleado.setForeground(Color.white);
 		textoBuscarHistorialEmpleado.setFocusable(false);
@@ -120,7 +120,7 @@ public class MuestraHistorialEmpleado extends JFrame {
 
 	private void botonMostrarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.mostrarHistorial("Empleado", datos);
+		String inf = controlador.mostrarHistorial("ControladorEmpleado", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL MOSTRAR EL HISTORIAL DE VENTAS DEL EMPLEADO", JOptionPane.ERROR_MESSAGE);

@@ -99,14 +99,14 @@ public class ListaEmpleados extends JFrame {
 			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("Empleado", datos);
-				controlador.listar("Empleado");
+				inf = controlador.baja("ControladorEmpleado", datos);
+				controlador.listar("ControladorEmpleado");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("Empleado", datos);
-				controlador.listar("Empleado");
+				inf = controlador.desactivar("ControladorEmpleado", datos);
+				controlador.listar("ControladorEmpleado");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
@@ -127,7 +127,7 @@ public class ListaEmpleados extends JFrame {
 	}
 
 	public void CrearTabla() {
-		String inf = controlador.listar("Empleado");
+		String inf = controlador.listar("ControladorEmpleado");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

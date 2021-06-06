@@ -60,7 +60,7 @@ public class BajaProducto extends JFrame {
 		
 
 		textoBajaProducto.setEditable(false);
-		textoBajaProducto.setText("Baja Producto");
+		textoBajaProducto.setText("Baja ControladorProducto");
 		textoBajaProducto.setBackground(Color.pink);
 		textoBajaProducto.setForeground(Color.white);
 		textoBajaProducto.setFocusable(false);
@@ -123,9 +123,9 @@ public class BajaProducto extends JFrame {
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("Producto", Datos);
+			inf = controlador.baja("ControladorProducto", Datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("Producto", Datos);
+			inf = controlador.desactivar("ControladorProducto", Datos);
 		}
 
 		if (inf != "Exito") {
