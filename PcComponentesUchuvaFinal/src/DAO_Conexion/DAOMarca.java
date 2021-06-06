@@ -1,8 +1,7 @@
-package DAOMarca;
+package DAO_Conexion;
 
 import java.sql.SQLException;
 
-import dao_Transfer_Singelton.Transfer;
 import factoria.Marca;
 
 public class  {

@@ -1,9 +1,8 @@
-package DAOProductos;
+package DAO_Conexion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dao_Transfer_Singelton.Transfer;
 import factoria.Producto;
 
 public class DAOProducto {

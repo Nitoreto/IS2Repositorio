@@ -1,4 +1,4 @@
-package dao_Transfer_Singelton;
+package DAO_Conexion;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
