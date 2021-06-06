@@ -6,9 +6,10 @@ import factoria.Cliente;
 
 public class DAOClientes {
 	private String DNI;
-	public DAOClientes(Cliente cliente) {
+	private Conexion conexion;
+	
+	public DAOClientes(Conexion conexion) {
 		super();
-		
 	}
 
 	public String Buscar() {

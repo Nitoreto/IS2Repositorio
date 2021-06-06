@@ -12,48 +12,37 @@ public class Conexion extends SingletonConexion{
 	protected String query;
 	protected Statement statement;
 	protected Transfer transfer;
-	private Boolean instancia;
 
-	public Conexion() {
-		instancia = true;
-		try {
-			conexion = DriverManager.getConnection(
-					"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
-		} catch (SQLException e1) {
-		}
-		
+	public Conexion()throws SQLException {
+		conexion = DriverManager.getConnection(
+				"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
 	}
-
+	
+	@Override
 	protected int conectarUpdate() throws SQLException {
 		int row;
 		statement = conexion.prepareStatement(query);
 		row = statement.executeUpdate(query);
 		statement.close();
-		conexion.close();
-		instancia = false;
-
 		return row;
 	}
-
+	@Override
 	protected ResultSet conectarExecute() throws SQLException {
 		ResultSet resultado;
 		statement = conexion.prepareStatement(query);
 		resultado = statement.executeQuery(query);
-
 		return resultado;
 	}
 
+	@Override
 	public void close() {
-		if (instancia == true) {
-			try {
-				statement.close();
-				conexion.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			instancia = false;
-		}
 
+		try {
+			statement.close();
+			conexion.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

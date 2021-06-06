@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public abstract  class SingletonConexion{
 	private static SingletonConexion conexion;
 	
-	public static SingletonConexion obtenerConexion() {
+	public static SingletonConexion obtenerConexion() throws SQLException {
 		if(conexion == null)
 			conexion = new Conexion();
 		return conexion;
