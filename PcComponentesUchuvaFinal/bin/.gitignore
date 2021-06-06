@@ -8,7 +8,10 @@
 /DAOClientes/
 /dao_Transfer_Singelton/
 /GUIPersonal/
+<<<<<<< HEAD
 /GUIClientes/
 /GUIMarca/
 /GUIProductos/
 /GUIVenta/
+=======
+>>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
