@@ -1,0 +1,17 @@
+/imagenes/
+/DAOEmpleado/
+/factoria/
+/DAOMarca/
+/DAOProductos/
+/DAOVentas/
+/DAO_Conexion/
+/DAOClientes/
+/dao_Transfer_Singelton/
+/GUIPersonal/
+<<<<<<< HEAD
+/GUIClientes/
+/GUIMarca/
+/GUIProductos/
+/GUIVenta/
+=======
+>>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
