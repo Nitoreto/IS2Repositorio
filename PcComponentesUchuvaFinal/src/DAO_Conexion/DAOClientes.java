@@ -15,13 +15,8 @@ public class DAOClientes {
 
 	public String Buscar() {
 		try {
-<<<<<<< HEAD
-			String query = "SELECT *FROM clientes WHERE DNI = '" + cliente.getDNI() + "'";
-			this.transfer = new Transfer( conexion.conectarExecute(query));
-=======
-			this.query = "SELECT * FROM Cliente WHERE DNI = '" + cliente.getDNI() + "'";
-			this.transfer = new Transfer(super.conectarExecute());
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
+			String query = "SELECT * FROM Cliente WHERE DNI = '" + cliente.getDNI() + "'";
+			this.transfer = new Transfer(conexion.conectarExecute(query));
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
