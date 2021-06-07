@@ -9,9 +9,9 @@ import DAOVentas.DAOListarVenta;
 import DAOVentas.DAOModificarVenta;
 import DAOVentas.DAOMostrarVenta;
 import DAOVentas.DAORegistrarVenta;
-import factoryController.ControllerObject;
+import factoryController.ObjectController;
 
-public class ControllerVenta extends ControllerObject {
+public class ControllerVenta extends ObjectController {
 
 	private int idVentas, idEmpleado, precioTotal;
 	private String DNICliente, listaProductos;

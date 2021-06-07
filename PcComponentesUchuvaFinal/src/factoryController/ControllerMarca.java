@@ -9,7 +9,7 @@ import DAOMarca.DAOListarMarcas;
 import DAOMarca.DAOModificarMarca;
 import main.Mediator;
 
-public class ControllerMarca extends ControllerObject {
+public class ControllerMarca extends ObjectController {
 
 	private String CIFMarca, nombre, pais;
 	private Boolean activo;

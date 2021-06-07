@@ -3,12 +3,12 @@ package main;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import factoryController.ControllerObject;
+import factoryController.ObjectController;
 import factoryController.FactoryController;
 
 public class Mediator {
 	private TableModel modelo;
-	private ControllerObject objeto;
+	private ObjectController objeto;
 
 	public String alta(String nombre, String[] Datos) {
 		objeto = FactoryController.FactoriaParse(nombre, Datos);
@@ -17,6 +17,8 @@ public class Mediator {
 		}
 		return objeto.alta();
 	}
+	
+	inicializarTransfer(String[] datos) throws NumberFormatException;
 
 	public String baja(String nombre, String[] Datos) {
 		objeto = FactoryController.FactoriaParse(nombre, Datos);

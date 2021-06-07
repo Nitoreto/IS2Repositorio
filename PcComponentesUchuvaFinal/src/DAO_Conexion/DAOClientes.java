@@ -3,105 +3,70 @@ package DAO_Conexion;
 import java.sql.SQLException;
 
 import Transfer.Transfer;
+import Transfer.TransferCliente;
 import factoryController.ControllerCliente;
 
 public class DAOClientes {
-	private Conexion conexion;
+	private SingletonConexion conexion;
 
-	public DAOClientes(Conexion conexion) {
-		super();
-		this.conexion=conexion;
+	public DAOClientes() throws SQLException {
+		this.conexion=SingletonConexion.obtenerConexion();
 	}
 
-	public String Buscar() {
-		try {
-			String query = "SELECT * FROM Cliente WHERE DNI = '" + cliente.getDNI() + "'";
-			this.transfer = new Transfer(conexion.conectarExecute(query));
-		} catch (SQLException e) {
-			return e.getMessage();
+	public TransferCliente buscar(String DNI) throws SQLException {
+		String query = "SELECT * FROM Cliente WHERE DNI = '" + DNI + "'";
+		TransferCliente tCliente = new TransferCliente(conexion.conectarExecute(query));
+		return tCliente;
+	}
+
+	public Boolean alta(TransferCliente tCliente) throws Exception, SQLException {
+		if (tCliente.equals("")) {
+			throw new Exception("Campo dni esta vacio");
 		}
-		return "Exito";
+		String query = "INSERT into Cliente (DNI, Nombre, Telefono) VALUES " + "('" + tCliente.getDNI() + "', '"
+				+ tCliente.getNombre() + "', '" + tCliente.getTelefono() + "')";
+		conexion.conectarUpdate(query);
+		return true;
 	}
 
-	public String Crear() {
-		try {
-			this.DNI = cliente.getDNI();
-			this.query = "INSERT into Cliente (DNI, Nombre, Telefono) VALUES " + "('" + cliente.getDNI() + "', '"
-					+ cliente.getNombre() + "', '" + cliente.getTelefono() + "')";
-			if (DNI.equals("")) {
-				throw new Exception("Campo dni esta vacio");
-			}
-			super.conectarUpdate();
-		} catch (Exception e) {
-			return e.getMessage();
-		}
-		return "Exito";
-	}
-
-	public String Eliminar() {
+	public Boolean eliminar(String DNI)throws Exception,SQLException {
 		int row = -1;
-		try {
-			this.query = "DELETE  FROM Cliente WHERE DNI = '" + cliente.getDNI() + "'";
-			row = this.conectarUpdate();
-		} catch (SQLException e) {
-			if (e.getClass().getName()
-					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				return "No se puede borrar un cliente con ventas";
-			}
-			return e.getMessage();
-		}
+		String query = "DELETE  FROM Cliente WHERE DNI = '" + DNI + "'";
+		row = conexion.conectarUpdate(query);
 		if (row == 0) {
-			return "No se ha encontrado un cliente con ese DNI";
+			throw new Exception("No se ha encontrado un cliente con ese DNI");
 		}
-		return "Exito";
+		return true;
 
 	}
 
-	public String Desactivar() {
+	public Boolean desactivar(String DNI) throws Exception, SQLException {
 		int row = -1;
-		try {
-			this.query = "UPDATE Cliente SET Activo = 0 WHERE DNI = '" + cliente.getDNI() + "'";
-			row = super.conectarUpdate();
-		} catch (Exception e) {
-
-			return e.getMessage();
-		}
+		String query = "UPDATE Cliente SET Activo = 0 WHERE DNI = '" + DNI + "'";
+		row = conexion.conectarUpdate(query);
 		if (row == 0) {
-			return "DNI no Encontrado";
+			throw new Exception("DNI no Encontrado");
 		}
-		return "Exito";
+		return true;
 	}
 
 
-	public String Listar() {
-
-		try {
-			this.query = "SELECT * FROM Cliente";
-			this.transfer = new Transfer(super.conectarExecute());
-
-		} catch (SQLException e) {
-			return e.getMessage();
-		}		
+	public TransferCliente listar() throws SQLException {
+		String query = "SELECT * FROM Cliente";
+		TransferCliente tCliente = new TransferCliente(conexion.conectarExecute(query));
+		return tCliente;
 	}
 
-	public String Modificar() {
+	public Boolean modificar(TransferCliente tCliente, String DNI) throws Exception, SQLException {
 		int row = -1;
-		try {
-			this.query = "UPDATE Cliente SET DNI = '" + cliente.getDNI() + "', Nombre = '" + cliente.getNombre()
-					+ "', telefono = " + cliente.getTelefono() + ", Activo = " + cliente.getActivo() + " WHERE DNI = '"
-					+ DNI + "'";
-			row = super.conectarUpdate();
-		} catch (Exception e) {
-			if (e.getClass().getName()
-					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				return "No se puede modificar el DNI de un cliente con ventas";
-			}
-			return e.getMessage();
-		}
+		String query = "UPDATE Cliente SET DNI = '" + tCliente.getDNI() + "', Nombre = '" + tCliente.getNombre()
+		+ "', telefono = " + tCliente.getTelefono() + ", Activo = " + tCliente.getActivo() + " WHERE DNI = '"
+		+ DNI + "'";
+		row = conexion.conectarUpdate(query);
 		if (row == 0) {
-			return "Los campos estan vacios.";
+			throw new Exception("Los campos estan vacios.");
 		}
-		return "Exito";
+		return true;
 	}
 
 }

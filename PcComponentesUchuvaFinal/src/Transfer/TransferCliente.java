@@ -1,12 +1,18 @@
 package Transfer;
 
-public class TransferCliente {
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TransferCliente extends Transfer {
 	private String nombre, DNI;
 	private int telefono;
 	private Boolean activo;
 	
-	public TransferCliente() {
-		
+	public TransferCliente(ResultSet resultado) throws SQLException {
+		super(resultado);
+	}
+	public TransferCliente(String[] datos){
+		super(datos);
 	}
 
 	public String getDNI() {
@@ -41,8 +47,7 @@ public class TransferCliente {
 		this.activo = activo;
 	}
 	
-	@Override
-	public void inicializarObjeto(String[] datos) throws NumberFormatException{
+	public void inicializarObjeto(String[] datos) throws Exception{
 		for (int i = 0; i < datos.length; i++) {
 			switch (i) {
 			case 0:
@@ -52,7 +57,11 @@ public class TransferCliente {
 				nombre = datos[1];
 				break;
 			case 2:
+				try{
 				telefono = Integer.parseInt(datos[2]);
+				}catch (NumberFormatException e) {
+					throw new Exception("Formato del telefono incorrecto")
+				}
 				break;
 			case 3:
 				if (datos[3].equals("1")) {
@@ -60,7 +69,7 @@ public class TransferCliente {
 				} else if(datos[3].equals("0")){
 					activo = false;
 				}else{
-					throw new NumberFormatException();
+					throw new Exception("Error valor activo invalido");
 				}
 			}
 		}

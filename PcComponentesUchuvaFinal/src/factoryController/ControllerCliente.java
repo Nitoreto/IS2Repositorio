@@ -1,39 +1,55 @@
  package factoryController;
 
-import DAOClientes.DAOBuscarCliente;
-import DAOClientes.DAOCrearCliente;
-import DAOClientes.DAODesactivarCliente;
-import DAOClientes.DAOEliminarCliente;
-import DAOClientes.DAOListarClientes;
-import DAOClientes.DAOModificarCliente;
+import java.sql.SQLException;
+import DAO_Conexion.DAOClientes;
+import Transfer.TransferCliente;
 import main.Mediator;
 
-public class ControllerCliente extends ControllerObject {
-
-	private String nombre, DNI;
-	private int telefono;
-	private Boolean activo;
+public class ControllerCliente extends ObjectController {
+	private DAOClientes DAOc;
+	private TransferCliente tCliente;
 
 	public ControllerCliente() {
 		super("ControllerCliente");
+			
+	}
+	
+	protected void inicializarTransfer(String[] datos) throws Exception{
+		try {
+			this.DAOc = new DAOClientes();
+		} catch (SQLException e) {
+			throw new Exception("Error al conectar con la base de datos.");
+		}
+		this.tCliente = new TransferCliente(datos);		
 	}
 
 	@Override
-	public String alta() {
-		DAOCrearCliente dao = new DAOCrearCliente(this);
-		return dao.conectar();
+	public String alta(String[] Datos) {
+		
+		DAOc.alta(tCliente);
 
 	}
 
 	@Override
 	public String baja() {
 		DAOEliminarCliente dao = new DAOEliminarCliente(this);
+		if (e.getClass().getName()
+				.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+			return "No se puede borrar un cliente con ventas";
+		}
 		return dao.conectar();
 	}
 
 	@Override
 	public String modificar(String ID) {
 		DAOModificarCliente dao = new DAOModificarCliente(this, ID);
+		 catch (Exception e) {
+				if (e.getClass().getName()
+						.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+					return "No se puede modificar el DNI de un cliente con ventas";
+				}
+				return e.getMessage();
+			}
 		return dao.conectar();
 
 	}

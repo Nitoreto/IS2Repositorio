@@ -4,18 +4,17 @@ import java.sql.SQLException;
 
 import dao_Transfer_Singelton.DAOSuper;
 
-public abstract class ControllerObject implements Acciones {
+public abstract class ObjectController implements Acciones {
 	private String nombreClase;
-	private DAOSuper dao;
 
-	public ControllerObject(String nombreClase) {
+	public ObjectController(String nombreClase) {
 		this.nombreClase = nombreClase;
 	}
 
-	public ControllerObject esEsteShopObject(String nombre, String[] datos) {
+	public ObjectController esEsteShopObject(String nombre, String[] datos) {
 		if (this.nombreClase.equalsIgnoreCase(nombre)) {
 			try {
-				inicializarObjeto(datos);
+				inicializarTransfer(datos);
 			} catch (NumberFormatException e) {
 				return null;
 			}
@@ -29,7 +28,7 @@ public abstract class ControllerObject implements Acciones {
 		if (dao != null)
 			dao.close();
 	}
-
-	public abstract void inicializarObjeto(String[] datos) throws NumberFormatException;
+	
+	protected abstract void inicializarTransfer(String[] datos) throws Exception;
 
 }

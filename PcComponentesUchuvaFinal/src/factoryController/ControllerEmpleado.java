@@ -9,7 +9,7 @@ import DAOEmpleado.DAOModificarEmpleado;
 import DAOEmpleado.DAOMuestraHistorialEmpleado;
 import main.Mediator;
 
-public class ControllerEmpleado extends ControllerObject {
+public class ControllerEmpleado extends ObjectController {
 	private String name, apellido, dni, direccion;
 	private int telefono, id_empledo;
 	private Boolean activo;

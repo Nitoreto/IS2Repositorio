@@ -8,7 +8,7 @@ import DAOProductos.DAOMostrarHistorialProducto;
 import DAOProductos.DAOMostrarProducto;
 import main.Mediator;
 
-public class ControllerProducto extends ControllerObject {
+public class ControllerProducto extends ObjectController {
 
 	private String  Nombre, Descripcion, NombreMarca;
 	private int ID;
