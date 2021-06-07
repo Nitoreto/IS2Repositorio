@@ -21,13 +21,20 @@ public class sucursalDecorator extends JFrame{
 	public void initGUI() {
 
 		
-		
-		JPanel mainPanel = new BorderDecorator();
-		this.setSize(500,500);
+		backGroundDecorator backGround = new backGroundDecorator();
+		backGround.setLayout(new BorderLayout());
+		BorderDecorator mainPanel = new BorderDecorator();
+		this.setSize(800,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setContentPane(mainPanel);
-		mainPanel.add(new buttonsPanelDecorator(), BorderLayout.CENTER);
+		backGround.add(mainPanel, BorderLayout.CENTER);
+		this.setContentPane(backGround);
+		mainPanel.addCp(new ButtonU("boton1"));
+		mainPanel.addCp(new ButtonU("boton2"));
+		mainPanel.addCp(new ButtonU("boton3"));
+		mainPanel.addTopLabel("Entidad sucursal");
+		
 		this.setVisible(true);
+		
 	}
 	 public static void main(String[] args) {
 
