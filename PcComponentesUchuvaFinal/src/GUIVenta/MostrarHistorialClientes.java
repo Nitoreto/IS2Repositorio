@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import main.Controlador;
+import main.Mediator;
 
 public class MostrarHistorialClientes extends JFrame {
 
@@ -31,9 +31,9 @@ public class MostrarHistorialClientes extends JFrame {
 	private JTextArea textoIdCliente;
 	private JTextField textoCampoIdCliente;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public MostrarHistorialClientes(Controlador controlador) {
+	public MostrarHistorialClientes(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponentes();
@@ -65,7 +65,7 @@ public class MostrarHistorialClientes extends JFrame {
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(1, 2, 0, 15));
 
-		textoIdCliente.setText("DNI ControladorCliente");
+		textoIdCliente.setText("DNI ControllerCliente");
 		textoIdCliente.setFont(new Font("Consolas", 4, 80));
 		textoIdCliente.setForeground(Color.green);
 		textoIdCliente.setEditable(false);

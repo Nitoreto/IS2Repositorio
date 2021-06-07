@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
 import main.PantallaPrincipalPccomponentes;
-import main.Controlador;
+import main.Mediator;
 
 public class PantallaPrincipalMarca extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -23,9 +23,9 @@ public class PantallaPrincipalMarca extends JFrame {
 	private JButton botonBaja;
 	private JPanel panel;
 	private JButton botonVolver;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public PantallaPrincipalMarca(Controlador controlador) {
+	public PantallaPrincipalMarca(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();

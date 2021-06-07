@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
 
 public class PantallaPrincipalProducto extends JFrame {
@@ -26,9 +26,9 @@ public class PantallaPrincipalProducto extends JFrame {
 	private JButton botonMostrarHistorial;
 	private JButton botonMostrar;
 	private JButton botonVolver;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public PantallaPrincipalProducto(Controlador controlador) {
+	public PantallaPrincipalProducto(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();

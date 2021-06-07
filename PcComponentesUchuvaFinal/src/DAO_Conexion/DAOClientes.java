@@ -2,8 +2,8 @@ package DAO_Conexion;
 
 import java.sql.SQLException;
 
-import factoria.ControladorCliente;
-import factoria.Transfer;
+import Transfer.Transfer;
+import factoryController.ControllerCliente;
 
 public class DAOClientes {
 	private Conexion conexion;
@@ -71,32 +71,17 @@ public class DAOClientes {
 		}
 		return "Exito";
 	}
-<<<<<<< HEAD
-	
-    public String Listar() {
-=======
+
 
 	public String Listar() {
 
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
 		try {
-<<<<<<< HEAD
-			this.query = "SELECT * FROM clientes";
-			this.transfer = new Transfer(super.conectarExecute());	
-=======
 			this.query = "SELECT * FROM Cliente";
 			this.transfer = new Transfer(super.conectarExecute());
 
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
 		} catch (SQLException e) {
 			return e.getMessage();
-<<<<<<< HEAD
 		}		
-=======
-		}
-
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
-		return "Exito";
 	}
 
 	public String Modificar() {
@@ -118,8 +103,5 @@ public class DAOClientes {
 		}
 		return "Exito";
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
 }

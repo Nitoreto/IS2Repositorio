@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import main.Controlador;
+import main.Mediator;
 
 public class MostrarVenta extends JFrame {
 	
@@ -32,9 +32,9 @@ public class MostrarVenta extends JFrame {
 	private JButton botonCancelar;
 	private JTextArea textoIdVenta;
 	private JTextField textoCampoIdVenta;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public MostrarVenta(Controlador controlador) {
+	public MostrarVenta(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponentes();
@@ -57,7 +57,7 @@ public class MostrarVenta extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoMostrarVenta.setEditable(false);
-		textoMostrarVenta.setText("Mostrar ControladorVenta");
+		textoMostrarVenta.setText("Mostrar ControllerVenta");
 		textoMostrarVenta.setBackground(Color.green);
 		textoMostrarVenta.setForeground(Color.white);
 		textoMostrarVenta.setFocusable(false);
@@ -67,7 +67,7 @@ public class MostrarVenta extends JFrame {
 		panelMostrarVenta.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(1, 2, 0, 100));
 
-		textoIdVenta.setText("ID ControladorVenta");
+		textoIdVenta.setText("ID ControllerVenta");
 		textoIdVenta.setFont(new Font("Consolas", 4, 80));
 		textoIdVenta.setForeground(Color.green);
 		textoIdVenta.setEditable(false);
@@ -111,7 +111,7 @@ public class MostrarVenta extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = controlador.buscar("ControladorVenta", datos);
+		String inf = controlador.buscar("ControllerVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);

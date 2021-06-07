@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import factoria.Transfer;
+import Transfer.Transfer;
 
 import java.sql.ResultSet;
 

@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class EliminarCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,9 +32,9 @@ public class EliminarCliente extends JFrame {
 
 	private JButton botonEliminar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public EliminarCliente(Controlador controlador) {
+	public EliminarCliente(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -58,7 +58,7 @@ public class EliminarCliente extends JFrame {
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoCliente.setEditable(false);
-		textoCliente.setText("Baja ControladorCliente");
+		textoCliente.setText("Baja ControllerCliente");
 		textoCliente.setBackground(Color.lightGray);
 		textoCliente.setForeground(Color.white);
 		textoCliente.setFocusable(false);
@@ -119,9 +119,9 @@ public class EliminarCliente extends JFrame {
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("ControladorCliente", Datos);
+			inf = controlador.baja("ControllerCliente", Datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("ControladorCliente", Datos);
+			inf = controlador.desactivar("ControllerCliente", Datos);
 		}
 
 		if (inf != "Exito") {

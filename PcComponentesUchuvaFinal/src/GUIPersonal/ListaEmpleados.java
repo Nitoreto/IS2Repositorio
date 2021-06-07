@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class ListaEmpleados extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -25,9 +25,9 @@ public class ListaEmpleados extends JFrame {
 	private JTable tabla;
 	private JButton botonBorrar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public ListaEmpleados(Controlador controlador) {
+	public ListaEmpleados(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -99,14 +99,14 @@ public class ListaEmpleados extends JFrame {
 			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("ControladorEmpleado", datos);
-				controlador.listar("ControladorEmpleado");
+				inf = controlador.baja("ControllerEmpleado", datos);
+				controlador.listar("ControllerEmpleado");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("ControladorEmpleado", datos);
-				controlador.listar("ControladorEmpleado");
+				inf = controlador.desactivar("ControllerEmpleado", datos);
+				controlador.listar("ControllerEmpleado");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
@@ -127,7 +127,7 @@ public class ListaEmpleados extends JFrame {
 	}
 
 	public void CrearTabla() {
-		String inf = controlador.listar("ControladorEmpleado");
+		String inf = controlador.listar("ControllerEmpleado");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

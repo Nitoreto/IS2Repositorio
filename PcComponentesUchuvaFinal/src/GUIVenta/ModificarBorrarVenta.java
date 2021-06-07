@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import main.Controlador;
+import main.Mediator;
 
 public class ModificarBorrarVenta extends JFrame {
 
@@ -29,10 +29,10 @@ public class ModificarBorrarVenta extends JFrame {
 	private JButton botonModificar;
 	private JButton botonCancelar;
 	private String idVenta;
-	private Controlador controlador;
+	private Mediator controlador;
 	private JTable tabla;
 
-	public ModificarBorrarVenta(String idVenta, Controlador controlador) {
+	public ModificarBorrarVenta(String idVenta, Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.idVenta = idVenta;
 		this.controlador = controlador;
@@ -52,7 +52,7 @@ public class ModificarBorrarVenta extends JFrame {
 		setPreferredSize(new Dimension(1920, 720));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Modificar ControladorVenta" + idVenta);
+		textoVenta.setText("Modificar ControllerVenta" + idVenta);
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -95,7 +95,7 @@ public class ModificarBorrarVenta extends JFrame {
 	
 	public void CrearTabla() {
 		String[] datos = {this.idVenta};
-		String inf = controlador.buscar("ControladorVenta", datos);
+		String inf = controlador.buscar("ControllerVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -115,7 +115,7 @@ public class ModificarBorrarVenta extends JFrame {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString() };
-		String inf = controlador.modificar("ControladorVenta", datos, idVenta);
+		String inf = controlador.modificar("ControllerVenta", datos, idVenta);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);

@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class CrearCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -37,9 +37,9 @@ public class CrearCliente extends JFrame {
 	private JButton botonGuardar;
 	private JButton botonCancelar;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public CrearCliente(Controlador controlador) {
+	public CrearCliente(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -69,7 +69,7 @@ public class CrearCliente extends JFrame {
 		setPreferredSize(new Dimension(1250, 720));
 
 		textoAltaCliente.setEditable(false);
-		textoAltaCliente.setText("Alta ControladorCliente");
+		textoAltaCliente.setText("Alta ControllerCliente");
 		textoAltaCliente.setBackground(Color.lightGray);
 		textoAltaCliente.setForeground(Color.white);
 		textoAltaCliente.setFocusable(false);
@@ -144,7 +144,7 @@ public class CrearCliente extends JFrame {
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText() };
-		String inf = controlador.alta("ControladorCliente", datos);
+		String inf = controlador.alta("ControllerCliente", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

@@ -2,17 +2,16 @@ package main;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import factoria.Factoria;
-import factoria.ModeloTabla;
-import factoria.ShopObject;
-import factoria.ModeloTablaEditable;
 
-public class Controlador {
+import factoryController.ControllerObject;
+import factoryController.FactoryController;
+
+public class Mediator {
 	private TableModel modelo;
-	private ShopObject objeto;
+	private ControllerObject objeto;
 
 	public String alta(String nombre, String[] Datos) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if (objeto == null) {
 			return "Datos Incorrectos";
 		}
@@ -20,7 +19,7 @@ public class Controlador {
 	}
 
 	public String baja(String nombre, String[] Datos) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if (objeto == null) {
 			return "Datos Incorrectos";
 		}
@@ -28,7 +27,7 @@ public class Controlador {
 	}
 
 	public String modificar(String nombre, String[] Datos, String ID) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if (objeto == null) {
 			return "Datos Incorrectos";
 		}
@@ -37,7 +36,7 @@ public class Controlador {
 
 	public String listar(String nombre) {
 		String[] Datos = {};
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if (objeto == null) {
 			return "Datos Incorrectos";
 		}
@@ -45,7 +44,7 @@ public class Controlador {
 	}
 
 	public String buscar(String nombre, String[] Datos) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if(objeto == null){
 			return "Datos Incorrectos";
 		}
@@ -53,7 +52,7 @@ public class Controlador {
 	}
 
 	public String mostrarHistorial(String nombre, String[] Datos) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if(objeto == null){
 			return "Datos Incorrectos";
 		}
@@ -61,7 +60,7 @@ public class Controlador {
 	}
 	
 	public String desactivar(String nombre, String[] Datos) {
-		objeto = Factoria.FactoriaParse(nombre, Datos);
+		objeto = FactoryController.FactoriaParse(nombre, Datos);
 		if(objeto == null){
 			return "Datos Incorrectos";
 		}

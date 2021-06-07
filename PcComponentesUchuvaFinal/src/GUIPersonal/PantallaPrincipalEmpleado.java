@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
 
 public class PantallaPrincipalEmpleado extends JFrame {
@@ -27,9 +27,9 @@ public class PantallaPrincipalEmpleado extends JFrame {
 	private JPanel panel;
 	private JButton botonVolver;
 	private JButton botonMostrarHistorial;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public PantallaPrincipalEmpleado(Controlador controlador) {
+	public PantallaPrincipalEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -50,7 +50,7 @@ public class PantallaPrincipalEmpleado extends JFrame {
 		panel.setLayout(new GridLayout(6, 1));
 
 		textoEmpleado.setEditable(false);
-		textoEmpleado.setText("ControladorEmpleado");
+		textoEmpleado.setText("ControllerEmpleado");
 		textoEmpleado.setBackground(Color.cyan);
 		textoEmpleado.setForeground(Color.white);
 		textoEmpleado.setFocusable(true);

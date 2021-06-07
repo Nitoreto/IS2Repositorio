@@ -3,21 +3,21 @@ package DAO_Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import factoria.ControladorProducto;
-import factoria.Transfer;
+import Transfer.Transfer;
+import factoryController.ControllerProducto;
 
 public class DAOProducto {
 	ResultSet resultado;
-	public DAOProducto(ControladorProducto Producto) {
+	public DAOProducto(ControllerProducto Producto) {
 		super();
 
 	}
 	
 	public String Alta() {
 		try {
-			this.query = "INSERT into `Productos` (`ID`, `Precio`, `ControladorMarca`, `Nombre`, `Descripcion`, `Activo`) VALUES " + "( "
-					+ ControladorProducto.getID() + " ,'" + ControladorProducto.getPrecio() + "', '" + ControladorProducto.getNombreMarca() +  "', '" + ControladorProducto.getNombre() + "', '"
-					+ ControladorProducto.getDescripcion() + "', '1' )";
+			this.query = "INSERT into `Productos` (`ID`, `Precio`, `ControllerMarca`, `Nombre`, `Descripcion`, `Activo`) VALUES " + "( "
+					+ ControllerProducto.getID() + " ,'" + ControllerProducto.getPrecio() + "', '" + ControllerProducto.getNombreMarca() +  "', '" + ControllerProducto.getNombre() + "', '"
+					+ ControllerProducto.getDescripcion() + "', '1' )";
 			super.conectarUpdate();
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -29,7 +29,7 @@ public class DAOProducto {
 	public String Baja() {
 		int row = -1;
 		try {
-			this.query = "DELETE FROM productos WHERE ID = " + ControladorProducto.getID();
+			this.query = "DELETE FROM productos WHERE ID = " + ControllerProducto.getID();
 			row = this.conectarUpdate();
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -59,9 +59,9 @@ public class DAOProducto {
 	public String Modificar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE productos SET ID = " + ControladorProducto.getID() + " , Precio = '" + ControladorProducto.getPrecio()
-			+ "', ControladorMarca = '" + ControladorProducto.getNombreMarca() + "', Nombre = '" + ControladorProducto.getNombre()
-			+ "', Descripcion = '" + ControladorProducto.getDescripcion() + "', Activo = " + ControladorProducto.isActivo() + " WHERE ID = " + IDOriginal;
+			this.query = "UPDATE productos SET ID = " + ControllerProducto.getID() + " , Precio = '" + ControllerProducto.getPrecio()
+			+ "', ControllerMarca = '" + ControllerProducto.getNombreMarca() + "', Nombre = '" + ControllerProducto.getNombre()
+			+ "', Descripcion = '" + ControllerProducto.getDescripcion() + "', Activo = " + ControllerProducto.isActivo() + " WHERE ID = " + IDOriginal;
 
 			row = super.conectarUpdate();
 
@@ -93,7 +93,7 @@ public class DAOProducto {
 	
 	public String Buscar() {
 		try {
-			this.query = "SELECT * FROM productos WHERE ID = " + ControladorProducto.getID();
+			this.query = "SELECT * FROM productos WHERE ID = " + ControllerProducto.getID();
 			this.transfer = new Transfer( super.conectarExecute());
 		} catch (Exception e) {
 			return e.getMessage();

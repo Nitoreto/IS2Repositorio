@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import GUIPersonal.PantallaPrincipalEmpleado;
-import main.Controlador;
+import main.Mediator;
 
 public class ListarTabla extends JFrame {
 
@@ -27,10 +27,10 @@ public class ListarTabla extends JFrame {
 
 	private JButton botonOk;
 	private JTable tabla;
-	private Controlador controlador;
+	private Mediator controlador;
 	private String DNICliente;
 
-	public ListarTabla(Controlador controlador, String DNICliente) {
+	public ListarTabla(Mediator controlador, String DNICliente) {
 
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
@@ -77,7 +77,7 @@ public class ListarTabla extends JFrame {
 
 	private String CrearTabla() {
 		String[] datos = { "rand", DNICliente };
-		String inf = controlador.mostrarHistorial("ControladorVenta", datos);
+		String inf = controlador.mostrarHistorial("ControllerVenta", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

@@ -1,4 +1,4 @@
-package factoria;
+package factoryController;
 
 import DAOEmpleado.DAOAñadirEmpleado;
 import DAOEmpleado.DAOBuscarEmpleado;
@@ -7,15 +7,15 @@ import DAOEmpleado.DAOEliminarEmpleado;
 import DAOEmpleado.DAOListaEmpleados;
 import DAOEmpleado.DAOModificarEmpleado;
 import DAOEmpleado.DAOMuestraHistorialEmpleado;
-import main.Controlador;
+import main.Mediator;
 
-public class ControladorEmpleado extends ShopObject {
+public class ControllerEmpleado extends ControllerObject {
 	private String name, apellido, dni, direccion;
 	private int telefono, id_empledo;
 	private Boolean activo;
 
-	public ControladorEmpleado() {
-		super("ControladorEmpleado");
+	public ControllerEmpleado() {
+		super("ControllerEmpleado");
 	}
 
 	public String getName() {
@@ -68,7 +68,7 @@ public class ControladorEmpleado extends ShopObject {
 	}
 
 	@Override
-	public String listar(Controlador controlador) {
+	public String listar(Mediator controlador) {
 		DAOListaEmpleados dao = new DAOListaEmpleados(this);
 		String string = dao.conectar();
 		if (string == "Exito")
@@ -77,7 +77,7 @@ public class ControladorEmpleado extends ShopObject {
 	}
 
 	@Override
-	public String buscar(Controlador controlador) {
+	public String buscar(Mediator controlador) {
 		DAOBuscarEmpleado dao = new DAOBuscarEmpleado(this);
 		String string = dao.conectar();
 		if (string == "Exito")
@@ -86,7 +86,7 @@ public class ControladorEmpleado extends ShopObject {
 	}
 
 	@Override
-	public String mostrarHistorial(Controlador controlador) {
+	public String mostrarHistorial(Mediator controlador) {
 		DAOMuestraHistorialEmpleado dao = new DAOMuestraHistorialEmpleado(this);
 		String string = dao.conectar();
 		controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Default");

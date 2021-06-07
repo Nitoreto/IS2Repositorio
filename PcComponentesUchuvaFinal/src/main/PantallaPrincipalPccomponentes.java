@@ -15,7 +15,7 @@ import GUIMarca.PantallaPrincipalMarca;
 import GUIPersonal.PantallaPrincipalEmpleado;
 import GUIProductos.PantallaPrincipalProducto;
 import GUIVenta.PantallaPrincipalVentas;
-import main.Controlador;
+import main.Mediator;
 
 public class PantallaPrincipalPccomponentes extends JFrame {
 	
@@ -28,9 +28,9 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 	private JButton botonClientes;
 	private JButton botonPersonal;
 	
-	private Controlador controlador;
+	private Mediator controlador;
 	
-	public PantallaPrincipalPccomponentes(Controlador controlador) {
+	public PantallaPrincipalPccomponentes(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponentes();
@@ -71,7 +71,7 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 		});
 		panel.add(botonClientes);
 		
-		botonPersonal.setText("ControladorEmpleado");
+		botonPersonal.setText("ControllerEmpleado");
 		botonPersonal.setBackground(Color.white);
 		botonPersonal.setForeground(Color.cyan);
 		botonPersonal.setFont(new Font("Consolas", 4, 80));

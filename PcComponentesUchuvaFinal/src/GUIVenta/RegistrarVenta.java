@@ -17,7 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class RegistrarVenta extends JFrame {
 	/**
@@ -44,9 +44,9 @@ public class RegistrarVenta extends JFrame {
 	private JTextArea textoListaProducos;
 	private JTextField textoCampoListaProductos;
 	private String inf;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public RegistrarVenta(Controlador controlador) {
+	public RegistrarVenta(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponentes();
@@ -72,7 +72,7 @@ public class RegistrarVenta extends JFrame {
 		setPreferredSize(new Dimension(1750, 800));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Registrar ControladorVenta");
+		textoVenta.setText("Registrar ControllerVenta");
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -83,7 +83,7 @@ public class RegistrarVenta extends JFrame {
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(4, 1, 0, 15));
 
-		textoDNICliente.setText("DNI ControladorCliente");
+		textoDNICliente.setText("DNI ControllerCliente");
 		textoDNICliente.setFont(new Font("Consolas", 4, 80));
 		textoDNICliente.setForeground(Color.green);
 		textoDNICliente.setEditable(false);
@@ -95,7 +95,7 @@ public class RegistrarVenta extends JFrame {
 
 		panelDatos.add(textoCampoDNICliente);
 
-		textoIdEmpleado.setText("ID ControladorEmpleado");
+		textoIdEmpleado.setText("ID ControllerEmpleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);
 		textoIdEmpleado.setEditable(false);
@@ -163,7 +163,7 @@ public class RegistrarVenta extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { "rand", textoCampoDNICliente.getText(), textoCampoIdEmpleado.getText(),
 				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText() };
-		inf = controlador.alta("ControladorVenta", datos);
+		inf = controlador.alta("ControllerVenta", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
 		} else {

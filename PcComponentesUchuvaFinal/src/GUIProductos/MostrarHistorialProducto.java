@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class MostrarHistorialProducto extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -29,9 +29,9 @@ public class MostrarHistorialProducto extends JFrame {
 
 	private JButton botonCancelar;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public MostrarHistorialProducto(Controlador controlador) {
+	public MostrarHistorialProducto(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -51,14 +51,14 @@ public class MostrarHistorialProducto extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoMostrarHistorialProducto.setEditable(false);
-		textoMostrarHistorialProducto.setText("Mostrar Historial ControladorProducto");
+		textoMostrarHistorialProducto.setText("Mostrar Historial ControllerProducto");
 		textoMostrarHistorialProducto.setFocusable(false);
 		textoMostrarHistorialProducto.setFont(new Font("Consolas", 4, 80));
 		textoMostrarHistorialProducto.setBackground(Color.pink);
 		textoMostrarHistorialProducto.setForeground(Color.white);
 		this.getContentPane().add(textoMostrarHistorialProducto, BorderLayout.NORTH);
 
-		String inf = controlador.listar("ControladorProducto");
+		String inf = controlador.listar("ControllerProducto");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

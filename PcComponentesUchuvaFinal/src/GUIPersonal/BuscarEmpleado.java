@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class BuscarEmpleado extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +38,9 @@ public class BuscarEmpleado extends JFrame {
 	private JButton botonModifcar;
 	private JButton botonCancelar;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public BuscarEmpleado(Controlador controlador) {
+	public BuscarEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -66,7 +66,7 @@ public class BuscarEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarEmpleado.setEditable(false);
-		textoBuscarEmpleado.setText("Buscar ControladorEmpleado");
+		textoBuscarEmpleado.setText("Buscar ControllerEmpleado");
 		textoBuscarEmpleado.setBackground(Color.cyan);
 		textoBuscarEmpleado.setForeground(Color.white);
 		textoBuscarEmpleado.setFocusable(false);
@@ -122,7 +122,7 @@ public class BuscarEmpleado extends JFrame {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString(), tabla.getValueAt(0, 6).toString() };
-		String inf = controlador.modificar("ControladorEmpleado", datos, campoID.getText());
+		String inf = controlador.modificar("ControllerEmpleado", datos, campoID.getText());
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
 		} else {
@@ -135,7 +135,7 @@ public class BuscarEmpleado extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoID.getText() };
-		String inf = controlador.buscar("ControladorEmpleado", datos);
+		String inf = controlador.buscar("ControllerEmpleado", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

@@ -1,4 +1,4 @@
-package factoria;
+package main;
 
 import javax.swing.table.AbstractTableModel;
 

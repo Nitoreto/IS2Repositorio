@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class BuscarCliente extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +38,9 @@ public class BuscarCliente extends JFrame {
 	private JButton botonModificar;
 	private JButton botonCancelar;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public BuscarCliente(Controlador controlador) {
+	public BuscarCliente(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -67,7 +67,7 @@ public class BuscarCliente extends JFrame {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarCliente.setEditable(false);
-		textoBuscarCliente.setText("Buscar ControladorCliente");
+		textoBuscarCliente.setText("Buscar ControllerCliente");
 		textoBuscarCliente.setBackground(Color.lightGray);
 		textoBuscarCliente.setForeground(Color.white);
 		textoBuscarCliente.setFocusable(false);
@@ -122,7 +122,7 @@ public class BuscarCliente extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.buscar("ControladorCliente", datos);
+		String inf = controlador.buscar("ControllerCliente", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -153,7 +153,7 @@ public class BuscarCliente extends JFrame {
 
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString() };
-		String inf = controlador.modificar("ControladorCliente", datos, campoDNI.getText());
+		String inf = controlador.modificar("ControllerCliente", datos, campoDNI.getText());
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

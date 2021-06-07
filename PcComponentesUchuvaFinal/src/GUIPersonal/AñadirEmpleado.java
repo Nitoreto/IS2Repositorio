@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class AñadirEmpleado extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +38,9 @@ public class AñadirEmpleado extends JFrame {
 	private JTextField campoId_Empleado;
 	private JButton botonGuardar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public AñadirEmpleado(Controlador controlador) {
+	public AñadirEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -78,7 +78,7 @@ public class AñadirEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1750, 650));
 
 		textoAltaEmpleado.setEditable(false);
-		textoAltaEmpleado.setText("Alta ControladorEmpleado");
+		textoAltaEmpleado.setText("Alta ControllerEmpleado");
 		textoAltaEmpleado.setBackground(Color.cyan);
 		textoAltaEmpleado.setForeground(Color.white);
 		textoAltaEmpleado.setFocusable(false);
@@ -184,7 +184,7 @@ public class AñadirEmpleado extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoId_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
 				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), };
-		String inf = controlador.alta("ControladorEmpleado", datos);
+		String inf = controlador.alta("ControllerEmpleado", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		} else {

@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import main.Controlador;
+import main.Mediator;
 
 public class ListarMarcas extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -24,9 +24,9 @@ public class ListarMarcas extends JFrame {
 	private JTable tabla;
 	private JButton botonBorrar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public ListarMarcas(Controlador controlador) {
+	public ListarMarcas(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -47,7 +47,7 @@ public class ListarMarcas extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 		CrearTabla();
 		textoListarMarca.setEditable(false);
-		textoListarMarca.setText("Listar ControladorMarca");
+		textoListarMarca.setText("Listar ControllerMarca");
 		textoListarMarca.setFocusable(false);
 		textoListarMarca.setFont(new Font("Consolas", 2, 100));
 		textoListarMarca.setBackground(Color.orange);
@@ -99,14 +99,14 @@ public class ListarMarcas extends JFrame {
 			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("ControladorMarca", datos);
-				controlador.listar("ControladorMarca");
+				inf = controlador.baja("ControllerMarca", datos);
+				controlador.listar("ControllerMarca");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("ControladorMarca", datos);
-				controlador.listar("ControladorMarca");
+				inf = controlador.desactivar("ControllerMarca", datos);
+				controlador.listar("ControllerMarca");
 				tabla.setModel(controlador.actualizarTabla());
 				tabla.revalidate();
 				tabla.repaint();
@@ -123,7 +123,7 @@ public class ListarMarcas extends JFrame {
 	}
 
 	private void CrearTabla() {
-		String inf = controlador.listar("ControladorMarca");
+		String inf = controlador.listar("ControllerMarca");
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		}

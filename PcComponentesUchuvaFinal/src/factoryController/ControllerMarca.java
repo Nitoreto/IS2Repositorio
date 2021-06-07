@@ -1,33 +1,29 @@
- package factoria;
+package factoryController;
 
-import DAOClientes.DAOBuscarCliente;
-import DAOClientes.DAOCrearCliente;
-import DAOClientes.DAODesactivarCliente;
-import DAOClientes.DAOEliminarCliente;
-import DAOClientes.DAOListarClientes;
-import DAOClientes.DAOModificarCliente;
-import main.Controlador;
+import DAOEmpleado.DAODesactivarEmpleado;
+import DAOMarca.DAOAltaMarca;
+import DAOMarca.DAOBajaMarca;
+import DAOMarca.DAOBuscarMarca;
+import DAOMarca.DAODesactivarMarca;
+import DAOMarca.DAOListarMarcas;
+import DAOMarca.DAOModificarMarca;
+import main.Mediator;
 
-public class ControladorCliente extends ShopObject {
+public class ControllerMarca extends ControllerObject {
 
-	private String nombre, DNI;
-	private int telefono;
+	private String CIFMarca, nombre, pais;
 	private Boolean activo;
 
-	public ControladorCliente() {
-		super("ControladorCliente");
+	public ControllerMarca() {
+		super("ControllerMarca");
 	}
 
-	public String getDNI() {
-		return DNI;
+	public String getCIFMarca() {
+		return CIFMarca;
 	}
 
 	public String getNombre() {
 		return nombre;
-	}
-
-	public int getTelefono() {
-		return telefono;
 	}
 
 	public int getActivo() {
@@ -35,66 +31,66 @@ public class ControladorCliente extends ShopObject {
 		return valor;
 	}
 
+	public String getPais() {
+		return pais;
+	}
+
 	@Override
 	public String alta() {
-		DAOCrearCliente dao = new DAOCrearCliente(this);
+		DAOAltaMarca dao = new DAOAltaMarca(this);
 		return dao.conectar();
 
 	}
 
 	@Override
 	public String baja() {
-		DAOEliminarCliente dao = new DAOEliminarCliente(this);
+		DAOBajaMarca dao = new DAOBajaMarca(this);
 		return dao.conectar();
 	}
 
 	@Override
 	public String modificar(String ID) {
-		DAOModificarCliente dao = new DAOModificarCliente(this, ID);
+		DAOModificarMarca dao = new DAOModificarMarca(this, ID);
 		return dao.conectar();
 
 	}
 
 	@Override
-	public String listar(Controlador controlador) {
-		DAOListarClientes dao = new DAOListarClientes(this);
+	public String listar(Mediator controlador) {
+		DAOListarMarcas dao = new DAOListarMarcas(this);
 		String string = dao.conectar();
-		if(string == "Exito")
+		if (string == "Exito")
 			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Abstract");
 		return string;
-
 	}
 
 	@Override
-	public String buscar(Controlador controlador) {
-		// TODO Auto-generated method stub
-		DAOBuscarCliente dao = new DAOBuscarCliente(this);
+	public String buscar(Mediator controlador) {
+		DAOBuscarMarca dao = new DAOBuscarMarca(this);
 		String string = dao.conectar();
-		if(string == "Exito")
+		if (string == "Exito")
 			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Default");
 		return string;
-
 	}
-
+	
 	@Override
 	public String desactivar() {
-		DAODesactivarCliente dao = new DAODesactivarCliente(this);
+		DAODesactivarMarca dao = new DAODesactivarMarca(this);
 		return dao.conectar();
 	}
-
 
 	@Override
 	public void inicializarObjeto(String[] datos) throws NumberFormatException{
 		for (int i = 0; i < datos.length; i++) {
 			switch (i) {
 			case 0:
-				DNI = datos[0];
+				CIFMarca = datos[0];
 				break;
 			case 1:
 				nombre = datos[1];
 				break;
 			case 2:
-				telefono = Integer.parseInt(datos[2]);
+				pais = datos[2];
 				break;
 			case 3:
 				if (datos[3].equals("1")) {
@@ -104,12 +100,14 @@ public class ControladorCliente extends ShopObject {
 				}else{
 					throw new NumberFormatException();
 				}
+				;
+				break;
 			}
 		}
 	}
 
 	@Override
-	public String mostrarHistorial(Controlador controlador) {
+	public String mostrarHistorial(Mediator controlador) {
 		// TODO Auto-generated method stub
 		return null;
 	}

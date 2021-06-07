@@ -1,24 +1,24 @@
-package factoria;
+package factoryController;
 
 import java.util.Random;
 
-import main.Controlador;
-import factoria.ShopObject;
+import main.Mediator;
 import DAOVentas.DAODesactivarVenta;
 import DAOVentas.DAOEliminarVenta;
 import DAOVentas.DAOListarVenta;
 import DAOVentas.DAOModificarVenta;
 import DAOVentas.DAOMostrarVenta;
 import DAOVentas.DAORegistrarVenta;
+import factoryController.ControllerObject;
 
-public class ControladorVenta extends ShopObject {
+public class ControllerVenta extends ControllerObject {
 
 	private int idVentas, idEmpleado, precioTotal;
 	private String DNICliente, listaProductos;
 	private Boolean activo;
 
-	public ControladorVenta() {
-		super("ControladorVenta");
+	public ControllerVenta() {
+		super("ControllerVenta");
 
 	}
 
@@ -73,7 +73,7 @@ public class ControladorVenta extends ShopObject {
 	}
 
 	@Override
-	public String listar(Controlador controlador) {
+	public String listar(Mediator controlador) {
 		DAOListarVenta dao = new DAOListarVenta(this);
 		String string = dao.conectar();
 		if (string == "Exito")
@@ -83,7 +83,7 @@ public class ControladorVenta extends ShopObject {
 	}
 
 	@Override
-	public String buscar(Controlador controlador) {
+	public String buscar(Mediator controlador) {
 
 		DAOMostrarVenta dao = new DAOMostrarVenta(this);
 		String string = dao.conectar();
@@ -138,7 +138,7 @@ public class ControladorVenta extends ShopObject {
 	}
 
 	@Override
-	public String mostrarHistorial(Controlador controlador) {
+	public String mostrarHistorial(Mediator controlador) {
 		DAOListarVenta dao = new DAOListarVenta(this);
 		String string = dao.conectar();
 		if (string == "Exito")

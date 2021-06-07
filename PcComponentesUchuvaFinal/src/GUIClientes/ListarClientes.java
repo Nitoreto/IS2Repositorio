@@ -15,7 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-import main.Controlador;
+import main.Mediator;
 
 public class ListarClientes extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -24,9 +24,9 @@ public class ListarClientes extends JFrame {
 	private JTextArea textoListarClientes;
 	private JTable tabla;
 	private JButton botonVolver;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public ListarClientes(Controlador controlador) {
+	public ListarClientes(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -46,14 +46,14 @@ public class ListarClientes extends JFrame {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoListarClientes.setEditable(false);
-		textoListarClientes.setText("Listar ControladorCliente");
+		textoListarClientes.setText("Listar ControllerCliente");
 		textoListarClientes.setFocusable(false);
 		textoListarClientes.setBackground(Color.lightGray);
 		textoListarClientes.setForeground(Color.white);
 		textoListarClientes.setFont(new Font("Consolas", 1, 100));
 		this.getContentPane().add(textoListarClientes, BorderLayout.NORTH);
 
-		String inf = controlador.listar("ControladorCliente");
+		String inf = controlador.listar("ControllerCliente");
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);

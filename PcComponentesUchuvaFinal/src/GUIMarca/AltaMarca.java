@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class AltaMarca extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -36,9 +36,9 @@ public class AltaMarca extends JFrame {
 
 	private JButton botonGuardar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public AltaMarca(Controlador controlador) {
+	public AltaMarca(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -68,7 +68,7 @@ public class AltaMarca extends JFrame {
 		setPreferredSize(new Dimension(1280, 720));
 		
 		textoAltaMarca.setEditable(false);
-		textoAltaMarca.setText("Alta ControladorMarca");
+		textoAltaMarca.setText("Alta ControllerMarca");
 		textoAltaMarca.setFocusable(false);
 		textoAltaMarca.setBackground(Color.orange);
 		textoAltaMarca.setForeground(Color.white);
@@ -80,7 +80,7 @@ public class AltaMarca extends JFrame {
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 
 		textoCifMarca.setEditable(false);
-		textoCifMarca.setText("CIF ControladorMarca");
+		textoCifMarca.setText("CIF ControllerMarca");
 		textoCifMarca.setForeground(Color.orange);
 		textoCifMarca.setFocusable(false);
 		textoCifMarca.setFont(new Font("Consolas", 4, 80));
@@ -143,7 +143,7 @@ public class AltaMarca extends JFrame {
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoCifMarca.getText(), campoNombre.getText(), campoPais.getText() };
-		String inf = controlador.alta("ControladorMarca", datos);
+		String inf = controlador.alta("ControllerMarca", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		} else {

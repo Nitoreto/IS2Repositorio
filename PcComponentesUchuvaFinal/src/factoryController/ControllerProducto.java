@@ -1,4 +1,4 @@
-package factoria;
+package factoryController;
 
 import DAOProductos.DAOAltaProducto;
 import DAOProductos.DAOBajaProducto;
@@ -6,17 +6,17 @@ import DAOProductos.DAODesactivarProducto;
 import DAOProductos.DAOModificarProducto;
 import DAOProductos.DAOMostrarHistorialProducto;
 import DAOProductos.DAOMostrarProducto;
-import main.Controlador;
+import main.Mediator;
 
-public class ControladorProducto extends ShopObject {
+public class ControllerProducto extends ControllerObject {
 
 	private String  Nombre, Descripcion, NombreMarca;
 	private int ID;
 	private float Precio;
 	private Boolean Activo;
 
-	public ControladorProducto() {
-		super("ControladorProducto");
+	public ControllerProducto() {
+		super("ControllerProducto");
 	}
 
 	public int getID() {
@@ -67,7 +67,7 @@ public class ControladorProducto extends ShopObject {
 	}
 
 	@Override
-	public String listar(Controlador controlador) {
+	public String listar(Mediator controlador) {
 		// TODO Auto-generated method stub
 		DAOMostrarHistorialProducto dao = new DAOMostrarHistorialProducto(this);
 		String string = dao.conectar();
@@ -77,7 +77,7 @@ public class ControladorProducto extends ShopObject {
 	}
 
 	@Override
-	public String buscar(Controlador controlador) {
+	public String buscar(Mediator controlador) {
 		// TODO Auto-generated method stub
 		DAOMostrarProducto dao = new DAOMostrarProducto(this);
 		String string = dao.Conectar();
@@ -127,7 +127,7 @@ public class ControladorProducto extends ShopObject {
 	}
 
 	@Override
-	public String mostrarHistorial(Controlador controlador) {
+	public String mostrarHistorial(Mediator controlador) {
 		// TODO Auto-generated method stub
 		return null;
 	}

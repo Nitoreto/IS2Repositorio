@@ -1,18 +1,18 @@
-package factoria;
+package factoryController;
 
 import java.sql.SQLException;
 
 import dao_Transfer_Singelton.DAOSuper;
 
-public abstract class ShopObject implements Acciones {
+public abstract class ControllerObject implements Acciones {
 	private String nombreClase;
 	private DAOSuper dao;
 
-	public ShopObject(String nombreClase) {
+	public ControllerObject(String nombreClase) {
 		this.nombreClase = nombreClase;
 	}
 
-	public ShopObject esEsteShopObject(String nombre, String[] datos) {
+	public ControllerObject esEsteShopObject(String nombre, String[] datos) {
 		if (this.nombreClase.equalsIgnoreCase(nombre)) {
 			try {
 				inicializarObjeto(datos);

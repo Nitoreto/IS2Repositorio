@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class BajaProducto extends JFrame {
 	
@@ -32,9 +32,9 @@ public class BajaProducto extends JFrame {
 
 	private JButton botonEliminar;
 	private JButton botonCancelar;
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public BajaProducto(Controlador controlador) {
+	public BajaProducto(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -60,7 +60,7 @@ public class BajaProducto extends JFrame {
 		
 
 		textoBajaProducto.setEditable(false);
-		textoBajaProducto.setText("Baja ControladorProducto");
+		textoBajaProducto.setText("Baja ControllerProducto");
 		textoBajaProducto.setBackground(Color.pink);
 		textoBajaProducto.setForeground(Color.white);
 		textoBajaProducto.setFocusable(false);
@@ -123,9 +123,9 @@ public class BajaProducto extends JFrame {
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("ControladorProducto", Datos);
+			inf = controlador.baja("ControllerProducto", Datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("ControladorProducto", Datos);
+			inf = controlador.desactivar("ControllerProducto", Datos);
 		}
 
 		if (inf != "Exito") {

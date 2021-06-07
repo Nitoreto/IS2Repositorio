@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import main.Controlador;
+import main.Mediator;
 
 public class MuestraHistorialEmpleado extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -38,9 +38,9 @@ public class MuestraHistorialEmpleado extends JFrame {
 	private JButton botonBuscar;
 	private JButton botonCancelar;
 
-	private Controlador controlador;
+	private Mediator controlador;
 
-	public MuestraHistorialEmpleado(Controlador controlador) {
+	public MuestraHistorialEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.controlador = controlador;
 		initComponents();
@@ -66,7 +66,7 @@ public class MuestraHistorialEmpleado extends JFrame {
 		setPreferredSize(new Dimension(1500, 720));
 
 		textoBuscarHistorialEmpleado.setEditable(false);
-		textoBuscarHistorialEmpleado.setText("Mostrar Historial ControladorEmpleado");
+		textoBuscarHistorialEmpleado.setText("Mostrar Historial ControllerEmpleado");
 		textoBuscarHistorialEmpleado.setBackground(Color.cyan);
 		textoBuscarHistorialEmpleado.setForeground(Color.white);
 		textoBuscarHistorialEmpleado.setFocusable(false);
@@ -120,7 +120,7 @@ public class MuestraHistorialEmpleado extends JFrame {
 
 	private void botonMostrarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.mostrarHistorial("ControladorEmpleado", datos);
+		String inf = controlador.mostrarHistorial("ControllerEmpleado", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL MOSTRAR EL HISTORIAL DE VENTAS DEL EMPLEADO", JOptionPane.ERROR_MESSAGE);

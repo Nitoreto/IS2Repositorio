@@ -8,7 +8,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new PantallaPrincipalPccomponentes(new Controlador());
+				new PantallaPrincipalPccomponentes(new Mediator());
 			}
 		});
 
