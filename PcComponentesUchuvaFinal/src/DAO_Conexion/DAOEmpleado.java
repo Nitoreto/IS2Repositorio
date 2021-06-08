@@ -7,18 +7,17 @@ import factoryController.ControllerEmpleado;
 
 public class DAOEmpleado {
 	private String DNI;
-	
+
 	public DAOEmpleado(ControllerEmpleado E1) {
 		super();
 		DNI = E1.getDni();
-		
+
 	}
-	
-	public String Añadir() {
+
+	public String Aï¿½adir() {
 		try {
-			this.query = "INSERT into empleados (ID_Empleado, Nombre, Apellidos, DNI, Direccion, Telefono) " + "VALUES "
-					+ "(" + E1.getId_empleado() + ",'" + E1.getName() + "','" + E1.getApell() + "','" + E1.getDni() + "','"
-					+ E1.getDir() + "'," + E1.getNumero() + ")";
+			this.query = "INSERT into Personal (DNI, Nombre, Contrasena, Direccion, Telefono, Sueldo, Activo) " + "VALUES "
+					+ "('" + E1.getDni() + "', '" + E1.getName() + "', " + E1.getContrasena() + ", '"	+ E1.getDir() + "', " + E1.getNumero() + ", " + E1.getSueldo() + ", "+ E1.getActivo() +")";
 			if (DNI.equals("")) {
 				return "Campo DNI esta vacio";
 			}
@@ -30,10 +29,10 @@ public class DAOEmpleado {
 		}
 		return "Exito";
 	}
-	
+
 	public String Busar() {
 		try {
-			this.query = "SELECT * FROM empleados WHERE ID_Empleado = " + E1.getId_empleado();
+			this.query = "SELECT * FROM Personal WHERE DNI = " + E1.getDni();
 
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
@@ -42,11 +41,11 @@ public class DAOEmpleado {
 		return "Exito";
 
 	}
-	
+
 	public String Desactivar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE empleados SET Activo = 0 WHERE ID_Empleado = " + empleado.getId_empleado();
+			this.query = "UPDATE Personal SET Activo = 0 WHERE DNI = " + E1.getDni();
 			row = super.conectarUpdate();
 		} catch (Exception e) {
 			return e.getMessage();
@@ -56,14 +55,15 @@ public class DAOEmpleado {
 		}
 		return "Exito";
 	}
-	
+
 	public String Eliminar() {
 		int row = -1;
 		try {
-			this.query = "DELETE FROM empleados WHERE ID_Empleado = " + E1.getId_empleado() + "";
+			this.query = "DELETE FROM Personal WHERE DNI = " + E1.getDni() + "";
 			row = this.conectarUpdate();
 		} catch (SQLException e) {
-			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+			if (e.getClass().getName()
+					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
 				return "No se puede borrar un empleado con ventas";
 			}
 			return e.getMessage();
@@ -74,27 +74,29 @@ public class DAOEmpleado {
 		return "Exito";
 
 	}
-	
+
 	public String Lista() {
 		try {
-			this.query = "SELECT * FROM empleados";
+			this.query = "SELECT * FROM Personal";
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
 		return "Exito";
 	}
-	
+
 	public String Modificar() {
 
 		int row = -1;
 		try {
-			this.query = "UPDATE empleados SET ID_Empleado = " + E1.getId_empleado() + "," + "Nombre = '" + E1.getName()
-			+ "', " + "Apellidos = '" + E1.getApell() + "',  " + "DNI = '" + E1.getDni() + "', " + "Direccion = '"
-			+ E1.getDir() + "', " + "Telefono = " + E1.getNumero() + " , Activo = " + E1.getActivo() + " WHERE ID_Empleado = " + ID_Empleado;
+			this.query = "UPDATE Personal SET DNI = '" + E1.getDni() + "'," + " Nombre = '" + E1.getName() + "', "
+					+ " Contrasena = " + E1.getContrasena() + ",  " + " Direccion = '"
+					+ E1.getDir() + "', " + " Telefono = " + E1.getNumero() + " Sueldo = " + E1.getSueldo() + ", " + " Activo = " + E1.getActivo()
+					+ " WHERE DNI = " + E1.getDni();
 			row = super.conectarUpdate();
 		} catch (Exception e) {
-			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+			if (e.getClass().getName()
+					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
 				return "No se puede modificar el ID de un empleado con ventas";
 			}
 			return e.getMessage();
@@ -104,16 +106,15 @@ public class DAOEmpleado {
 		}
 		return "Exito";
 	}
-	
+
 	public String MuestraHistorialEmpleado() {
 		try {
-			this.query = "SELECT E.id_empleado, E.Nombre, V.id_ventas FROM empleado E JOIN ventas V ON E.id_empleado = V.id_empleado WHERE DNI = "
-					+ E1.getDni() + "";
+			this.query = "SELECT DNI, IDs , IDv FROM Gestiona WHERE DNI = " + E1.getDni() + "";
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();
 		}
 		return "Exito";
 	}
-	
+
 }
