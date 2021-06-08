@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import factoria.Marca;
 
-public class  {
+public class DAOMarca {
 	private String CIFMarca;
 
 	public DAOMarca(Marca marca) {
@@ -15,8 +15,8 @@ public class  {
 	
 	public String Alta() {
 		try {
-			this.query = "INSERT into `marcas` (`CIFMarca`, `Nombre`, `Pais`) VALUES " + "('" + marca.getCIFMarca() + "','"
-					+ marca.getNombre() + "', '" + marca.getPais() + "')";
+			this.query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES " + "('" + marca.getCIFMarca() + "','"
+					+ marca.getNombre() + "', '" + marca.getPais() + "'," + marca.getActivo() + ")";
 			if (CIFMarca.equals("")) {
 				return "Campo CIF esta vacio";
 			}
@@ -31,7 +31,7 @@ public class  {
 	public String Baja() {
 		int row = -1;
 		try {
-			this.query = "DELETE FROM marcas WHERE CIFMarca = '" + marca.getCIFMarca() + "'";
+			this.query = "DELETE FROM Marca WHERE CIF = '" + marca.getCIFMarca() + "'";
 			row = this.conectarUpdate();
 		} catch (SQLException e) {
 			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
@@ -48,7 +48,7 @@ public class  {
 	
 	public String Buscar() {
 		try {
-			this.query = "SELECT * FROM marcas WHERE CIFMarca = '" + marca.getCIFMarca() + "'";
+			this.query = "SELECT * FROM Marca WHERE CIF = '" + marca.getCIFMarca() + "'";
 
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
@@ -63,7 +63,7 @@ public class  {
 	public String Desactivar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE marcas SET Activo = 0 WHERE CIFMarca = '" + marca.getCIFMarca() + "'";
+			this.query = "UPDATE Marca SET Activo = 0 WHERE CIF = '" + marca.getCIFMarca() + "'";
 			row = super.conectarUpdate();
 		} catch (Exception e) {
 
@@ -77,7 +77,7 @@ public class  {
 	
 	public String Listar() {
 		try {
-			this.query = "SELECT * FROM marcas";
+			this.query = "SELECT * FROM Marca";
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -88,8 +88,8 @@ public class  {
 	public String conectar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE marcas SET CIFMarca = '" + marca.getCIFMarca() + "' ,Nombre = '" + marca.getNombre()
-			+ "', Pais = '" + marca.getPais() + "', Activo = " + marca.getActivo() + " WHERE CIFMarca = '" + CIFMarcaOriginal + "'";
+			this.query = "UPDATE Marca SET CIF = '" + marca.getCIFMarca() + "' ,Nombre = '" + marca.getNombre()
+			+ "', Pais = '" + marca.getPais() + "', Activo = " + marca.getActivo() + " WHERE CIF = '" + CIFMarcaOriginal + "'";
 			row = super.conectarUpdate();
 		} catch (Exception e) {
 			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {

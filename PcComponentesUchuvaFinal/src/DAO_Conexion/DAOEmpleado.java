@@ -32,7 +32,7 @@ public class DAOEmpleado {
 
 	public String Busar() {
 		try {
-			this.query = "SELECT * FROM Personal WHERE DNI = " + E1.getDni();
+			this.query = "SELECT * FROM Personal WHERE DNI = '" + E1.getDni() + "'";
 
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
@@ -45,7 +45,7 @@ public class DAOEmpleado {
 	public String Desactivar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE Personal SET Activo = 0 WHERE DNI = " + E1.getDni();
+			this.query = "UPDATE Personal SET Activo = 0 WHERE DNI = '" + E1.getDni() + "'";
 			row = super.conectarUpdate();
 		} catch (Exception e) {
 			return e.getMessage();
@@ -59,7 +59,7 @@ public class DAOEmpleado {
 	public String Eliminar() {
 		int row = -1;
 		try {
-			this.query = "DELETE FROM Personal WHERE DNI = " + E1.getDni() + "";
+			this.query = "DELETE FROM Personal WHERE DNI = '" + E1.getDni() + "'";
 			row = this.conectarUpdate();
 		} catch (SQLException e) {
 			if (e.getClass().getName()
@@ -109,7 +109,7 @@ public class DAOEmpleado {
 
 	public String MuestraHistorialEmpleado() {
 		try {
-			this.query = "SELECT DNI, IDs , IDv FROM Gestiona WHERE DNI = " + E1.getDni() + "";
+			this.query = "SELECT DNI, IDs , IDv FROM Gestiona WHERE DNI = '" + E1.getDni() + "'";
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();

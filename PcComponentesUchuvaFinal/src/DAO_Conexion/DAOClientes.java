@@ -24,7 +24,7 @@ public class DAOClientes {
 			throw new Exception("Campo dni esta vacio");
 		}
 		String query = "INSERT into Cliente (DNI, Nombre, Telefono, Activo) VALUES " + "('" + tCliente.getDNI() + "', '"
-				+ tCliente.getNombre() + "', '" + tCliente.getTelefono() + "', '" + tCliente.getActivo() +"')";
+				+ tCliente.getNombre() + "', " + tCliente.getTelefono() + ", " + tCliente.getActivo() +")";
 		conexion.conectarUpdate(query);
 		return true;
 	}
