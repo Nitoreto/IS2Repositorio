@@ -7,7 +7,6 @@ import main.Mediator;
 public class ControllerCliente extends ObjectController {
 	private DAOClientes DAOc;
 	private TransferCliente tCliente;
-	private Mediator mediator;
 
 	public ControllerCliente() {
 		super("ControllerCliente");
@@ -15,10 +14,9 @@ public class ControllerCliente extends ObjectController {
 	}
 	
 	@Override
-	protected void inicializarTransfer(String[] datos, Mediator mediator) throws Exception{
+	protected void inicializarTransfer(String[] datos) throws Exception{
 		this.DAOc = new DAOClientes();
 		this.tCliente = new TransferCliente(datos);		
-		this.mediator = mediator;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import main.Mediator;
 
 public abstract class ObjectController implements Acciones {
 	private String nombreClase;
+	protected Mediator mediator;
 
 	public ObjectController(String nombreClase) {
 		this.nombreClase = nombreClase;
@@ -13,7 +14,8 @@ public abstract class ObjectController implements Acciones {
 	public ObjectController esEsteShopObject(String nombre, String[] datos, Mediator mediator) {
 		if (this.nombreClase.equalsIgnoreCase(nombre)) {
 			try {
-				inicializarTransfer(datos, mediator);
+				this.mediator = mediator;
+				inicializarTransfer(datos);
 			} catch (Exception e) {
 				mediator.avisarError(e.getMessage());
 			}
@@ -23,6 +25,6 @@ public abstract class ObjectController implements Acciones {
 		}
 	}
 	
-	protected abstract void inicializarTransfer(String[] datos, Mediator mediator) throws Exception;
+	protected abstract void inicializarTransfer(String[] datos) throws Exception;
 
 }

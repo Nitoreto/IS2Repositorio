@@ -1,10 +1,7 @@
 package DAO_Conexion;
 
 import java.sql.SQLException;
-
-import Transfer.Transfer;
 import Transfer.TransferCliente;
-import factoryController.ControllerCliente;
 
 public class DAOClientes {
 	private SingletonConexion conexion;
@@ -94,7 +91,7 @@ public class DAOClientes {
 					+ " WHERE DNI = '" + DNI + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
-				throw new Exception("Los campos estan vacios.");
+				throw new Exception("No hay un cliente con ese DNI");
 			}
 			return true;
 		} catch (SQLException e) {
@@ -104,7 +101,6 @@ public class DAOClientes {
 			} else {
 				throw new Exception(e.getCause());
 			}
-
 		}
 	}
 

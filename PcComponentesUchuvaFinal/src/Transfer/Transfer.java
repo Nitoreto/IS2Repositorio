@@ -18,7 +18,7 @@ public abstract class Transfer {
 		this.metaDat = resultado.getMetaData();
 	}
 	
-	public Transfer(String[] datos) {
+	public Transfer(String[] datos) throws Exception {
 		this.inicializarObjeto(datos);
 	}
 
