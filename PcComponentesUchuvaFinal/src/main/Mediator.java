@@ -7,89 +7,85 @@ import factoryController.ObjectController;
 import factoryController.FactoryController;
 
 public class Mediator {
-	private TableModel modelo;
-	private ObjectController objeto;
+	private ObjectController controller;
 
 	public String alta(String nombre, String[] Datos) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if (objeto == null) {
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		if (controller == null) {
 			return "Datos Incorrectos";
 		}
-		return objeto.alta();
+		return controller.alta();
 	}
-	
-	inicializarTransfer(String[] datos) throws NumberFormatException;
 
 	public String baja(String nombre, String[] Datos) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if (objeto == null) {
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if (controller == null) {
 			return "Datos Incorrectos";
 		}
-		return objeto.baja();
+		return controller.baja();
 	}
 
 	public String modificar(String nombre, String[] Datos, String ID) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if (objeto == null) {
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if (controller == null) {
 			return "Datos Incorrectos";
 		}
-		return objeto.modificar(ID);
+		return controller.modificar(ID);
 	}
 
 	public String listar(String nombre) {
 		String[] Datos = {};
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if (objeto == null) {
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if (controller == null) {
 			return "Datos Incorrectos";
 		}
-		return objeto.listar(this);
+		return controller.listar(this);
 	}
 
 	public String buscar(String nombre, String[] Datos) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if(objeto == null){
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if(controller == null){
 			return "Datos Incorrectos";
 		}
-		return objeto.buscar(this);
+		return controller.buscar(this);
 	}
 
 	public String mostrarHistorial(String nombre, String[] Datos) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if(objeto == null){
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if(controller == null){
 			return "Datos Incorrectos";
 		}
-		return objeto.mostrarHistorial(this);
+		return controller.mostrarHistorial(this);
 	}
 	
 	public String desactivar(String nombre, String[] Datos) {
-		objeto = FactoryController.FactoriaParse(nombre, Datos);
-		if(objeto == null){
+		controller = FactoryController.FactoriaParse(nombre, Datos);
+		if(controller == null){
 			return "Datos Incorrectos";
 		}
-		return objeto.desactivar();
+		return controller.desactivar();
 
 	}
 
-	public String generarTabla(Object[][] generarTabla, String[] generarTitulos, String Modelo) {
-
-		if (Modelo.equalsIgnoreCase("Default")) {
-			modelo = new ModeloTablaEditable(generarTabla, generarTitulos);
-		} else {
-			modelo = new ModeloTabla(generarTabla, generarTitulos);
-		}
-		return "Exito";
+	public void actualizarTabla(Object[][] generarTabla, String[] generarTitulos) {
+		Esto solo pasa los datos, la vista se encarga de actualizar como crea.
+		Pasar vista los datos.
 	}
-
-	public TableModel actualizarTabla() {
-		return modelo;
+	
+	public void avisarError(String Error) {
+		Avisa a la vista del error
+	}
+	
+	public void avisarCorrecto() {
+		Avisa a la vista de que se hizo correctamente
 	}
 
 	public String cancelar() {
 
 		modelo = new DefaultTableModel();
 
-		if (objeto != null)
-			objeto.close();
+		if (controller != null)
+			controller.close();
 		return "Exito";
 	}
 }

@@ -7,7 +7,7 @@ public class TransferCliente extends Transfer {
 	private String nombre, DNI;
 	private int telefono;
 	private Boolean activo;
-	
+
 	public TransferCliente(ResultSet resultado) throws SQLException {
 		super(resultado);
 	}
@@ -46,7 +46,7 @@ public class TransferCliente extends Transfer {
 	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
-	
+
 	public void inicializarObjeto(String[] datos) throws Exception{
 		for (int i = 0; i < datos.length; i++) {
 			switch (i) {
@@ -58,7 +58,7 @@ public class TransferCliente extends Transfer {
 				break;
 			case 2:
 				try{
-				telefono = Integer.parseInt(datos[2]);
+					telefono = Integer.parseInt(datos[2]);
 				}catch (NumberFormatException e) {
 					throw new Exception("Formato del telefono incorrecto")
 				}
@@ -74,5 +74,5 @@ public class TransferCliente extends Transfer {
 			}
 		}
 	}
-	
+
 }

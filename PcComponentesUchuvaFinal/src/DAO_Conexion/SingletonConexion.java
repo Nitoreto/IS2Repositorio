@@ -15,5 +15,5 @@ public abstract  class SingletonConexion{
 	
 	public abstract int conectarUpdate(String query) throws SQLException;
 	public abstract ResultSet conectarExecute(String query) throws SQLException;
-	public abstract void close();
+	public abstract void close() throws SQLException;
 }

@@ -14,7 +14,7 @@ public class DAOEmpleado {
 
 	}
 
-	public String A�adir() {
+	public String alta() {
 		try {
 			this.query = "INSERT into Personal (DNI, Nombre, Contrasena, Direccion, Telefono, Sueldo, Activo) " + "VALUES "
 					+ "('" + E1.getDni() + "', '" + E1.getName() + "', " + E1.getContrasena() + ", '"	+ E1.getDir() + "', " + E1.getNumero() + ", " + E1.getSueldo() + ", "+ E1.getActivo() +")";

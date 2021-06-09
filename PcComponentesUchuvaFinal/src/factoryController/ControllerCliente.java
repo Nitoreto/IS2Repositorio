@@ -1,6 +1,5 @@
- package factoryController;
+package factoryController;
 
-import java.sql.SQLException;
 import DAO_Conexion.DAOClientes;
 import Transfer.TransferCliente;
 import main.Mediator;
@@ -8,83 +7,97 @@ import main.Mediator;
 public class ControllerCliente extends ObjectController {
 	private DAOClientes DAOc;
 	private TransferCliente tCliente;
+	private Mediator mediator;
 
 	public ControllerCliente() {
 		super("ControllerCliente");
-			
+
 	}
 	
-	protected void inicializarTransfer(String[] datos) throws Exception{
-		try {
-			this.DAOc = new DAOClientes();
-		} catch (SQLException e) {
-			throw new Exception("Error al conectar con la base de datos.");
-		}
+	@Override
+	protected void inicializarTransfer(String[] datos, Mediator mediator) throws Exception{
+		this.DAOc = new DAOClientes();
 		this.tCliente = new TransferCliente(datos);		
+		this.mediator = mediator;
 	}
 
 	@Override
-	public String alta(String[] Datos) {
-		
-		DAOc.alta(tCliente);
-
-	}
-
-	@Override
-	public String baja() {
-		DAOEliminarCliente dao = new DAOEliminarCliente(this);
-		if (e.getClass().getName()
-				.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-			return "No se puede borrar un cliente con ventas";
+	public Boolean alta() {
+		try {
+			DAOc.alta(tCliente);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
 		}
-		return dao.conectar();
 	}
 
 	@Override
-	public String modificar(String ID) {
-		DAOModificarCliente dao = new DAOModificarCliente(this, ID);
-		 catch (Exception e) {
-				if (e.getClass().getName()
-						.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-					return "No se puede modificar el DNI de un cliente con ventas";
-				}
-				return e.getMessage();
-			}
-		return dao.conectar();
+	public Boolean baja() {
+		try {
+			DAOc.baja(tCliente.getDNI());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean modificar(String DNI) {
+		try {
+			DAOc.modificar(tCliente, DNI);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean listar() {
+		try {
+			tCliente = DAOc.listar();
+			mediator.actualizarTabla(tCliente.generarTabla(), tCliente.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean buscar() {
+		try {
+			tCliente = DAOc.buscar(tCliente.getDNI());
+			mediator.actualizarTabla(tCliente.generarTabla(), tCliente.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
 
 	}
 
 	@Override
-	public String listar(Mediator controlador) {
-		DAOListarClientes dao = new DAOListarClientes(this);
-		String string = dao.conectar();
-		if(string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Abstract");
-		return string;
-
+	public Boolean desactivar() {
+		try {
+			DAOc.desactivar(tCliente.getDNI());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
 	}
 
 	@Override
-	public String buscar(Mediator controlador) {
-		// TODO Auto-generated method stub
-		DAOBuscarCliente dao = new DAOBuscarCliente(this);
-		String string = dao.conectar();
-		if(string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Default");
-		return string;
-
-	}
-
-	@Override
-	public String desactivar() {
-		DAODesactivarCliente dao = new DAODesactivarCliente(this);
-		return dao.conectar();
-	}
-
-	@Override
-	public String mostrarHistorial(Mediator controlador) {
-		// TODO Auto-generated method stub
+	public Boolean mostrarHistorial() {
 		return null;
 	}
-
 }

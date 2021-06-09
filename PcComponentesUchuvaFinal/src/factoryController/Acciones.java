@@ -1,20 +1,21 @@
 package factoryController;
 
+import Transfer.Transfer;
 import main.Mediator;
 
 public interface Acciones {
-	public String alta();
+	public Boolean alta();
 
-	public String baja();
+	public Boolean baja();
 
-	public String modificar(String ID);
+	public Boolean modificar(String ID);
 
-	public String listar(Mediator controlador);
+	public Boolean listar();
 
-	public String buscar(Mediator controlador);
+	public Boolean buscar();
 
-	public String mostrarHistorial(Mediator controlador);
+	public Boolean mostrarHistorial();
 
-	public String desactivar();
+	public Boolean desactivar();
 
 }

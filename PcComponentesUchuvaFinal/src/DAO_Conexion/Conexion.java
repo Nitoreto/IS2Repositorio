@@ -19,7 +19,7 @@ public class Conexion extends SingletonConexion{
 		conexion = DriverManager.getConnection(
 				"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
 	}
-	
+
 	@Override
 	public int conectarUpdate(String query) throws SQLException {
 		int row;
@@ -28,7 +28,7 @@ public class Conexion extends SingletonConexion{
 		statement.close();
 		return row;
 	}
-	
+
 	@Override
 	public ResultSet conectarExecute(String query) throws SQLException {
 		ResultSet resultado;
@@ -38,13 +38,10 @@ public class Conexion extends SingletonConexion{
 	}
 
 	@Override
-	public void close() {
-		try {
-			statement.close();
-			conexion.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void close() throws SQLException {
+		statement.close();
+		conexion.close();
+
 	}
 
 }
