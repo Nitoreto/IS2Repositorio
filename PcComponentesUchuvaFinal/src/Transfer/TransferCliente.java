@@ -20,7 +20,7 @@ public class TransferCliente extends Transfer {
 		try {
 			telefono = Integer.parseInt(datos[2]);
 		} catch (NumberFormatException e) {
-			throw new Exception("Formato del telefono incorrecto");
+			throw new Exception("Formato del telefono incorrecto, solo numero");
 		}
 		
 		if (datos[3].equals("1")) {

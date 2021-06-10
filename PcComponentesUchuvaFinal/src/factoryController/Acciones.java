@@ -14,8 +14,8 @@ public interface Acciones {
 
 	public Boolean buscar();
 
-	public Boolean mostrarHistorial();
-
 	public Boolean desactivar();
+	
+	public Boolean mostrarHistorial();
 
 }

@@ -1,23 +1,12 @@
-/imagenes/
-/DAOEmpleado/
-/factoria/
-/DAOMarca/
-/DAOProductos/
-/DAOVentas/
 /DAO_Conexion/
-/DAOClientes/
-/dao_Transfer_Singelton/
-/GUIPersonal/
-<<<<<<< HEAD
+/Fallos ejecucion
 /GUIClientes/
 /GUIMarca/
+/GUIPersonal/
 /GUIProductos/
-/GUIVenta/
-=======
->>>>>>> branch 'main' of https://github.com/Nitoreto/IS2Repositorio.git
-/main/
-/TransferCliente/
-/Transfer/
-/factoriaControler/
-/factoryController/
 /GUISucursal/
+/GUIVenta/
+/Transfer/
+/factoryController/
+/imagenes/
+/main/

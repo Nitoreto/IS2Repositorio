@@ -1,75 +1,103 @@
 package factoryController;
 
-import DAOProductos.DAOAltaProducto;
-import DAOProductos.DAOBajaProducto;
-import DAOProductos.DAODesactivarProducto;
-import DAOProductos.DAOModificarProducto;
-import DAOProductos.DAOMostrarHistorialProducto;
-import DAOProductos.DAOMostrarProducto;
-import main.Mediator;
+
+
+import DAO_Conexion.DAOProducto;
+import Transfer.TransferProducto;
 
 public class ControllerProducto extends ObjectController {
-
+	private DAOProducto DAOp;
+	private TransferProducto tProducto;
 	
 	public ControllerProducto() {
 		super("ControllerProducto");
 	}
 	
-
 	@Override
-	public String alta() {
-		// TODO Auto-generated method stub
-		DAOAltaProducto dao = new DAOAltaProducto(this);
-		return dao.Conectar();
-
-	}
-
-	@Override
-	public String baja() {
-		// TODO Auto-generated method stub
-		DAOBajaProducto dao = new DAOBajaProducto(this);
-		return dao.Conectar();
-	}
-
-	@Override
-	public String modificar(String ID) {
-		// TODO Auto-generated method stub
-		DAOModificarProducto dao = new DAOModificarProducto(this, ID);
-		return dao.Conectar();
-	}
-
-	@Override
-	public String listar(Mediator controlador) {
-		// TODO Auto-generated method stub
-		DAOMostrarHistorialProducto dao = new DAOMostrarHistorialProducto(this);
-		String string = dao.conectar();
-		if (string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Abstract");
-		return string;
-	}
-
-	@Override
-	public String buscar(Mediator controlador) {
-		// TODO Auto-generated method stub
-		DAOMostrarProducto dao = new DAOMostrarProducto(this);
-		String string = dao.Conectar();
-		if (string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Default");
-		return string;
+	protected void inicializarController(String[] datos) throws Exception{
+		this.DAOp = new DAOProducto();
+		this.tProducto = new TransferProducto(datos);		
 	}
 	
+
 	@Override
-	public String desactivar() {
-		DAODesactivarProducto dao = new DAODesactivarProducto(this);
-		return dao.conectar();
+	public Boolean alta() {
+		try {
+			DAOp.alta(tProducto);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
 	}
 
 	@Override
-	public String mostrarHistorial(Mediator controlador) {
-		// TODO Auto-generated method stub
+	public Boolean baja() {
+		try {
+			DAOp.baja(tProducto.getID());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean modificar(String ID) {
+		try {
+			DAOp.modificar(tProducto, ID);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean listar() {
+		try {
+			tProducto = DAOp.listar();
+			mediator.actualizarTabla(tProducto.generarTabla(), tProducto.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean buscar() {
+		try {
+			tProducto = DAOp.buscar(tProducto.getID());
+			mediator.actualizarTabla(tProducto.generarTabla(), tProducto.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+
+	}
+
+	@Override
+	public Boolean desactivar() {
+		try {
+			DAOp.desactivar(tProducto.getID());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean mostrarHistorial() {
 		return null;
 	}
-
-
 
 }
