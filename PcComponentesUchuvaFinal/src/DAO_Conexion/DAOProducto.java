@@ -16,8 +16,8 @@ public class DAOProducto {
 
 	public String Alta() {
 
-		String query = "INSERT into Product (IDp, IDm, Nombre, Precio, Descripcion, Activo) VALUES ( "
-				+ tProducto.getId() + ", '" + tProducto.getMarca() + "' ,'" + tProducto.getNombre() + "', "
+		String query = "INSERT into Product (IDp, NombreMarca, Nombre, Precio, Descripcion, Activo) VALUES ( "
+				+ tProducto.getId() + ", '" + tProducto.getNombreMarca() + "' ,'" + tProducto.getNombre() + "', "
 				+ tProducto.getPrecio() + ", '" + tProducto.getDescripcion() + "'," + tProducto.isActivo() + ")";
 		String query1 = "INSERT into Have(IDp, IDs) VALUES (" + tProducto.getId() + ", " + tProducto.getSucarusal()
 				+ ")";

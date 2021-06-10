@@ -16,7 +16,7 @@ public class DAOMarca {
 
 	public Boolean alta(TransferMarca tMarca) throws Exception {
 		try {
-			String query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES " + "('" + tMarca.getCIFMarca() + "','"
+			String query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES ('" + tMarca.getCIFMarca() + "','"
 					+ tMarca.getNombre() + "', '" + tMarca.getPais() + "'," + tMarca.getActivo() + ")";
 			if (tMarca.getCIFMarca().equals("")) {
 				throw new Exception("Campo CIF esta vacio");
