@@ -2,7 +2,6 @@ package factoryController;
 
 import DAO_Conexion.DAOClientes;
 import Transfer.TransferCliente;
-import main.Mediator;
 
 public class ControllerCliente extends ObjectController {
 	private DAOClientes DAOc;

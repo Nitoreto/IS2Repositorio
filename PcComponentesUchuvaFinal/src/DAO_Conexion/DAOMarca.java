@@ -1,107 +1,103 @@
 package DAO_Conexion;
 
 import java.sql.SQLException;
-
-import factoria.Marca;
+import Transfer.TransferMarca;
 
 public class DAOMarca {
-	private String CIFMarca;
+	private SingletonConexion conexion;
 
-	public DAOMarca(Marca marca) {
-		super();
-		CIFMarca = marca.getCIFMarca();
-
-	}
-	
-	public String Alta() {
+	public DAOMarca() throws Exception {
 		try {
-			this.query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES " + "('" + marca.getCIFMarca() + "','"
-					+ marca.getNombre() + "', '" + marca.getPais() + "'," + marca.getActivo() + ")";
-			if (CIFMarca.equals("")) {
-				return "Campo CIF esta vacio";
+			conexion = SingletonConexion.obtenerConexion();
+		} catch (SQLException e) {
+			throw new Exception("Error al conectar con la base de datos.");
+		}
+	}
+
+	public Boolean alta(TransferMarca tMarca) throws Exception {
+		try {
+			String query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES " + "('" + tMarca.getCIFMarca() + "','"
+					+ tMarca.getNombre() + "', '" + tMarca.getPais() + "'," + tMarca.getActivo() + ")";
+			if (tMarca.getCIFMarca().equals("")) {
+				throw new Exception("Campo CIF esta vacio");
 			}
-			super.conectarUpdate();
+			conexion.conectarUpdate(query);
+			return true;
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
-		return "Exito";
-
 	}
-	
-	public String Baja() {
-		int row = -1;
+
+	public Boolean baja(String CIFMarca) throws Exception {
 		try {
-			this.query = "DELETE FROM Marca WHERE CIF = '" + marca.getCIFMarca() + "'";
-			row = this.conectarUpdate();
-		} catch (SQLException e) {
-			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				return "No se puede eliminar una marca con productos";
+			int row = -1;
+			String query = "DELETE FROM Marca WHERE CIF = '" + CIFMarca + "'";
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception(" El campos DNI esta vacio");
 			}
-			return e.getMessage();
-		}
-		if (row == 0) {
-			return " El campos DNI esta vacio";
-		}
-		return "Exito";
-
-	}
-	
-	public String Buscar() {
-		try {
-			this.query = "SELECT * FROM Marca WHERE CIF = '" + marca.getCIFMarca() + "'";
-
-			this.transfer = new Transfer(super.conectarExecute());
+			return true;
 		} catch (SQLException e) {
-			return e.getMessage();
+			if (e.getClass().getName()
+					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+				throw new Exception("No se puede eliminar una marca con productos");
+			}
+			return false;
 		}
-
-		// CREAR EL MESNAJE DE INFORMACION
-
-		return "Exito";
 	}
-	
-	public String Desactivar() {
-		int row = -1;
+
+	public TransferMarca buscar(String CIFMarca) throws Exception {
 		try {
-			this.query = "UPDATE Marca SET Activo = 0 WHERE CIF = '" + marca.getCIFMarca() + "'";
-			row = super.conectarUpdate();
+			String query = "SELECT * FROM Marca WHERE CIF = '" + CIFMarca + "'";
+			TransferMarca tMarca = new TransferMarca(conexion.conectarExecute(query));
+			return tMarca;
+		} catch (SQLException e) {
+			throw new Exception(e.getCause());
+		}
+	}
+
+	public Boolean desactivar(String CIFMarca) throws Exception {
+		try {
+			int row = -1;
+			String query = "UPDATE Marca SET Activo = 0 WHERE CIF = '" + CIFMarca + "'";
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception("CIF no Encontrado");
+			}
+			return true;
 		} catch (Exception e) {
-
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
-		if (row == 0) {
-			return "CIF no Encontrado";
-		}
-		return "Exito";
 	}
-	
-	public String Listar() {
+
+	public TransferMarca listar() throws Exception {
 		try {
-			this.query = "SELECT * FROM Marca";
-			this.transfer = new Transfer(super.conectarExecute());
+			String query = "SELECT * FROM Marca";
+			TransferMarca tMarca = new TransferMarca(conexion.conectarExecute(query));
+			return tMarca;
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
-		return "Exito";
 	}
-	
-	public String conectar() {
-		int row = -1;
+
+	public Boolean modificar(TransferMarca tMarca, String CIFMarca) throws Exception {
 		try {
-			this.query = "UPDATE Marca SET CIF = '" + marca.getCIFMarca() + "' ,Nombre = '" + marca.getNombre()
-			+ "', Pais = '" + marca.getPais() + "', Activo = " + marca.getActivo() + " WHERE CIF = '" + CIFMarcaOriginal + "'";
-			row = super.conectarUpdate();
-		} catch (Exception e) {
-			if (e.getClass().getName().equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				return "No se puede cambiar el nombre de una marca con productos";
+			int row = -1;
+			String query = "UPDATE Marca SET CIF = '" + tMarca.getCIFMarca() + "' ,Nombre = '" + tMarca.getNombre()
+					+ "', Pais = '" + tMarca.getPais() + "', Activo = " + tMarca.getActivo() + " WHERE CIF = '"
+					+ CIFMarca + "'";
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception("El CIF esta vacio.");
 			}
+			return true;
+		} catch (SQLException e) {
+			if (e.getClass().getName()
+					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+				throw new Exception("No se puede cambiar el nombre de una marca con productos");
+			}
+			return null;
+		}
 
-			return e.getMessage();
-		}
-		if (row == 0) {
-			return "El CIF esta vacio.";
-		}
-		return "Exito";
 	}
-
 }

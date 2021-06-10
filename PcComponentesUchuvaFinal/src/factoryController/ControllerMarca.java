@@ -1,114 +1,98 @@
 package factoryController;
 
-import DAOEmpleado.DAODesactivarEmpleado;
-import DAOMarca.DAOAltaMarca;
-import DAOMarca.DAOBajaMarca;
-import DAOMarca.DAOBuscarMarca;
-import DAOMarca.DAODesactivarMarca;
-import DAOMarca.DAOListarMarcas;
-import DAOMarca.DAOModificarMarca;
-import main.Mediator;
+import DAO_Conexion.DAOMarca;
+import Transfer.TransferMarca;
 
 public class ControllerMarca extends ObjectController {
-
-	private String CIFMarca, nombre, pais;
-	private Boolean activo;
+	private DAOMarca DAOm;
+	private TransferMarca tMarca;
 
 	public ControllerMarca() {
 		super("ControllerMarca");
 	}
 
-	public String getCIFMarca() {
-		return CIFMarca;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public int getActivo() {
-		int valor = this.activo ? 1 : 0;
-		return valor;
-	}
-
-	public String getPais() {
-		return pais;
+	@Override
+	protected void inicializarTransfer(String[] datos) throws Exception {
+		this.DAOm = new DAOMarca();
+		this.tMarca = new TransferMarca(datos);
 	}
 
 	@Override
-	public String alta() {
-		DAOAltaMarca dao = new DAOAltaMarca(this);
-		return dao.conectar();
-
-	}
-
-	@Override
-	public String baja() {
-		DAOBajaMarca dao = new DAOBajaMarca(this);
-		return dao.conectar();
-	}
-
-	@Override
-	public String modificar(String ID) {
-		DAOModificarMarca dao = new DAOModificarMarca(this, ID);
-		return dao.conectar();
-
-	}
-
-	@Override
-	public String listar(Mediator controlador) {
-		DAOListarMarcas dao = new DAOListarMarcas(this);
-		String string = dao.conectar();
-		if (string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Abstract");
-		return string;
-	}
-
-	@Override
-	public String buscar(Mediator controlador) {
-		DAOBuscarMarca dao = new DAOBuscarMarca(this);
-		String string = dao.conectar();
-		if (string == "Exito")
-			controlador.generarTabla(dao.generarTabla(), dao.generarTitulos(), "Default");
-		return string;
-	}
-	
-	@Override
-	public String desactivar() {
-		DAODesactivarMarca dao = new DAODesactivarMarca(this);
-		return dao.conectar();
-	}
-
-	@Override
-	public void inicializarObjeto(String[] datos) throws NumberFormatException{
-		for (int i = 0; i < datos.length; i++) {
-			switch (i) {
-			case 0:
-				CIFMarca = datos[0];
-				break;
-			case 1:
-				nombre = datos[1];
-				break;
-			case 2:
-				pais = datos[2];
-				break;
-			case 3:
-				if (datos[3].equals("1")) {
-					activo = true;
-				} else if(datos[3].equals("0")){
-					activo = false;
-				}else{
-					throw new NumberFormatException();
-				}
-				;
-				break;
-			}
+	public Boolean alta() {
+		try {
+			DAOm.alta(tMarca);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
 		}
 	}
 
 	@Override
-	public String mostrarHistorial(Mediator controlador) {
-		// TODO Auto-generated method stub
+	public Boolean baja() {
+		try {
+			DAOm.baja(tMarca.getCIFMarca());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean modificar(String CIFMarca) {
+		try {
+			DAOm.modificar(tMarca, CIFMarca);
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean listar() {
+		try {
+			tMarca = DAOm.listar();
+			mediator.actualizarTabla(tMarca.generarTabla(), tMarca.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean buscar() {
+		try {
+			tMarca = DAOm.buscar(tMarca.getCIFMarca());
+			mediator.actualizarTabla(tMarca.generarTabla(), tMarca.generarTitulos());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean desactivar() {
+		try {
+			DAOm.desactivar(tMarca.getCIFMarca());
+			mediator.avisarCorrecto();
+			return true;
+		} catch (Exception e) {
+			mediator.avisarError(e.getMessage());
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean mostrarHistorial() {
 		return null;
 	}
 
