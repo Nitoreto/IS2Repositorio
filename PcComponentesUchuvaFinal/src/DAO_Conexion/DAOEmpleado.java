@@ -23,7 +23,7 @@ public class DAOEmpleado {
 				+ tEmpleado.getPassword() + ", '" + tEmpleado.getDir() + "', " + tEmpleado.getNumero() + ", "
 				+ tEmpleado.getSueldo() + ", " + tEmpleado.getActivo() + ")";
 		
-		String query1 = "INSERT into Contratado (DNI, IDs) VALUES (' " + tEmpleado.getDNI() + "', " + tEmpleado.getIdsucursal() +")";
+		String query1 = "INSERT into Contratado (DNI, IDs) VALUES (' " + tEmpleado.getDNI() + "', " + tEmpleado.getIdSucursal() +")";
 		try {
 			conexion.conectarUpdate(query);
 			conexion.conectarUpdate(query1);

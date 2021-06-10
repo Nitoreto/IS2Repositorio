@@ -13,16 +13,21 @@ public class TransferMarca extends Transfer {
 	}
 
 	public TransferMarca(String[] datos) throws Exception {
-		super();
-		CIFMarca = datos[0];
-		nombre = datos[1];
-		pais = datos[2];
-		if (datos[3].equals("1")) {
-			activo = true;
-		} else if (datos[3].equals("0")) {
-			activo = false;
-		} else {
-			throw new Exception("Formato del telefono incorrecto");
+		switch(datos.length) {
+		case 4:
+			if (datos[3].equals("1")) {
+				activo = true;
+			} else if (datos[3].equals("0")) {
+				activo = false;
+			} else {
+				throw new Exception("Formato del telefono incorrecto");
+			}
+		case 3:
+			pais = datos[2];
+		case 2:
+			nombre = datos[1];
+		case 1:
+			CIFMarca = datos[0];
 		}
 	}
 

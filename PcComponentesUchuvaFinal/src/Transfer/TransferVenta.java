@@ -14,38 +14,41 @@ public class TransferVenta extends Transfer {
 	}
 
 	public TransferVenta(String[] datos) throws Exception {
-		if (datos[0].equalsIgnoreCase("rand")) {
-			idVentas = idRandom();
-		} else {
-			try {
-				this.idVentas = Integer.parseInt(datos[0]);
-			} catch (NumberFormatException e) {
-				throw new Exception("Formato del id incorrecto, solo numero");
+		switch (datos.length) {
+		case 6:
+			if (datos[5].equals("1")) {
+				activo = true;
+			} else if (datos[5].equals("0")) {
+				activo = false;
+			} else {
+				throw new Exception("Formato del campo activo incorrecto");
 			}
-		}
-		
-		this.DNICliente = datos[1];
-		
-		try {
-			this.idEmpleado = Integer.parseInt(datos[2]);
-		} catch (NumberFormatException e) {
-			throw new Exception("Formato del id de empleado incorrecto, solo numero");
-		}
-		
-		this.listaProductos = datos[3];
-		
-		try {
-			this.precioTotal = Integer.parseInt(datos[4]);
-		} catch (NumberFormatException e) {
-			throw new Exception("Formato del precio total incorrecto, solo numero");
-		}
-
-		if (datos[5].equals("1")) {
-			activo = true;
-		} else if (datos[5].equals("0")) {
-			activo = false;
-		} else {
-			throw new Exception("Formato del campo activo incorrecto");
+		case 5:
+			try {
+				this.precioTotal = Integer.parseInt(datos[4]);
+			} catch (NumberFormatException e) {
+				throw new Exception("Formato del precio total incorrecto, solo numero");
+			}
+		case 4:
+			this.listaProductos = datos[3];
+		case 3:
+			try {
+				this.idEmpleado = Integer.parseInt(datos[2]);
+			} catch (NumberFormatException e) {
+				throw new Exception("Formato del id de empleado incorrecto, solo numero");
+			}
+		case 2:
+			this.DNICliente = datos[1];
+		case 1:
+			if (datos[0].equalsIgnoreCase("rand")) {
+				idVentas = idRandom();
+			} else {
+				try {
+					this.idVentas = Integer.parseInt(datos[0]);
+				} catch (NumberFormatException e) {
+					throw new Exception("Formato del id incorrecto, solo numero");
+				}
+			}
 		}
 
 	}
