@@ -8,62 +8,46 @@ import factoryController.FactoryController;
 
 public class Mediator {
 	private ObjectController controller;
-
-	public String alta(String nombre, String[] Datos) {
+	private vista vista;
+	
+	public void asignarVista(vista vista) {
+		this.vista=vista;
+	}
+	
+	public void alta(String nombre, String[] Datos) {
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
-		if (controller == null) {
-			return "Datos Incorrectos";
-		}
-		return controller.alta();
+		controller.alta();
 	}
 
-	public String baja(String nombre, String[] Datos) {
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if (controller == null) {
-			return "Datos Incorrectos";
-		}
-		return controller.baja();
+	public void baja(String nombre, String[] Datos) {
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.baja();
 	}
 
 	public String modificar(String nombre, String[] Datos, String ID) {
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if (controller == null) {
-			return "Datos Incorrectos";
-		}
-		return controller.modificar(ID);
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.modificar(ID);
 	}
 
 	public String listar(String nombre) {
 		String[] Datos = {};
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if (controller == null) {
-			return "Datos Incorrectos";
-		}
-		return controller.listar(this);
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.listar();
 	}
 
 	public String buscar(String nombre, String[] Datos) {
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if(controller == null){
-			return "Datos Incorrectos";
-		}
-		return controller.buscar(this);
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.buscar();
 	}
 
 	public String mostrarHistorial(String nombre, String[] Datos) {
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if(controller == null){
-			return "Datos Incorrectos";
-		}
-		return controller.mostrarHistorial(this);
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.mostrarHistorial();
 	}
 	
 	public String desactivar(String nombre, String[] Datos) {
-		controller = FactoryController.FactoriaParse(nombre, Datos);
-		if(controller == null){
-			return "Datos Incorrectos";
-		}
-		return controller.desactivar();
+		controller = FactoryController.FactoriaParse(nombre, Datos, this);
+		controller.desactivar();
 
 	}
 

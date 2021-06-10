@@ -13,26 +13,7 @@ public class TransferCliente extends Transfer {
 	}
 
 	public TransferCliente(String[] datos) throws Exception {
-		super(datos);
-	}
-
-	public String getDNI() {
-		return DNI;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public int getTelefono() {
-		return telefono;
-	}
-
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void inicializarObjeto(String[] datos) throws Exception {
+		super();
 		DNI = datos[0];
 		nombre = datos[1];
 		
@@ -51,4 +32,20 @@ public class TransferCliente extends Transfer {
 		}
 	}
 
+	public String getDNI() {
+		return DNI;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public int isActivo() {
+		int valor = this.activo ? 1 : 0;
+		return valor;
+	}
 }

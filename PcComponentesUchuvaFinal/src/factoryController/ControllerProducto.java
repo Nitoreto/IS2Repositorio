@@ -10,39 +10,11 @@ import main.Mediator;
 
 public class ControllerProducto extends ObjectController {
 
-	private String  Nombre, Descripcion, NombreMarca;
-	private int ID;
-	private float Precio;
-	private Boolean Activo;
-
+	
 	public ControllerProducto() {
 		super("ControllerProducto");
 	}
-
-	public int getID() {
-		return ID;
-	}
-
-	public String getNombreMarca() {
-		return NombreMarca;
-	}
-
-	public float getPrecio() {
-		return Precio;
-	}
-
-	public String getNombre() {
-		return Nombre;
-	}
-
-	public String getDescripcion() {
-		return Descripcion;
-	}
-
-	public int isActivo() {
-		int valor = this.Activo ? 1 : 0;
-		return valor;
-	}
+	
 
 	@Override
 	public String alta() {
@@ -90,40 +62,6 @@ public class ControllerProducto extends ObjectController {
 	public String desactivar() {
 		DAODesactivarProducto dao = new DAODesactivarProducto(this);
 		return dao.conectar();
-	}
-
-	@Override
-	public void inicializarObjeto(String[] Datos)throws NumberFormatException{
-		// TODO Auto-generated method stub
-
-		for (int i = 0; i < Datos.length; i++) {
-			switch (i) {
-			case 0:
-				ID = Integer.parseInt(Datos[0]);
-				break;
-			case 1:
-				Nombre = Datos[1];
-				break;
-			case 2:
-				NombreMarca = Datos[2];
-				break;
-			case 3:
-				Descripcion = Datos[3];
-				break;
-			case 4:
-				Precio = Float.parseFloat(Datos[4]);
-				break;
-			case 5:
-				if (Datos[5].equals("1")) {
-					Activo = true;
-				} else if(Datos[5].equals("0")){
-					Activo = false;
-				}else{
-					throw new NumberFormatException();
-				}
-				break;
-			}
-		}
 	}
 
 	@Override

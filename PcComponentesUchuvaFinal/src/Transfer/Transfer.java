@@ -4,10 +4,11 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
-public abstract class Transfer {
+public class Transfer {
 
 	ResultSet resultado;
 	ResultSetMetaData metaDat;
+	public Transfer() {}
 
 	public Transfer(ResultSet resultado) throws SQLException {
 		this.resultado = resultado;
@@ -16,10 +17,6 @@ public abstract class Transfer {
 			throw new SQLException("No se ha encontrado ningun Elemento");
 		}
 		this.metaDat = resultado.getMetaData();
-	}
-	
-	public Transfer(String[] datos) throws Exception {
-		this.inicializarObjeto(datos);
 	}
 
 	public Object[][] generarTabla() {
@@ -57,7 +54,4 @@ public abstract class Transfer {
 		}
 		return null;
 	}
-	
-	public abstract void inicializarObjeto(String[] datos) throws Exception;
-
 }

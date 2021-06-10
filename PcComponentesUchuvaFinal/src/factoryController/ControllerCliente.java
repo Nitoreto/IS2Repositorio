@@ -13,7 +13,7 @@ public class ControllerCliente extends ObjectController {
 	}
 	
 	@Override
-	protected void inicializarTransfer(String[] datos) throws Exception{
+	protected void inicializarController(String[] datos) throws Exception{
 		this.DAOc = new DAOClientes();
 		this.tCliente = new TransferCliente(datos);		
 	}

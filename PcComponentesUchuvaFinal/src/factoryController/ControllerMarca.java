@@ -12,7 +12,7 @@ public class ControllerMarca extends ObjectController {
 	}
 
 	@Override
-	protected void inicializarTransfer(String[] datos) throws Exception {
+	protected void inicializarController(String[] datos) throws Exception {
 		this.DAOm = new DAOMarca();
 		this.tMarca = new TransferMarca(datos);
 	}

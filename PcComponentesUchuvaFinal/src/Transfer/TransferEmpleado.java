@@ -14,7 +14,31 @@ public class TransferEmpleado extends Transfer {
 	}
 
 	public TransferEmpleado(String[] datos) throws Exception {
-		super(datos);
+		super();
+		DNI = datos[0];
+		nombre = datos[1];
+		password = datos[2];
+		direccion = datos[3];
+		
+		try {
+			telefono = Integer.parseInt(datos[4]);
+		} catch (NumberFormatException e) {
+			throw new Exception("Formato del telefono incorrecto, solo numeros");
+		}
+		
+		try {
+			sueldo = Integer.parseInt(datos[5]);
+		} catch (NumberFormatException e) {
+			throw new Exception("Formato del sueldo incorrecto, solo numeros");
+		}
+		
+		if (datos[6].equals("1")) {
+			activo = true;
+		} else if (datos[6].equals("0")) {
+			activo = false;
+		} else {
+			throw new Exception("Formato del campo activo incorrecto");
+		}
 	}
 
 	public String getNombre() {
@@ -44,33 +68,5 @@ public class TransferEmpleado extends Transfer {
 
 	public int getSueldo() {
 		return sueldo;
-	}
-
-	@Override
-	public void inicializarObjeto(String[] datos) throws Exception {
-		DNI = datos[0];
-		nombre = datos[1];
-		password = datos[2];
-		direccion = datos[3];
-		
-		try {
-			telefono = Integer.parseInt(datos[4]);
-		} catch (NumberFormatException e) {
-			throw new Exception("Formato del telefono incorrecto, solo numeros");
-		}
-		
-		try {
-			sueldo = Integer.parseInt(datos[5]);
-		} catch (NumberFormatException e) {
-			throw new Exception("Formato del sueldo incorrecto, solo numeros");
-		}
-		
-		if (datos[6].equals("1")) {
-			activo = true;
-		} else if (datos[6].equals("0")) {
-			activo = false;
-		} else {
-			throw new Exception("Formato del campo activo incorrecto");
-		}
 	}
 }

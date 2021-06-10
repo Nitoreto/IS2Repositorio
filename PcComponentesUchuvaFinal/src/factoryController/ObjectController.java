@@ -15,7 +15,7 @@ public abstract class ObjectController implements Acciones {
 		if (this.nombreClase.equalsIgnoreCase(nombre)) {
 			try {
 				this.mediator = mediator;
-				inicializarTransfer(datos);
+				inicializarController(datos);
 			} catch (Exception e) {
 				mediator.avisarError(e.getMessage());
 			}
@@ -25,6 +25,6 @@ public abstract class ObjectController implements Acciones {
 		}
 	}
 	
-	protected abstract void inicializarTransfer(String[] datos) throws Exception;
+	protected abstract void inicializarController(String[] datos) throws Exception;
 
 }

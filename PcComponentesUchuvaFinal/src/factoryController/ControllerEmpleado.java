@@ -13,7 +13,7 @@ public class ControllerEmpleado extends ObjectController {
 	}
 	
 	@Override
-	protected void inicializarTransfer(String[] datos) throws Exception{
+	protected void inicializarController(String[] datos) throws Exception{
 		this.DAOe = new DAOEmpleado();
 		this.tEmpleado = new TransferEmpleado(datos);		
 	}
