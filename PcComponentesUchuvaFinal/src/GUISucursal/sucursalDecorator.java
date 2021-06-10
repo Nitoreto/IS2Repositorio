@@ -28,10 +28,12 @@ public class sucursalDecorator extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
+		mainPanel.addTopLabel("Entidad sucursal");
 		mainPanel.addCp(new ButtonU("boton1"));
 		mainPanel.addCp(new ButtonU("boton2"));
 		mainPanel.addCp(new ButtonU("boton3"));
-		mainPanel.addTopLabel("Entidad sucursal");
+		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
+		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
 		
 		this.setVisible(true);
 		
