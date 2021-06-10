@@ -55,26 +55,37 @@ public class DAOVentas {
 		return "Exito";
 	}
 
-	/*
-	 * public String Modificar() { int row = -1;
-	 * 
-	 * try { DNI = venta.getDNICliente(); idEmpleado = venta.getIdEmpleado();
-	 * this.query = "UPDATE Venta SET IDv = " + venta.getIdVentas() +
-	 * " ,DNIcliente = '" + DNI + "', listaProductos = '" +
-	 * venta.getListaProductos() + "', ID_Empleado = " + idEmpleado +
-	 * ", precioTotal = " + venta.getPrecioTotal() + ", Activo = " +
-	 * venta.getActivo() + " WHERE idVentas = " + idVenta;
-	 * 
-	 * if (DNI.equals("")) { throw new
-	 * Exception("El campo DNI de cliente est� vac�o."); } if (idEmpleado == -1) {
-	 * throw new Exception("El campo ID de ControllerEmpleado est� vac�o."); } row =
-	 * super.conectarUpdate();
-	 * 
-	 * } catch (Exception e) { if (e.getClass().getName() .equals(
-	 * "com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")
-	 * ) { return "No se encuentra ese cliente o empleado"; } return e.getMessage();
-	 * } if (row == 0) { return "No se encuentra dicho id."; } return "Exito"; }
-	 */
+	public String Modificar() {
+		int row = -1;
+
+		try {
+			DNI = venta.getDNICliente();
+			idEmpleado = venta.getIdEmpleado();
+			this.query = "UPDATE Venta SET IDv = " + venta.getIdVentas() + " ,DNIcliente = '" + DNI
+					+ "', listaProductos = '" + venta.getListaProductos() + "', ID_Empleado = " + idEmpleado
+					+ ", precioTotal = " + venta.getPrecioTotal() + ", Activo = " + venta.isActivo()
+					+ " WHERE IDv = " + idVenta;
+
+			if (DNI.equals("")) {
+				throw new Exception("El campo DNI de cliente est� vac�o.");
+			}
+			if (idEmpleado == -1) {
+				throw new Exception("El campo ID de ControllerEmpleado est� vac�o.");
+			}
+			row = super.conectarUpdate();
+
+		} catch (Exception e) {
+			if (e.getClass().getName()
+					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
+				return "No se encuentra ese cliente o empleado";
+			}
+			return e.getMessage();
+		}
+		if (row == 0) {
+			return "No se encuentra dicho id.";
+		}
+		return "Exito";
+	}
 
 	public String Mostrar() {
 		try {
