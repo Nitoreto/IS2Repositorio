@@ -1,49 +1,51 @@
 package DAO_Conexion;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import Transfer.Transfer;
-import factoryController.ControllerProducto;
+import Transfer.TransferProducto;
 
 public class DAOProducto {
-	ResultSet resultado;
+	private SingletonConexion conexion;
 
-	public DAOProducto(ControllerProducto Producto) {
-		super();
-
+	public DAOProducto() throws Exception{
+		try {
+			this.conexion = SingletonConexion.obtenerConexion();
+		} catch (SQLException e) {
+			throw new Exception("Error al conectar con la base de datos.");
+		}
 	}
 
-	public String Alta() {
+	public Boolean alta(TransferProducto tProducto) {
 
 		String query = "INSERT into Product (IDp, IDm, Nombre, Precio, Descripcion, Activo) VALUES ( "
-				+ tProducto.getId() + ", '" + tProducto.getMarca() + "' ,'" + tProducto.getNombre() + "', "
+				+ tProducto.getID() + ", '" + tProducto.getNombreMarca() + "' ,'" + tProducto.getNombre() + "', "
 				+ tProducto.getPrecio() + ", '" + tProducto.getDescripcion() + "'," + tProducto.isActivo() + ")";
-		String query1 = "INSERT into Have(IDp, IDs) VALUES (" + tProducto.getId() + ", " + tProducto.getSucarusal()
+		String query1 = "INSERT into Have(IDp, IDs) VALUES (" + tProducto.getID() + ", " + tProducto.getIdSucursal()
 				+ ")";
 		try {
 			conexion.conectarUpdate(query);
 			conexion.conectarUpdate(query1);
 
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
 
-		return "Exito";
+		return true;
 	}
 
-	public String Baja() {
+	public Boolean Baja(String ID) throws Exception{
 		int row = -1;
 		try {
-			String query = "DELETE FROM Product WHERE IDp = " + tProducto.getId();
-			String quety1 = "DELETE FORM Have WHERE IDp =" + tProducto.getId();
-			row = this.conectarUpdate();
+			String query = "DELETE FROM Product WHERE IDp = " + ID);
+			String quety1 = "DELETE FORM Have WHERE IDp =" + ID;
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception( "Producto no encontrado");
+			}
+			row = conexion.conectarUpdate(query1);
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
-		if (row == 0) {
-			return "Producto no encontrado";
-		}
+
 		return "Exito";
 
 	} 

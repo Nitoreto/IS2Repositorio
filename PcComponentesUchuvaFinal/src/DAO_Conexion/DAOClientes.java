@@ -12,7 +12,6 @@ public class DAOClientes {
 		} catch (SQLException e) {
 			throw new Exception("Error al conectar con la base de datos.");
 		}
-
 	}
 
 	public TransferCliente buscar(String DNI) throws Exception {

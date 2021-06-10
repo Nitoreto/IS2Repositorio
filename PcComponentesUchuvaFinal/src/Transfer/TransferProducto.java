@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class TransferProducto extends Transfer {
 	private String nombre, descripcion, nombreMarca;
-	private int ID;
+	private int ID, idSucursal;
 	private float precio;
 	private Boolean activo;
 
@@ -15,6 +15,8 @@ public class TransferProducto extends Transfer {
 
 	public TransferProducto(String[] datos) throws Exception {
 		switch (datos.length) {
+		case 7: 
+			idSucursal = Integer.parseInt(datos[6]);
 		case 6:
 			if (datos[5].equals("1")) {
 				activo = true;
@@ -67,6 +69,10 @@ public class TransferProducto extends Transfer {
 	public int isActivo() {
 		int valor = this.activo ? 1 : 0;
 		return valor;
+	}
+
+	public int getIdSucursal() {
+		return idSucursal;
 	}
 
 }
