@@ -22,8 +22,11 @@ public class DAOEmpleado {
 				+ "VALUES " + "('" + tEmpleado.getDNI() + "', '" + tEmpleado.getNombre() + "', "
 				+ tEmpleado.getPassword() + ", '" + tEmpleado.getDir() + "', " + tEmpleado.getNumero() + ", "
 				+ tEmpleado.getSueldo() + ", " + tEmpleado.getActivo() + ")";
+		
+		String query1 = "INSERT into Contratado (DNI, IDs) VALUES (' " + tEmpleado.getDNI() + "', " + tEmpleado.getIdsucursal() +")";
 		try {
 			conexion.conectarUpdate(query);
+			conexion.conectarUpdate(query1);
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}
@@ -59,6 +62,7 @@ public class DAOEmpleado {
 		try {
 			int row = -1;
 			String query = "DELETE FROM Personal WHERE DNI = '" + DNI + "'";
+			String query1 = "DELETE FROM Contratado  WHERE DNI = '" + DNI + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("No se ha encontrado un empleado con ese DNI");

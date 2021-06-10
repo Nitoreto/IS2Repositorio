@@ -30,7 +30,7 @@ public class DAOClientes {
 			throw new Exception("Campo dni esta vacio");
 		}
 		String query = "INSERT into Cliente (DNI, Nombre, Telefono, Activo) VALUES " + "('" + tCliente.getDNI() + "', '"
-				+ tCliente.getNombre() + "', " + tCliente.getTelefono() + ", " + tCliente.getActivo() + ")";
+				+ tCliente.getNombre() + "', " + tCliente.getTelefono() + ", " + tCliente.isActivo() + ")";
 		try {
 			conexion.conectarUpdate(query);
 		} catch (SQLException e) {
@@ -87,7 +87,7 @@ public class DAOClientes {
 		try {
 			int row = -1;
 			String query = "UPDATE Cliente SET DNI = '" + tCliente.getDNI() + "', Nombre = '" + tCliente.getNombre()
-					+ "', Telefono = " + tCliente.getTelefono() + ", Activo = " + tCliente.getActivo()
+					+ "', Telefono = " + tCliente.getTelefono() + ", Activo = " + tCliente.isActivo()
 					+ " WHERE DNI = '" + DNI + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
