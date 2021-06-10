@@ -102,11 +102,13 @@ public class DAOVentas {
 		try {
 			DNI = tVenta.getDNICliente();
 			DNIEmpleado = tVenta.getDni();
-			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVentas() + ", "
+			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVenta() + ", "
 					+ tVenta.getPrecioTotal + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
 			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + DNIEmpleado + "', "
 					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVentas() + ")";
-			String query2 = " INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + DNI + "')";
+			String query2 = "INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + DNI + "')";
+			String query3 = "INSERT into Contiene (IDv, IDp) VALUES (" + tVenta.getIdVenta() + ", "
+					+ tVenta.getIdProducto() + ")";
 			if (DNI.equals("")) {
 				throw new Exception("El campo DNI cliente est� vac�o. ");
 			}
