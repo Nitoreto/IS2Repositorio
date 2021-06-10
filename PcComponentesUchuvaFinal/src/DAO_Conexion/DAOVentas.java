@@ -103,7 +103,7 @@ public class DAOVentas {
 			DNI = tVenta.getDNICliente();
 			DNIEmpleado = tVenta.getDni();
 			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVentas() + ", "
-					+ tVenta.getPrecioTotal + ",'" + tVenta.getFecha() + ", " + 1 + " )";
+					+ tVenta.getPrecioTotal + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
 			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + DNIEmpleado + "', "
 					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVentas() + ")";
 			String query2 = " INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + DNI + "')";
