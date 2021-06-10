@@ -6,8 +6,7 @@ import Transfer.Transfer;
 import factoryController.ControllerVenta;
 
 public class DAOVentas {
-	private String DNI;
-	private int idEmpleado = -1;
+	private String DNI, DNIEmpleado;
 
 	public DAOVentas(ControllerVenta venta) {
 		super();
@@ -17,7 +16,7 @@ public class DAOVentas {
 	public String Desactivar() {
 		int row = -1;
 		try {
-			this.query = "UPDATE Venta SET Activo = 0 WHERE IDv = " + venta.getIdVentas();
+			String query = "UPDATE Venta SET Activo = 0 WHERE IDv = " + tVenta.getIdVentas();
 			row = super.conectarUpdate();
 		} catch (Exception e) {
 
@@ -32,7 +31,9 @@ public class DAOVentas {
 	public String Eliminar() {
 		int row = -1;
 		try {
-			this.query = "DELETE FROM Venta WHERE IDv = " + venta.getIdVentas();
+			String query = "DELETE FROM Venta WHERE IDv = " + tVenta.getIdVentas();
+			String query1 = "DELETE FROM Realiza WHERE IDv = " + tVenta.getIdVentas();
+			String query2 = "DELETE FROM Gestiona WHERE IDv = " + tVenta.getIdVentas();
 			row = super.conectarUpdate();
 
 		} catch (Exception e) {
@@ -47,7 +48,7 @@ public class DAOVentas {
 
 	public String Listar() {
 		try {
-			this.query = "SELECT * FROM Realiza WHERE DNI = '" + venta.getDNICliente() + "' ";
+			String query = "SELECT * FROM Realiza WHERE DNI = '" + tVenta.getDNICliente() + "' ";
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -59,12 +60,11 @@ public class DAOVentas {
 		int row = -1;
 
 		try {
-			DNI = venta.getDNICliente();
-			idEmpleado = venta.getIdEmpleado();
-			this.query = "UPDATE Venta SET IDv = " + venta.getIdVentas() + " ,DNIcliente = '" + DNI
-					+ "', listaProductos = '" + venta.getListaProductos() + "', ID_Empleado = " + idEmpleado
-					+ ", precioTotal = " + venta.getPrecioTotal() + ", Activo = " + venta.isActivo()
-					+ " WHERE IDv = " + idVenta;
+			DNI = tVenta.getDNICliente();
+			idEmpleado = tVenta.getIdEmpleado();
+			String query = "UPDATE Venta SET IDv = " + tVenta.getIdVentas() + ", Importe = " + tVenta.getPrecioTotal()
+					+ ", Fecha = '" + tVenta.getFecha() + "', Activo = " + tVenta.isActivo() + " WHERE IDv = "
+					+ idVenta;
 
 			if (DNI.equals("")) {
 				throw new Exception("El campo DNI de cliente est� vac�o.");
@@ -89,7 +89,7 @@ public class DAOVentas {
 
 	public String Mostrar() {
 		try {
-			this.query = "SELECT * FROM Venta WHERE IDv = " + venta.getIdVentas();
+			String query = "SELECT * FROM Venta WHERE IDv = " + tVenta.getIdVentas();
 			this.transfer = new Transfer(super.conectarExecute());
 		} catch (SQLException e) {
 			return e.getMessage();
@@ -100,15 +100,13 @@ public class DAOVentas {
 	public String RegistrarVenta() {
 		int row = -1;
 		try {
-			DNI = venta.getDNICliente();
-			idEmpleado = venta.getDni();
-			this.query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + venta.getIdVentas() + ", "
-					+ venta.getPrecioTotal + ",'" + venta.getFecha() + "')";
-			this.query = "INSERT into Realiza(IDv, DNI) VALUES " + venta.getIdVentas() + ", '" + DNI + "'";
-			this.query = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + idEmpleado + "', " + venta.getIdSucursal()
-					+ ", " + venta.getIdVentas() + ")";
-			// TODO añadir productos y la venta a la tabla coniten
-
+			DNI = tVenta.getDNICliente();
+			DNIEmpleado = tVenta.getDni();
+			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVentas() + ", "
+					+ tVenta.getPrecioTotal + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
+			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + DNIEmpleado + "', "
+					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVentas() + ")";
+			String query2 = " INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + DNI + "')";
 			if (DNI.equals("")) {
 				throw new Exception("El campo DNI cliente est� vac�o. ");
 			}
