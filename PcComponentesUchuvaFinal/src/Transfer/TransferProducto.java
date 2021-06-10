@@ -15,19 +15,31 @@ public class TransferProducto extends Transfer {
 
 	public TransferProducto(String[] datos) throws Exception {
 		super();
-
+		
+		try {
+		ID = Integer.parseInt(datos[0]);
+		} catch (NumberFormatException e) {
+			throw new Exception("Formato del sueldo incorrecto, solo numeros");
+		}
+		
 		nombre = datos[1];
 		nombreMarca = datos[2];
 		descripcion = datos[3];
+		
+		try {
 		precio = Float.parseFloat(datos[4]);
-
+		} catch (NumberFormatException e) {
+			throw new Exception("Formato del sueldo incorrecto, solo numeros");
+		}
+		
 		if (datos[5].equals("1")) {
 			activo = true;
 		} else if (datos[5].equals("0")) {
 			activo = false;
 		} else {
-			throw new NumberFormatException();
+			throw new Exception("Formato del campo activo incorrecto");
 		}
+		
 	}
 
 	public int getID() {
