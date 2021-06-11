@@ -145,7 +145,6 @@ public class BuscarCliente extends JFrame implements Observer {
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		mediator.cancelar();
 		this.dispose();
 		new PantallaPrincipalClientes(mediator);
 	}

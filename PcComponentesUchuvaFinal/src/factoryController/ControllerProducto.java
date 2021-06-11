@@ -23,7 +23,7 @@ public class ControllerProducto extends ObjectController {
 	public Boolean alta() {
 		try {
 			DAOp.alta(tProducto);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -35,7 +35,7 @@ public class ControllerProducto extends ObjectController {
 	public Boolean baja() {
 		try {
 			DAOp.baja(tProducto.getID());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de baja el producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -47,7 +47,7 @@ public class ControllerProducto extends ObjectController {
 	public Boolean modificar(String ID) {
 		try {
 			DAOp.modificar(tProducto, Integer.parseInt(ID));
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificado el producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -60,7 +60,7 @@ public class ControllerProducto extends ObjectController {
 		try {
 			tProducto = DAOp.listar();
 			mediator.actualizarTabla(tProducto.generarTabla(), tProducto.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha lsitado el producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -73,7 +73,7 @@ public class ControllerProducto extends ObjectController {
 		try {
 			tProducto = DAOp.buscar(tProducto.getID());
 			mediator.actualizarTabla(tProducto.generarTabla(), tProducto.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha buscado el producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -86,7 +86,7 @@ public class ControllerProducto extends ObjectController {
 	public Boolean desactivar() {
 		try {
 			DAOp.desactivar(tProducto.getID());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado el producto");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());

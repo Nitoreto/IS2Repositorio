@@ -2,13 +2,8 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 import Model.Observer;
 import factoryController.ObjectController;
-import simulator.model.SimulatorObserver;
 import factoryController.FactoryController;
 
 public class Mediator {
@@ -29,31 +24,30 @@ public class Mediator {
 		controller.baja();
 	}
 
-	public String modificar(String nombre, String[] Datos, String ID) {
+	public void modificar(String nombre, String[] Datos, String ID) {
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
 		controller.modificar(ID);
 	}
 
-	public String listar(String nombre) {
+	public void listar(String nombre) {
 		String[] Datos = {};
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
 		controller.listar();
 	}
 
-	public String buscar(String nombre, String[] Datos) {
+	public void buscar(String nombre, String[] Datos) {
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
 		controller.buscar();
 	}
 
-	public String mostrarHistorial(String nombre, String[] Datos) {
+	public void mostrarHistorial(String nombre, String[] Datos) {
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
 		controller.mostrarHistorial();
 	}
 	
-	public String desactivar(String nombre, String[] Datos) {
+	public void desactivar(String nombre, String[] Datos) {
 		controller = FactoryController.FactoriaParse(nombre, Datos, this);
 		controller.desactivar();
-
 	}
 
 	public void actualizarTabla(Object[][] generarTabla, String[] generarTitulos) {
@@ -72,14 +66,5 @@ public class Mediator {
 		for(Observer o: observerList) {
 			o.onCorrectMessage(acierto);;
 		}
-	}
-
-	public String cancelar() {
-
-		modelo = new DefaultTableModel();
-
-		if (controller != null)
-			controller.close();
-		return "Exito";
 	}
 }
