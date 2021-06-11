@@ -1,8 +1,7 @@
 package DAO_Conexion;
 
 import java.sql.SQLException;
-
-import Transfer.TransferCliente;
+import Transfer.TransferSucursal;
 
 public class DAOSucursal {
 	private SingletonConexion conexion;
@@ -13,7 +12,6 @@ public class DAOSucursal {
 		} catch (SQLException e) {
 			throw new Exception("Error al conectar con la base de datos.");
 		}
-
 	}
 
 	public TransferSucursal buscar(int id) throws Exception {
