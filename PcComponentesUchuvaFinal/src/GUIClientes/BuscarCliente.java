@@ -18,9 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class BuscarCliente extends JFrame {
+public class BuscarCliente extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -38,11 +40,12 @@ public class BuscarCliente extends JFrame {
 	private JButton botonModificar;
 	private JButton botonCancelar;
 
-	private Mediator controlador;
+	private Mediator mediator;
 
-	public BuscarCliente(Mediator controlador) {
+	public BuscarCliente(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -122,57 +125,52 @@ public class BuscarCliente extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.buscar("ControllerCliente", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			botonModificar.setText("Modificar");
-			botonModificar.setFont(new Font("Consolas", 4, 80));
-			botonModificar.setForeground(Color.lightGray);
-			botonModificar.setContentAreaFilled(false);
-			botonModificar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					botonModificarActionPerformed(evt);
-				}
-			});
-			panel.add(botonModificar);
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			panelMostrar.add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-
-		}
+		mediator.buscar("ControllerCliente", datos);
+		botonModificar.setText("Modificar");
+		botonModificar.setFont(new Font("Consolas", 4, 80));
+		botonModificar.setForeground(Color.lightGray);
+		botonModificar.setContentAreaFilled(false);
+		botonModificar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonModificarActionPerformed(evt);
+			}
+		});
 	}
 
 	private void botonModificarActionPerformed(ActionEvent evt) {
-
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString() };
-		String inf = controlador.modificar("ControllerCliente", datos, campoDNI.getText());
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-			this.campoDNI.setText(tabla.getValueAt(0, 0).toString());
-		}
+		mediator.modificar("ControllerCliente", datos, campoDNI.getText());
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL MODIFICAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			this.dispose();
-			new PantallaPrincipalClientes(controlador);
-		}
+		mediator.cancelar();
+		this.dispose();
+		new PantallaPrincipalClientes(mediator);
+	}
 
+	@Override
+	public void onCorrectMessage(String msg) {
+		JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		panel.add(botonModificar);
+		tabla = new JTable(new ModeloTablaEditable(generarTabla, generarTitulo));
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrar.add(paneScroll, BorderLayout.CENTER);
+		this.validate();
 	}
 
 }
