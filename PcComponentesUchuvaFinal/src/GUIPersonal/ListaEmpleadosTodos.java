@@ -20,7 +20,7 @@ import Model.ModeloTablaEditable;
 import Model.Observer;
 import main.Mediator;
 
-public class ListaEmpleados extends JFrame implements Observer{
+public class ListaEmpleadosTodos extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JTextArea textoListaEmpleados;
@@ -30,7 +30,7 @@ public class ListaEmpleados extends JFrame implements Observer{
 	private Mediator mediator;
 	private ModeloTablaEditable model;
 
-	public ListaEmpleados(Mediator mediator) {
+	public ListaEmpleadosTodos(Mediator mediator) {
 		super("PCComponentes Uchuva");
 		this.mediator = mediator;
 		mediator.asignarObserver(this);

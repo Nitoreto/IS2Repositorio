@@ -2,19 +2,16 @@ package GUIPersonal;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
-
+import GUIPersonal.ListaEmpleadosTodos;
 import Model.Observer;
 import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
@@ -29,6 +26,7 @@ public class PantallaPrincipalEmpleado extends JFrame implements Observer{
 	private JButton botonVolver;
 	private JButton botonMostrarHistorial;
 	private Mediator mediator;
+	
 
 	public PantallaPrincipalEmpleado(Mediator mediator) {
 		super("PCComponentes Uchuva");
@@ -133,7 +131,7 @@ public class PantallaPrincipalEmpleado extends JFrame implements Observer{
 	}
 
 	private void botonListarActionPerformed(ActionEvent evt) {
-		new ListaEmpleados(mediator);
+		new ListaEmpleadosTodos(mediator);
 		this.dispose();
 	}
 
