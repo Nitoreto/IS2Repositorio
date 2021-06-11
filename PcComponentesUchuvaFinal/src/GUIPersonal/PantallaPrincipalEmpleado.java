@@ -51,7 +51,7 @@ public class PantallaPrincipalEmpleado extends JFrame implements Observer{
 		panel.setLayout(new GridLayout(6, 1));
 
 		textoEmpleado.setEditable(false);
-		textoEmpleado.setText("ControllerEmpleado");
+		textoEmpleado.setText("Empleado");
 		textoEmpleado.setBackground(Color.cyan);
 		textoEmpleado.setForeground(Color.white);
 		textoEmpleado.setFocusable(true);

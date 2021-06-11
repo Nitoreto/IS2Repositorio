@@ -34,6 +34,7 @@ public class ListarMarcas extends JFrame implements Observer{
 	public ListarMarcas(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.mediator = controlador;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

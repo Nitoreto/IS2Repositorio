@@ -16,7 +16,7 @@ public class DAOMarca {
 
 	public Boolean alta(TransferMarca tMarca) throws Exception {
 		try {
-			String query = "INSERT into Marca (CIF, Nombre, Pais, Activo) VALUES ('" + tMarca.getCIFMarca() + "','"
+			String query = "INSERT into Marca (CIF, NombreM, Pais, Activo) VALUES ('" + tMarca.getCIFMarca() + "','"
 					+ tMarca.getNombre() + "', '" + tMarca.getPais() + "'," + tMarca.getActivo() + ")";
 			if (tMarca.getCIFMarca().equals("")) {
 				throw new Exception("Campo CIF esta vacio");
@@ -83,7 +83,7 @@ public class DAOMarca {
 	public Boolean modificar(TransferMarca tMarca, String CIFMarca) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Marca SET CIF = '" + tMarca.getCIFMarca() + "' ,Nombre = '" + tMarca.getNombre()
+			String query = "UPDATE Marca SET CIF = '" + tMarca.getCIFMarca() + "' ,NombreM = '" + tMarca.getNombre()
 					+ "', Pais = '" + tMarca.getPais() + "', Activo = " + tMarca.getActivo() + " WHERE CIF = '"
 					+ CIFMarca + "'";
 			row = conexion.conectarUpdate(query);

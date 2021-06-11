@@ -71,7 +71,7 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 		});
 		panel.add(botonClientes);
 		
-		botonPersonal.setText("ControllerEmpleado");
+		botonPersonal.setText("Empleado");
 		botonPersonal.setBackground(Color.white);
 		botonPersonal.setForeground(Color.cyan);
 		botonPersonal.setFont(new Font("Consolas", 4, 80));

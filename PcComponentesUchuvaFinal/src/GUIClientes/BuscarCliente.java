@@ -70,7 +70,7 @@ public class BuscarCliente extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarCliente.setEditable(false);
-		textoBuscarCliente.setText("Buscar ControllerCliente");
+		textoBuscarCliente.setText("Buscar Cliente");
 		textoBuscarCliente.setBackground(Color.lightGray);
 		textoBuscarCliente.setForeground(Color.white);
 		textoBuscarCliente.setFocusable(false);

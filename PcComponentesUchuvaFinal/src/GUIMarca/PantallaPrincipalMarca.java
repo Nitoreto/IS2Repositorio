@@ -24,11 +24,12 @@ public class PantallaPrincipalMarca extends JFrame implements Observer{
 	private JButton botonBaja;
 	private JPanel panel;
 	private JButton botonVolver;
-	private Mediator controlador;
+	private Mediator mediator;
 
-	public PantallaPrincipalMarca(Mediator controlador) {
+	public PantallaPrincipalMarca(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -109,23 +110,23 @@ public class PantallaPrincipalMarca extends JFrame implements Observer{
 	}
 
 	protected void botonVolverActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalPccomponentes(controlador);
+		new PantallaPrincipalPccomponentes(mediator);
 		this.dispose();
 
 	}
 
 	private void botonListarActionPerformed(ActionEvent evt) {
-		new ListarMarcas(controlador);
+		new ListarMarcas(mediator);
 		this.dispose();
 	}
 
 	private void botonAltaActionPerformed(ActionEvent evt) {
-		new AltaMarca(controlador);
+		new AltaMarca(mediator);
 		this.dispose();
 	}
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
-		new BuscarMarca(controlador);
+		new BuscarMarca(mediator);
 		this.dispose();
 	}
 

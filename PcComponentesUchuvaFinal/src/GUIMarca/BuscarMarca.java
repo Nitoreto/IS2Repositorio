@@ -45,6 +45,7 @@ public class BuscarMarca extends JFrame implements Observer{
 	public BuscarMarca(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.mediator = controlador;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

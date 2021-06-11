@@ -42,6 +42,7 @@ public class AltaMarca extends JFrame implements Observer{
 	public AltaMarca(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.mediator = controlador;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -143,7 +144,7 @@ public class AltaMarca extends JFrame implements Observer{
 	}
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
-		String[] datos = { campoCifMarca.getText(), campoNombre.getText(), campoPais.getText() };
+		String[] datos = { campoCifMarca.getText(), campoNombre.getText(), campoPais.getText(),"1" };
 		mediator.alta("ControllerMarca", datos);
 
 	}

@@ -35,8 +35,8 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	private JTextField campoDireccion;
 	private JTextArea textoTelefono;
 	private JTextField campoTelefono;
-	private JTextArea textoId_Empleado;
-	private JTextField campoId_Empleado;
+	private JTextArea textoPassword;
+	private JTextField campoPassword_Empleado;
 	private JButton botonGuardar;
 	private JButton botonCancelar;
 	private Mediator mediator;
@@ -69,8 +69,8 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		textoTelefono = new JTextArea();
 		campoTelefono = new JTextField();
 
-		textoId_Empleado = new JTextArea();
-		campoId_Empleado = new JTextField();
+		textoPassword = new JTextArea();
+		campoPassword_Empleado = new JTextField();
 
 		botonGuardar = new JButton();
 		botonCancelar = new JButton();
@@ -90,15 +90,15 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(3, 2, 0, 15));
 
-		textoId_Empleado.setEditable(false);
-		textoId_Empleado.setText("ID");
-		textoId_Empleado.setForeground(Color.cyan);
-		textoId_Empleado.setFocusable(false);
-		textoId_Empleado.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(textoId_Empleado);
+		textoPassword.setEditable(false);
+		textoPassword.setText("Password");
+		textoPassword.setForeground(Color.cyan);
+		textoPassword.setFocusable(false);
+		textoPassword.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoPassword);
 
-		campoId_Empleado.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(campoId_Empleado);
+		campoPassword_Empleado.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(campoPassword_Empleado);
 
 		textoNombre.setEditable(false);
 		textoNombre.setText("Nombre");
@@ -183,7 +183,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	}
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
-		String[] datos = { campoId_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
+		String[] datos = { campoPassword_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
 				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), };
 		mediator.alta("ControllerEmpleado", datos);
 
