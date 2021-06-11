@@ -16,9 +16,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 
-public class CrearCliente extends JFrame {
+public class CrearCliente extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JPanel panelDatos;
@@ -37,11 +38,11 @@ public class CrearCliente extends JFrame {
 	private JButton botonGuardar;
 	private JButton botonCancelar;
 
-	private Mediator controlador;
+	private Mediator mediator;
 
-	public CrearCliente(Mediator controlador) {
+	public CrearCliente(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = mediator;
 		initComponents();
 	}
 
@@ -144,7 +145,7 @@ public class CrearCliente extends JFrame {
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText() };
-		String inf = controlador.alta("ControllerCliente", datos);
+		String inf = mediator.alta("ControllerCliente", datos);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
@@ -155,8 +156,26 @@ public class CrearCliente extends JFrame {
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalClientes(controlador);
+		new PantallaPrincipalClientes(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
