@@ -47,6 +47,7 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 		botonProductos = new JButton();
 		botonMarcas = new JButton();
 		botonClientes = new JButton();
+		botonSucursal = new JButton();
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(900, 720));
 		panel.setFocusable(false);
