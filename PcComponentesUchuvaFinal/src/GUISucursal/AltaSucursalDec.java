@@ -1,9 +1,11 @@
 package GUISucursal;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -31,7 +33,12 @@ public class AltaSucursalDec extends JFrame implements Observer{
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
 		mainPanel.addTopLabel("Alta de sucursal");
-		mainPanel.addCp(new ButtonU("Dar De Alta"));
+		ButtonU btn = new Button("Dar De Alta").addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonGuardarActionPerformed(evt);
+			}});
+		mainPanel.addCp();
 		mainPanel.addJtext("Telefono");
 		mainPanel.addJtext("Ciudad");
 		mainPanel.addJtext("ID");
