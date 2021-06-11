@@ -70,7 +70,7 @@ public class DAOVentas {
 			}
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
-				throw new Exception("No se encuentra dicho id de venta.");
+				throw new Exception("No se encuntre la venta.");
 			}
 
 		} catch (SQLException e) {

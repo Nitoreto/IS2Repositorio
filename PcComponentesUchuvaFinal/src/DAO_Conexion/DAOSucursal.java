@@ -16,7 +16,7 @@ public class DAOSucursal {
 
 	public TransferSucursal buscar(int id) throws Exception {
 		try {
-			String query = "SELECT * FROM Cliente WHERE DNI = '" + id + "'";
+			String query = "SELECT * FROM Sucursal WHERE IDs = '" + id + "'";
 			TransferSucursal tSucursal = new TransferSucursal(conexion.conectarExecute(query));
 			return tSucursal;
 		} catch (SQLException e) {
