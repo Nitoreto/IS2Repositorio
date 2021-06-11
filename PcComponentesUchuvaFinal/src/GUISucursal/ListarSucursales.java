@@ -30,8 +30,8 @@ public class ListarSucursales extends JFrame implements Observer{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
-		
-		
+		m.listar("ControllerSucursal");
+		this.setVisible(true);
 		m.asignarObserver(this);
 	}
 

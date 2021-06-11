@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +32,30 @@ public class ModificarSucursalDec extends JFrame implements Observer{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
+		mainPanel.addTopLabel("Modificar una sucursal");
+		mainPanel.addJtext("Id");
+		JButton buscarButton = new JButton();
+		buscarButton.setText("Buscar");
+		buscarButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonBuscarActionPerformed();
+			}
+		});
+		mainPanel.addCp(buscarButton);
 		
+		
+		
+		JButton volverButton = new JButton();
+		volverButton.setText("volver");
+		volverButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonCancelarActionPerformed();
+			}
+		});
+		mainPanel.addCp(volverButton);
+		this.setVisible(true);
 		m.asignarObserver(this);
 	}
 
@@ -42,19 +66,17 @@ public class ModificarSucursalDec extends JFrame implements Observer{
 		_eventsTable.setOpaque(false);
 		mainPanel.add(new JScrollPane(_eventsTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
-		mainPanel.addTopLabel("Modificar una sucursal");
-		mainPanel.addJtext("Id");
-		mainPanel.addCp(new ButtonU("Buscar"));
-		mainPanel.addCp(new ButtonU("Modificar"));
-		JButton volverButton = new JButton();
-		volverButton.setText("volver");
-		volverButton.addActionListener(new ActionListener() {
+		
+		
+		JButton modificarButton = new JButton();
+		modificarButton.setText("modificar");
+		modificarButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
-				botonCancelarActionPerformed();
+				botonModificarActionPerformed();
 			}
 		});
-		mainPanel.addCp(volverButton);
+		mainPanel.addCp(modificarButton);
 		
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
@@ -85,6 +107,20 @@ public class ModificarSucursalDec extends JFrame implements Observer{
 	public void botonCancelarActionPerformed() {
 		new PantallaPrincipalSucursal(m);
 		this.dispose();
+	}
+	public void botonBuscarActionPerformed() {
+		ArrayList<String> datos = mainPanel.getData();
+		String[] arr = new String[datos.size()];
+	    arr = datos.toArray(arr);
+		m.buscar("ControllerSucursal", arr);
+	
+	}
+	public void botonModificarActionPerformed() {
+		ArrayList<String> datos = mainPanel.getData();
+		String[] arr = new String[datos.size()];
+	    arr = datos.toArray(arr);
+		//m.modificar("ControllerSucursal", , arr[0]);
+	
 	}
 
 }
