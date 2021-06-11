@@ -15,7 +15,7 @@ public class DAOProducto {
 	}
 
 	public Boolean alta(TransferProducto tProducto) throws Exception {
-		String query = "INSERT into Producto (IDp, NombreMarca, Nombre, Precio, Descripcion, Activo) VALUES ( "
+		String query = "INSERT into Producto (IDpr, NombreMarca, Nombre, Precio, Descripcion, Activop) VALUES ( "
 				+ tProducto.getID() + ", '" + tProducto.getNombreMarca() + "' ,'" + tProducto.getNombre() + "', "
 				+ tProducto.getPrecio() + ", '" + tProducto.getDescripcion() + "'," + tProducto.isActivo() + ")";
 		String query1 = "INSERT into Tiene (IDp, IDs) VALUES (" + tProducto.getID() + ", " + tProducto.getIdSucursal()
@@ -32,8 +32,8 @@ public class DAOProducto {
 	public Boolean baja(int ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "DELETE FROM Producto WHERE IDp = " + ID;
-			String query1 = "DELETE FORM Tiene WHERE IDp =" + ID;
+			String query = "DELETE FROM Producto WHERE IDpr = " + ID;
+			String query1 = "DELETE FORM Tiene WHERE IDpr =" + ID;
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("Producto no encontrado");
@@ -48,7 +48,7 @@ public class DAOProducto {
 	public Boolean bajaProductoSucursal(TransferProducto tProducto) throws Exception {
 		try {
 			int row = -1;
-			String query = "DELETE FORM Tiene WHERE IDp = " + tProducto.getID() + " AND IDs = "
+			String query = "DELETE FORM Tiene WHERE IDpr = " + tProducto.getID() + " AND IDs = "
 					+ tProducto.getIdSucursal();
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
@@ -64,7 +64,7 @@ public class DAOProducto {
 	public Boolean desactivar(int ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Producto SET Activo = 0 WHERE IDp = " + ID;
+			String query = "UPDATE Producto SET Activo = 0 WHERE IDpr = " + ID;
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("Producto no encontrado");
@@ -78,10 +78,10 @@ public class DAOProducto {
 	public Boolean modificar(TransferProducto tProducto, int ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Producto SET IDp = " + tProducto.getID() + ", Marca = '" + tProducto.getNombreMarca()
+			String query = "UPDATE Producto SET IDpr = " + tProducto.getID() + ", Marca = '" + tProducto.getNombreMarca()
 					+ "', Nombre = '" + tProducto.getNombre() + "' , Precio = " + tProducto.getPrecio()
 					+ ", Descripcion = '" + tProducto.getDescripcion() + "', Activo = " + tProducto.isActivo()
-					+ " WHERE IDp = " + ID;
+					+ " WHERE IDpr = " + ID;
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("Producto no encontrado");
@@ -109,7 +109,7 @@ public class DAOProducto {
 	public TransferProducto mostrarHistorialProducto(int ID) throws Exception {
 
 		try {
-			String query = "SELECT IDp, Nombre, NombreMarca, IDs, Precio, Descripcion, Activo FROM (Tiene h JOIN Producto p ON h.IDp = p.IDp) JOIN Marca m ON p.CIFm = m.CIF WHERE IDp = "
+			String query = "SELECT IDs, Nombre, NombreM, Precio, Descripcion FROM (Tiene t JOIN Producto p ON t.IDp = p.IDpr) JOIN Marca m ON p.CIFm = m.CIF WHERE IDp = "
 					+ ID;
 			TransferProducto tProducto = new TransferProducto(conexion.conectarExecute(query));
 			return tProducto;
@@ -120,7 +120,7 @@ public class DAOProducto {
 
 	public TransferProducto buscar(int ID) throws Exception {
 		try {
-			String query = "SELECT * FROM Producto WHERE IDp = " + ID;
+			String query = "SELECT * FROM Producto WHERE IDpr = " + ID;
 			TransferProducto tProducto = new TransferProducto(conexion.conectarExecute(query));
 			return tProducto;
 		} catch (SQLException e) {

@@ -82,7 +82,7 @@ public class DAOSucursal {
 	public Boolean modificar(TransferSucursal tSucursal, String ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Sucursal SET Ids = " + tSucursal.getID() + ", Direccion = '"
+			String query = "UPDATE Sucursal SET IDs = " + tSucursal.getID() + ", Direccion = '"
 					+ tSucursal.getDireccion() + "', Telefono = " + tSucursal.getTelefono() + ", Activo = "
 					+ tSucursal.isActivo() + " WHERE DNI = '" + ID + "'";
 			row = conexion.conectarUpdate(query);
