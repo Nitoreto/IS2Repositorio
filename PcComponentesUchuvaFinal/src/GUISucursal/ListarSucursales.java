@@ -3,29 +3,35 @@ package GUISucursal;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import Model.ModeloTablaEditable;
+import Model.Observer;
+import main.Mediator;
 
-public class ListarSucursales extends JFrame{
+public class ListarSucursales extends JFrame implements Observer{
 	
 	private ModeloTablaEditable model;
 	private JTable _eventsTable;
-	
-	public ListarSucursales(Object[][] objeto, String[] texto) {
-		initComponentes(objeto, texto);
-	}
-
-	private void initComponentes(Object[][] objeto, String[] texto) {
+	private BorderDecorator mainPanel;
+	public ListarSucursales(Mediator m) {
 		backGroundDecorator backGround = new backGroundDecorator();
 		backGround.setLayout(new BorderLayout());
-		BorderDecorator mainPanel = new BorderDecorator();
+		mainPanel = new BorderDecorator();
 		this.setSize(800,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
+		
+		
+		m.asignarObserver(this);
+	}
+
+	private void initComponentes(Object[][] objeto, String[] texto) {
+		
 		model = new ModeloTablaEditable(objeto, texto);
 		_eventsTable = new JTable(model);
 		_eventsTable.setOpaque(false);
@@ -42,11 +48,25 @@ public class ListarSucursales extends JFrame{
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
 		this.setVisible(true);
 	}
-	public static void main(String[] args) {
-		Object object[][] = new String[2][2] ;
-		String str[] = new String[3];
 
-		ListarSucursales t1 = new ListarSucursales(object, str);
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "Se ha realizado la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "No se ha podido realizar la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		initComponentes(generarTabla, generarTitulo);
 		
 	}
 

@@ -5,13 +5,18 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class AltaSucursalDec extends JFrame{
+import Model.Observer;
+import main.Mediator;
+
+public class AltaSucursalDec extends JFrame implements Observer{
 	
-	public AltaSucursalDec() {
+	public AltaSucursalDec(Mediator m) {
 		initComponentes();
+		m.asignarObserver(this);
 	}
 	public void initComponentes() {
 		backGroundDecorator backGround = new backGroundDecorator();
@@ -32,10 +37,23 @@ public class AltaSucursalDec extends JFrame{
 		this.setVisible(true);
 	}
 
-	 public static void main(String[] args) {
-
-			AltaSucursalDec t1 = new AltaSucursalDec();
-			
-
-		}
+	
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "Se ha realizado la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+	}
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "No se ha podido realizar la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+		
+	}
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
+	}
 }

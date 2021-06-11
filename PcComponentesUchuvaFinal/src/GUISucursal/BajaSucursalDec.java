@@ -3,10 +3,15 @@ package GUISucursal;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
-public class BajaSucursalDec extends JFrame{
-	public BajaSucursalDec() {
+import Model.Observer;
+import main.Mediator;
+
+public class BajaSucursalDec extends JFrame implements Observer{
+	public BajaSucursalDec(Mediator m) {
 		initComponentes();
+		m.asignarObserver(this);
 	}
 
 	private void initComponentes() {
@@ -28,10 +33,25 @@ public class BajaSucursalDec extends JFrame{
 		this.setVisible(true);
 		
 	}
-	 public static void main(String[] args) {
 
-			BajaSucursalDec t1 = new BajaSucursalDec();
-			
-		}
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "Se ha realizado la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		int input = JOptionPane.showConfirmDialog(null, 
+                "No se ha podido realizar la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
