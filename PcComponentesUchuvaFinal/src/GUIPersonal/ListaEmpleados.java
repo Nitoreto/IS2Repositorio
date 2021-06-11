@@ -120,11 +120,8 @@ public class ListaEmpleados extends JFrame implements Observer{
 
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		mediator.cancelar();
-	
 			this.dispose();
-			new PantallaPrincipalEmpleado(mediator);
-		
+			new PantallaPrincipalEmpleado(mediator);		
 	}
 
 	@Override

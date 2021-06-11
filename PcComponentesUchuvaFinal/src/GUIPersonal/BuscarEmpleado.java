@@ -22,7 +22,7 @@ import Model.ModeloTablaEditable;
 import Model.Observer;
 import main.Mediator;
 
-public class BuscarEmpleado extends JFrame implements Observer{
+public class BuscarEmpleado extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -134,11 +134,9 @@ public class BuscarEmpleado extends JFrame implements Observer{
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		mediator.cancelar();
-		
 		this.dispose();
 		new PantallaPrincipalEmpleado(mediator);
-		
+
 	}
 
 	@Override
@@ -179,6 +177,6 @@ public class BuscarEmpleado extends JFrame implements Observer{
 		JScrollPane paneScroll = new JScrollPane(tabla);
 		panelMostrar.add(paneScroll, BorderLayout.CENTER);
 		this.validate();
-		
+
 	}
 }
