@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import main.ModeloTablaEditable;
+import Model.ModeloTablaEditable;
 
 public class ListarSucursales extends JFrame{
 	

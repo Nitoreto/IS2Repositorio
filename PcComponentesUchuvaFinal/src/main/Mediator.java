@@ -1,17 +1,22 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import Model.Observer;
 import factoryController.ObjectController;
+import simulator.model.SimulatorObserver;
 import factoryController.FactoryController;
 
 public class Mediator {
 	private ObjectController controller;
-	private vista vista;
+	private List<Observer> observerList = new ArrayList<>();
 	
-	public void asignarVista(vista vista) {
-		this.vista=vista;
+	public void asignarObserver(Observer vista) {
+		this.observerList.add(vista);
 	}
 	
 	public void alta(String nombre, String[] Datos) {
@@ -52,16 +57,21 @@ public class Mediator {
 	}
 
 	public void actualizarTabla(Object[][] generarTabla, String[] generarTitulos) {
-		Esto solo pasa los datos, la vista se encarga de actualizar como crea.
-		Pasar vista los datos.
+		for(Observer o: observerList) {
+			o.onTableChange(generarTabla, generarTitulos);
+		}
 	}
 	
 	public void avisarError(String Error) {
-		Avisa a la vista del error
+		for(Observer o: observerList) {
+			o.onIncorrectMessage(Error);;
+		}
 	}
 	
-	public void avisarCorrecto() {
-		Avisa a la vista de que se hizo correctamente
+	public void avisarCorrecto(String acierto) {
+		for(Observer o: observerList) {
+			o.onCorrectMessage(acierto);;
+		}
 	}
 
 	public String cancelar() {

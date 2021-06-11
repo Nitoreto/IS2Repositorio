@@ -1,4 +1,4 @@
-package main;
+package Model;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;

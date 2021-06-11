@@ -1,6 +1,4 @@
-/factoryController/
 /main/
-/Transfer/
-/DAO_Conexion/
-/GUIVenta/
+/Model/
 /GUISucursal/
+/factoryController/

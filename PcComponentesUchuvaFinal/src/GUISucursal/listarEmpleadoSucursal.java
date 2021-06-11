@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import main.ModeloTablaEditable;
+import Model.ModeloTablaEditable;
 
 public class listarEmpleadoSucursal extends JFrame{
 	

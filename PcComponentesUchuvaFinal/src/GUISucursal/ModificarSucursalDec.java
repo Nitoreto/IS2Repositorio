@@ -5,7 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import main.ModeloTablaEditable;
+
+import Model.ModeloTablaEditable;
 
 public class ModificarSucursalDec extends JFrame{
 	
