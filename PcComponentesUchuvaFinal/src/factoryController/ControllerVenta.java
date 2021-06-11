@@ -22,7 +22,7 @@ public class ControllerVenta extends ObjectController {
 	public Boolean alta() {
 		try {
 			DAOv.alta(tVenta);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -34,7 +34,7 @@ public class ControllerVenta extends ObjectController {
 	public Boolean baja() {
 		try {
 			DAOv.baja(tVenta.getIdVenta());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado baja la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -46,7 +46,7 @@ public class ControllerVenta extends ObjectController {
 	public Boolean modificar(String ID) {
 		try {
 			DAOv.modificar(tVenta, Integer.parseInt(ID));
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificado la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -59,7 +59,7 @@ public class ControllerVenta extends ObjectController {
 		try {
 			tVenta = DAOv.listar();
 			mediator.actualizarTabla(tVenta.generarTabla(), tVenta.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha listado la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -72,7 +72,7 @@ public class ControllerVenta extends ObjectController {
 		try {
 			tVenta = DAOv.buscar(tVenta.getIdVenta());
 			mediator.actualizarTabla(tVenta.generarTabla(), tVenta.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha buscado la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -85,7 +85,7 @@ public class ControllerVenta extends ObjectController {
 	public Boolean desactivar() {
 		try {
 			DAOv.desactivar(tVenta.getIdVenta());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado la venta");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());

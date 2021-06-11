@@ -17,9 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 
-public class EliminarCliente extends JFrame {
+public class EliminarCliente extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -32,11 +33,11 @@ public class EliminarCliente extends JFrame {
 
 	private JButton botonEliminar;
 	private JButton botonCancelar;
-	private Mediator controlador;
+	private Mediator mediator;
 
-	public EliminarCliente(Mediator controlador) {
+	public EliminarCliente(Mediator meditar) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = meditar;
 		initComponents();
 	}
 
@@ -114,28 +115,35 @@ public class EliminarCliente extends JFrame {
 	private void botonEliminarActionPerformed(ActionEvent evt) {
 		String[] opciones = { "Eliminar", "Desactivar" };
 		String[] Datos = { campoDNI.getText() };
-		String inf = "";
-
 		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("ControllerCliente", Datos);
+			mediator.baja("ControllerCliente", Datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("ControllerCliente", Datos);
+			mediator.desactivar("ControllerCliente", Datos);
 		}
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
-
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalClientes(controlador);
+		new PantallaPrincipalClientes(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

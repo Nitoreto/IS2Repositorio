@@ -85,7 +85,6 @@ public class ListarTabla extends JFrame implements Observer{
 	}
 
 	private void botonOkActionPerformed() {
-		mediator.cancelar();
 		
 	}
 

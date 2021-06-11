@@ -16,20 +16,23 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class ListaEmpleados extends JFrame {
+public class ListaEmpleados extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JTextArea textoListaEmpleados;
 	private JTable tabla;
 	private JButton botonBorrar;
 	private JButton botonCancelar;
-	private Mediator controlador;
+	private Mediator mediator;
+	private ModeloTablaEditable model;
 
 	public ListaEmpleados(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -46,7 +49,7 @@ public class ListaEmpleados extends JFrame {
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(1920, 1080));
-		CrearTabla();
+		mediator.listar("ControllerEmpleado");
 		textoListaEmpleados.setEditable(false);
 		textoListaEmpleados.setText("Listar Empleados");
 		textoListaEmpleados.setFocusable(false);
@@ -94,29 +97,18 @@ public class ListaEmpleados extends JFrame {
 		if (rowSeleccionada > -1) {
 			String[] opciones = { "Eliminar", "Desactivar" };
 			String[] datos = { tabla.getValueAt(rowSeleccionada, 0).toString() };
-			String inf = "Exito";
 
-			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
+			int elecion = JOptionPane.showOptionDialog(null, "ï¿½ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("ControllerEmpleado", datos);
-				controlador.listar("ControllerEmpleado");
-				tabla.setModel(controlador.actualizarTabla());
-				tabla.revalidate();
-				tabla.repaint();
+				mediator.baja("ControllerEmpleado", datos);
+				mediator.listar("ControllerEmpleado");
+				
+				
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("ControllerEmpleado", datos);
-				controlador.listar("ControllerEmpleado");
-				tabla.setModel(controlador.actualizarTabla());
-				tabla.revalidate();
-				tabla.repaint();
-			}
-
-			if (inf != "Exito") {
-				JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-			} else {
-				JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
-						JOptionPane.INFORMATION_MESSAGE);
+				mediator.desactivar("ControllerEmpleado", datos);
+				mediator.listar("ControllerEmpleado");
+				
 			}
 
 		} else {
@@ -126,30 +118,41 @@ public class ListaEmpleados extends JFrame {
 
 	}
 
-	public void CrearTabla() {
-		String inf = controlador.listar("ControllerEmpleado");
 
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		}
+	private void botonCancelarActionPerformed(ActionEvent evt) {
+			this.dispose();
+			new PantallaPrincipalEmpleado(mediator);		
+	}
 
-		tabla = new JTable(controlador.actualizarTabla());
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		mediator.listar("ControllerEmpleado");
+
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+		tabla = new JTable(model);
 		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
 		tabla.setRowHeight(50);
 		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		tabla.revalidate();
+		tabla.repaint();
 		JScrollPane paneScroll = new JScrollPane(tabla);
 		this.getContentPane().add(paneScroll, BorderLayout.CENTER);
 
 		this.validate();
-	}
-
-	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			this.dispose();
-			new PantallaPrincipalEmpleado(controlador);
-		}
+		
 	}
 }

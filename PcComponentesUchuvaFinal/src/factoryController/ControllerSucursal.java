@@ -22,7 +22,7 @@ public class ControllerSucursal extends ObjectController{
 	public Boolean alta() {
 		try {
 			DAOs.alta(tSucursal);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta el sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -34,7 +34,7 @@ public class ControllerSucursal extends ObjectController{
 	public Boolean baja() {
 		try {
 			DAOs.baja(tSucursal.getID());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de baja el sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -46,7 +46,7 @@ public class ControllerSucursal extends ObjectController{
 	public Boolean modificar(String ID) {
 		try {
 			DAOs.modificar(tSucursal, ID);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificado el sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -59,7 +59,7 @@ public class ControllerSucursal extends ObjectController{
 		try {
 			tSucursal = DAOs.listar();
 			mediator.actualizarTabla(tSucursal.generarTabla(), tSucursal.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha listado la sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -72,7 +72,7 @@ public class ControllerSucursal extends ObjectController{
 		try {
 			tSucursal = DAOs.buscar(tSucursal.getID());
 			mediator.actualizarTabla(tSucursal.generarTabla(), tSucursal.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se buscado el sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -85,7 +85,7 @@ public class ControllerSucursal extends ObjectController{
 	public Boolean desactivar() {
 		try {
 			DAOs.desactivar(tSucursal.getID());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado el sucursal");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());

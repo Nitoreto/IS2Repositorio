@@ -145,14 +145,7 @@ public class CrearCliente extends JFrame implements Observer{
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText() };
-		String inf = mediator.alta("ControllerCliente", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido añadir a la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		mediator.alta("ControllerCliente", datos);
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
@@ -162,20 +155,19 @@ public class CrearCliente extends JFrame implements Observer{
 
 	@Override
 	public void onCorrectMessage(String msg) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido añadir a la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 
 	@Override
 	public void onIncorrectMessage(String msg) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
 		
 	}
 
 	@Override
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

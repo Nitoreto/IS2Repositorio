@@ -19,14 +19,17 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class MuestraHistorialEmpleado extends JFrame {
+public class MuestraHistorialEmpleado extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
 	private JPanel panelMostrarHistorial;
 	private JPanel panelDatos;
+	private ModeloTablaEditable model;
 
 	private JTextArea textoBuscarHistorialEmpleado;
 
@@ -38,11 +41,11 @@ public class MuestraHistorialEmpleado extends JFrame {
 	private JButton botonBuscar;
 	private JButton botonCancelar;
 
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public MuestraHistorialEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -120,28 +123,37 @@ public class MuestraHistorialEmpleado extends JFrame {
 
 	private void botonMostrarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNI.getText() };
-		String inf = controlador.mostrarHistorial("ControllerEmpleado", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL MOSTRAR EL HISTORIAL DE VENTAS DEL EMPLEADO", JOptionPane.ERROR_MESSAGE);
-		} else {
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			panelMostrarHistorial.add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-		}
+		mediator.mostrarHistorial("ControllerEmpleado", datos);
 	}
 
-	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			new PantallaPrincipalEmpleado(controlador);
-			this.dispose();
-		}
+	private void botonCancelarActionPerformed(ActionEvent evt) {	
+		new PantallaPrincipalEmpleado(mediator);
+		this.dispose();	
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL MOSTRAR EL HISTORIAL DE VENTAS DEL EMPLEADO", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrarHistorial.add(paneScroll, BorderLayout.CENTER);
+		this.validate();
+		
 	}
 }

@@ -15,20 +15,25 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
+
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class ListarMarcas extends JFrame {
+public class ListarMarcas extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JTextArea textoListarMarca;
 	private JTable tabla;
 	private JButton botonBorrar;
 	private JButton botonCancelar;
-	private Mediator controlador;
+	private Mediator mediator;
+	private ModeloTablaEditable model;
+
 
 	public ListarMarcas(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -94,26 +99,18 @@ public class ListarMarcas extends JFrame {
 		if (rowSeleccionada > -1) {
 			String[] opciones = { "Eliminar", "Desactivar" };
 			String[] datos = { tabla.getValueAt(rowSeleccionada, 0).toString() };
-			String inf = "Exito";
 
-			int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
+			int elecion = JOptionPane.showOptionDialog(null, "ï¿½ Deseas borrarlo o desactivarlo ?", "Eliminar",
 					JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 			if (elecion == 0) {
-				inf = controlador.baja("ControllerMarca", datos);
-				controlador.listar("ControllerMarca");
-				tabla.setModel(controlador.actualizarTabla());
-				tabla.revalidate();
-				tabla.repaint();
+				mediator.baja("ControllerMarca", datos);
+				mediator.listar("ControllerMarca");
+				
 			} else if (elecion == 1) {
-				inf = controlador.desactivar("ControllerMarca", datos);
-				controlador.listar("ControllerMarca");
-				tabla.setModel(controlador.actualizarTabla());
-				tabla.revalidate();
-				tabla.repaint();
+				mediator.desactivar("ControllerMarca", datos);
+				mediator.listar("ControllerMarca");
+				
 			}	
-			if (inf != "Exito") {
-				JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-			}
 
 		} else {
 			JOptionPane.showMessageDialog(null, "Error: No esta seleccionada ninguna fila de la tabla",
@@ -123,28 +120,41 @@ public class ListarMarcas extends JFrame {
 	}
 
 	private void CrearTabla() {
-		String inf = controlador.listar("ControllerMarca");
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		tabla = new JTable(controlador.actualizarTabla());
-		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-		tabla.setRowHeight(50);
-		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-		JScrollPane paneScroll = new JScrollPane(tabla);
-		this.getContentPane().add(paneScroll, BorderLayout.CENTER);
-		this.validate();
+		mediator.listar("ControllerMarca");
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			this.dispose();
-			new PantallaPrincipalMarca(controlador);
-		}
+		this.dispose();
+		new PantallaPrincipalMarca(mediator);
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+
+		tabla.revalidate();
+		tabla.repaint();
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		this.getContentPane().add(paneScroll, BorderLayout.CENTER);
+		this.validate();
+		
 	}
 
 }

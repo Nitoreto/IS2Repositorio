@@ -12,10 +12,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.PantallaPrincipalPccomponentes;
 import main.Mediator;
 
-public class PantallaPrincipalMarca extends JFrame {
+public class PantallaPrincipalMarca extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JTextArea textoMarca;
 	private JButton botonListar;
@@ -126,6 +127,24 @@ public class PantallaPrincipalMarca extends JFrame {
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		new BuscarMarca(controlador);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

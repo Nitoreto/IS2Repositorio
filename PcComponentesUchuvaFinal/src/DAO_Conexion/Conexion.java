@@ -10,10 +10,14 @@ public class Conexion extends SingletonConexion{
 
 	protected Connection conexion;
 	protected Statement statement;
+	private int puerto = 3306;
+	private String nombreBBDD = "pccomponentes";
+	private String user = "root";
+	private String paswordd = "3110";
 
 	public Conexion()throws SQLException {
 		conexion = DriverManager.getConnection(
-				"jdbc:mysql://localhost:3306/pccomponentes?autoReconnect=true&useSSL=false", "root", "3110");
+				"jdbc:mysql://localhost:" + puerto +"/"+nombreBBDD+"?autoReconnect=true&useSSL=false", user, paswordd);
 	}
 
 	@Override
