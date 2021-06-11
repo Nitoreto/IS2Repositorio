@@ -176,7 +176,7 @@ public class AltaProducto extends JFrame implements Observer{
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] Datos = { campoID.getText(), campoNombre.getText(), campoNombreMarca.getText(),
-				campoDescripcion.getText(), campoPrecio.getText(), };
+				campoDescripcion.getText(), campoPrecio.getText(), "1"};
 		mediator.alta("ControllerProducto", Datos);
 	}
 
