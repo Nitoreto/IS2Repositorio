@@ -17,9 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 
-public class ModificarVenta extends JFrame {
+public class ModificarVenta extends JFrame implements Observer{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -29,14 +30,14 @@ public class ModificarVenta extends JFrame {
 	private JButton botonModificar;
 	private JButton botonCancelar;
 	private JButton botonEliminar;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	JTextArea textoIdVenta;
 	JTextField textoCampoIdVenta;
 
 	public ModificarVenta(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -123,11 +124,11 @@ public class ModificarVenta extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = controlador.buscar("ControllerVenta", datos);
+		String inf = mediator.buscar("ControllerVenta", datos);
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "ID no encontrado", "Error: ", JOptionPane.ERROR_MESSAGE);
 		} else {
-			new ModificarBorrarVenta(textoCampoIdVenta.getText(), controlador);
+			new ModificarBorrarVenta(textoCampoIdVenta.getText(), mediator);
 			this.dispose();
 		}
 	}
@@ -135,33 +136,43 @@ public class ModificarVenta extends JFrame {
 	private void botonEliminarActionPerformed(ActionEvent evt) {
 		String[] opciones = { "Eliminar", "Desactivar" };
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = "" ;
-
-		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
+		
+		int elecion = JOptionPane.showOptionDialog(null, "ï¿½ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
-			inf = controlador.baja("ControllerVenta", datos);
+			mediator.baja("ControllerVenta", datos);
 		} else if (elecion == 1) {
-			inf = controlador.desactivar("ControllerVenta", datos);
+			mediator.desactivar("ControllerVenta", datos);
 		}
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+			
+		
 		//----------
 	}
 
 	private void botonCancelarActionPerformed() {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: ", inf, JOptionPane.ERROR_MESSAGE);
-		} else {
-			new PantallaPrincipalVentas(controlador);
-			this.dispose();
-		}
+		mediator.cancelar();
+		new PantallaPrincipalVentas(mediator);
+		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: ", msg, JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

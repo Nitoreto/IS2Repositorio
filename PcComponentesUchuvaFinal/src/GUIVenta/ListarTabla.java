@@ -17,27 +17,31 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
 import GUIPersonal.PantallaPrincipalEmpleado;
+import Model.ModeloTabla;
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class ListarTabla extends JFrame {
+public class ListarTabla extends JFrame implements Observer{
 
 	private static final long serialVersionUID = 1L;
 
 	private JTextArea textoListarVentas;
-
+	private ModeloTabla model;
 	private JButton botonOk;
 	private JTable tabla;
-	private Mediator controlador;
+	private Mediator mediator;
 	private String DNICliente;
 
-	public ListarTabla(Mediator controlador, String DNICliente) {
+	public ListarTabla(Mediator mediator, String DNICliente) {
 
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = mediator;
 		this.DNICliente = DNICliente;
 		this.getContentPane().setLayout(new BorderLayout());
-		if (CrearTabla().equalsIgnoreCase("Exito"))
-			initComponentes();
+		mediator.asignarObserver(this);
+		CrearTabla();
+		initComponentes();
 
 	}
 
@@ -75,33 +79,43 @@ public class ListarTabla extends JFrame {
 		this.setVisible(true);
 	}
 
-	private String CrearTabla() {
-		String[] datos = { "rand", DNICliente };
-		String inf = controlador.mostrarHistorial("ControllerVenta", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-			return "Error";
-		} else {
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			this.getContentPane().add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-			return "Exito";
-		}
+	private void CrearTabla() {
+		String[] datos = {DNICliente };
+		mediator.mostrarHistorial("ControllerVenta", datos);
 	}
 
 	private void botonOkActionPerformed() {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			this.dispose();
-			new PantallaPrincipalVentas(controlador);
-		}
+		mediator.cancelar();
+		
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+	
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTabla(generarTabla, generarTitulo);
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		this.getContentPane().add(paneScroll, BorderLayout.CENTER);
+		this.validate();
+		
 	}
 
 }
