@@ -18,9 +18,11 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Model.ModeloTabla;
+import Model.Observer;
 import main.Mediator;
 
-public class MostrarVenta extends JFrame {
+public class MostrarVenta extends JFrame implements Observer{
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -32,11 +34,12 @@ public class MostrarVenta extends JFrame {
 	private JButton botonCancelar;
 	private JTextArea textoIdVenta;
 	private JTextField textoCampoIdVenta;
-	private Mediator controlador;
+	private Mediator mediator;
+	private ModeloTabla model;
 
 	public MostrarVenta(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -111,25 +114,39 @@ public class MostrarVenta extends JFrame {
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = controlador.buscar("ControllerVenta", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
-		} else {
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			panelMostrarVenta.add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-		}
-
+		mediator.buscar("ControllerVenta", datos);
+		
+			
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalVentas(controlador);
+		new PantallaPrincipalVentas(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTabla(generarTabla, generarTitulo);
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrarVenta.add(paneScroll, BorderLayout.CENTER);
+		this.validate();
 	}
 
 }

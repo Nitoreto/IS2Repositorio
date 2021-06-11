@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Model.Observer;
 import main.Mediator;
 
-public class MostrarHistorialClientes extends JFrame {
+public class MostrarHistorialClientes extends JFrame implements Observer{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -31,11 +32,11 @@ public class MostrarHistorialClientes extends JFrame {
 	private JTextArea textoIdCliente;
 	private JTextField textoCampoIdCliente;
 
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public MostrarHistorialClientes(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -108,22 +109,34 @@ public class MostrarHistorialClientes extends JFrame {
 	}
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
-		new ListarTabla(controlador, textoCampoIdCliente.getText());
+		new ListarTabla(mediator, textoCampoIdCliente.getText());
 		this.dispose();
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
 
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showConfirmDialog(null, "Error: " + inf, "DNI no encontrado", JOptionPane.PLAIN_MESSAGE,
-					JOptionPane.ERROR_MESSAGE);
-		} else {
-			new PantallaPrincipalVentas(controlador);
-			this.dispose();
-		}
-
+		mediator.cancelar();
+		new PantallaPrincipalVentas(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showConfirmDialog(null, "Error: " + msg, "DNI no encontrado", JOptionPane.PLAIN_MESSAGE,
+				JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
