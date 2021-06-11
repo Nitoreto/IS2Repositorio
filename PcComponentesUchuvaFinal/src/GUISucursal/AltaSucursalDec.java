@@ -16,8 +16,10 @@ import main.Mediator;
 
 public class AltaSucursalDec extends JFrame implements Observer{
 	BorderDecorator mainPanel;
+	Mediator m;
 	public AltaSucursalDec(Mediator m) {
 		initComponentes();
+		this.m = m;
 		m.asignarObserver(this);
 	}
 	public void initComponentes() {
@@ -49,8 +51,8 @@ public class AltaSucursalDec extends JFrame implements Observer{
 	}
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = mainPanel.getData();
-		mediator.alta("ControllerVenta", datos);
-		new PantallaPrincipalVentas(mediator);
+		m.alta("ControllerVenta", datos);
+		new PantallaPrincipalVentas(m);
 		this.dispose();
 	}
 	@Override
