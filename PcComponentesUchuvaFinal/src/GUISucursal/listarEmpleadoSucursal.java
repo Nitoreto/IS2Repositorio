@@ -3,6 +3,7 @@ package GUISucursal;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -29,21 +30,18 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
-		
-		m.asignarObserver(this);
-	}
-
-	private void initComponentes(Object[][] objeto, String[] texto) {
-		
-		model = new ModeloTablaEditable(objeto, texto);
-		_eventsTable = new JTable(model);
-		_eventsTable.setOpaque(false);
-		mainPanel.add(new JScrollPane(_eventsTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 		mainPanel.addTopLabel("Listar empleados por sucursal");
 		mainPanel.addJtext("Id");
-		mainPanel.addCp(new ButtonU("Buscar"));
 		
+		JButton buscarButton = new JButton();
+		buscarButton.setText("Buscar");
+		buscarButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonBuscarActionPerformed();
+			}
+		});
+		mainPanel.addCp(buscarButton);
 
 		JButton volverButton = new JButton();
 		volverButton.setText("volver");
@@ -54,6 +52,20 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 			}
 		});
 		mainPanel.addCp(volverButton);
+		
+		this.setVisible(true);
+		m.asignarObserver(this);
+	}
+
+	private void initComponentes(Object[][] objeto, String[] texto) {
+		
+		model = new ModeloTablaEditable(objeto, texto);
+		_eventsTable = new JTable(model);
+		_eventsTable.setOpaque(false);
+		mainPanel.add(new JScrollPane(_eventsTable, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+		
+		
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
 		this.setVisible(true);
@@ -80,6 +92,13 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 		// TODO Auto-generated method stub
 		initComponentes(generarTabla, generarTitulo);
 		
+	}
+	public void botonBuscarActionPerformed() {
+		ArrayList<String> datos = mainPanel.getData();
+		String[] arr = new String[datos.size()];
+	    arr = datos.toArray(arr);
+		m.buscar("ControllerSucursal", arr);
+
 	}
 	public void botonCancelarActionPerformed() {
 		new PantallaPrincipalSucursal(m);
