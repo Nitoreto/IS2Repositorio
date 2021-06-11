@@ -17,9 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 
-public class RegistrarVenta extends JFrame {
+public class RegistrarVenta extends JFrame implements Observer{
 	/**
 	 * 
 	 */
@@ -43,12 +44,11 @@ public class RegistrarVenta extends JFrame {
 
 	private JTextArea textoListaProducos;
 	private JTextField textoCampoListaProductos;
-	private String inf;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public RegistrarVenta(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -163,20 +163,33 @@ public class RegistrarVenta extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { "rand", textoCampoDNICliente.getText(), textoCampoIdEmpleado.getText(),
 				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText() };
-		inf = controlador.alta("ControllerVenta", datos);
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido añadir a la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
-		new PantallaPrincipalVentas(controlador);
+		mediator.alta("ControllerVenta", datos);
+		new PantallaPrincipalVentas(mediator);
 		this.dispose();
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalVentas(controlador);
+		new PantallaPrincipalVentas(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido añadir a la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

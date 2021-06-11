@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import Model.Observer;
 import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
 
 
-public class PantallaPrincipalVentas extends JFrame {
+public class PantallaPrincipalVentas extends JFrame implements Observer{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -25,11 +26,11 @@ public class PantallaPrincipalVentas extends JFrame {
 	private JButton botonMostrarVenta;
 	private JButton botonModificarVenta;
 	private JButton botonVolver;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public PantallaPrincipalVentas(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -125,30 +126,48 @@ public class PantallaPrincipalVentas extends JFrame {
 	}
 
 	private void botonVolverActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalPccomponentes(controlador);
+		new PantallaPrincipalPccomponentes(mediator);
 		this.dispose();
 		
 	}
 
 	private void botonListarVentasActionPerformed(ActionEvent evt) {
-		new MostrarHistorialClientes(controlador);
+		new MostrarHistorialClientes(mediator);
 		this.dispose();
 	}
 
 	private void botonRegistrarVentaActionPerformed(ActionEvent evt) {
-		new RegistrarVenta(controlador);
+		new RegistrarVenta(mediator);
 		this.dispose();
 	}
 
 	private void botonMostrarVentasActionPerformed(ActionEvent evt) {
-		new MostrarVenta(controlador);
+		new MostrarVenta(mediator);
 		this.dispose();
 	}
 
 	private void botonModificarVentasActionPerformed(ActionEvent evt) {
-		new ModificarVenta(controlador);
+		new ModificarVenta(mediator);
 		this.dispose();
 
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
