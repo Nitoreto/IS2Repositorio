@@ -45,11 +45,13 @@ public class DAOSucursal {
 			if (row == 0) {
 				throw new Exception("No se ha encontrado una sucursal con ese id");
 			}
+			conexion.conectarUpdate(query1);
+			conexion.conectarUpdate(query2);
 			return true;
 		} catch (SQLException e) {
 			if (e.getClass().getName()
 					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				throw new Exception("No se puede borrar un cliente con ventas");
+				throw new Exception("No se puede borrar un sucursal");
 			}
 			return false;
 		}
@@ -93,7 +95,7 @@ public class DAOSucursal {
 		} catch (SQLException e) {
 			if (e.getClass().getName()
 					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				throw new Exception("No se puede modificar el DNI de un cliente con ventas");
+				throw new Exception("No se puede modificar la sucursal con ventas");
 			} else {
 				throw new Exception(e.getCause());
 			}
