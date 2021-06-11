@@ -20,7 +20,7 @@ import javax.swing.WindowConstants;
 import Model.Observer;
 import main.Mediator;
 
-public class ModificarVenta extends JFrame implements Observer{
+public class ModificarVenta extends JFrame implements Observer {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
@@ -124,19 +124,15 @@ public class ModificarVenta extends JFrame implements Observer{
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { textoCampoIdVenta.getText() };
-		String inf = mediator.buscar("ControllerVenta", datos);
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "ID no encontrado", "Error: ", JOptionPane.ERROR_MESSAGE);
-		} else {
-			new ModificarBorrarVenta(textoCampoIdVenta.getText(), mediator);
-			this.dispose();
-		}
+		mediator.buscar("ControllerVenta", datos);
+		new ModificarBorrarVenta(textoCampoIdVenta.getText(), mediator);
+		this.dispose();
 	}
 
 	private void botonEliminarActionPerformed(ActionEvent evt) {
 		String[] opciones = { "Eliminar", "Desactivar" };
 		String[] datos = { textoCampoIdVenta.getText() };
-		
+
 		int elecion = JOptionPane.showOptionDialog(null, "� Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
@@ -144,13 +140,11 @@ public class ModificarVenta extends JFrame implements Observer{
 		} else if (elecion == 1) {
 			mediator.desactivar("ControllerVenta", datos);
 		}
-			
-		
-		//----------
+
+		// ----------
 	}
 
 	private void botonCancelarActionPerformed() {
-		mediator.cancelar();
 		new PantallaPrincipalVentas(mediator);
 		this.dispose();
 	}
@@ -160,7 +154,7 @@ public class ModificarVenta extends JFrame implements Observer{
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, "Se ha podido dar de baja de la base de datos ", "Exito",
 				JOptionPane.INFORMATION_MESSAGE);
-		
+
 	}
 
 	@Override
@@ -172,7 +166,7 @@ public class ModificarVenta extends JFrame implements Observer{
 	@Override
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

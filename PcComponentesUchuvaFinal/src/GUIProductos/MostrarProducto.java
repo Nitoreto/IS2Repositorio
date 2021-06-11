@@ -23,7 +23,7 @@ import Model.ModeloTablaEditable;
 import Model.Observer;
 import main.Mediator;
 
-public class MostrarProducto extends JFrame implements Observer{
+public class MostrarProducto extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -137,23 +137,14 @@ public class MostrarProducto extends JFrame implements Observer{
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = mediator.cancelar();
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-
-			this.dispose();
-
-			new PantallaPrincipalProducto(mediator);
-		}
+		this.dispose();
+		new PantallaPrincipalProducto(mediator);
 	}
 
 	@Override
 	public void onCorrectMessage(String msg) {
 		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, msg, "Exito",
-				JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, msg, "Exito", JOptionPane.INFORMATION_MESSAGE);
 		this.campoID.setText(tabla.getValueAt(0, 0).toString());
 	}
 
@@ -185,7 +176,7 @@ public class MostrarProducto extends JFrame implements Observer{
 		panelMostrar.add(paneScroll, BorderLayout.CENTER);
 
 		this.validate();
-		
+
 	}
 
 }

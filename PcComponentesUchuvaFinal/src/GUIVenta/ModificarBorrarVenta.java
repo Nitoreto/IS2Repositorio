@@ -109,14 +109,7 @@ public class ModificarBorrarVenta extends JFrame implements Observer{
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString() };
-		String inf = mediator.modificar("ControllerVenta", datos, idVenta);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido modificar la venta ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		mediator.modificar("ControllerVenta", datos, idVenta);
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
@@ -126,8 +119,8 @@ public class ModificarBorrarVenta extends JFrame implements Observer{
 
 	@Override
 	public void onCorrectMessage(String msg) {
-		// TODO Auto-generated method stub
-		
+		JOptionPane.showMessageDialog(null, "Se ha podido modificar la venta ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	@Override

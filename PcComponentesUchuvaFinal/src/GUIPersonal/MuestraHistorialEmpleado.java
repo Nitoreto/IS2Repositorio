@@ -126,12 +126,9 @@ public class MuestraHistorialEmpleado extends JFrame implements Observer{
 		mediator.mostrarHistorial("ControllerEmpleado", datos);
 	}
 
-	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = mediator.cancelar();
-		
+	private void botonCancelarActionPerformed(ActionEvent evt) {	
 		new PantallaPrincipalEmpleado(mediator);
-		this.dispose();
-		
+		this.dispose();	
 	}
 
 	@Override

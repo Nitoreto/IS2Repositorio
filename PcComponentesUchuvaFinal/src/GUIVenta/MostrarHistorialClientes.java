@@ -114,8 +114,6 @@ public class MostrarHistorialClientes extends JFrame implements Observer{
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-
-		mediator.cancelar();
 		new PantallaPrincipalVentas(mediator);
 		this.dispose();
 	}

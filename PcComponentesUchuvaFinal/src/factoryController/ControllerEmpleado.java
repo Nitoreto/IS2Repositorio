@@ -22,7 +22,7 @@ public class ControllerEmpleado extends ObjectController {
 	public Boolean alta() {
 		try {
 			DAOe.alta(tEmpleado);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -34,7 +34,7 @@ public class ControllerEmpleado extends ObjectController {
 	public Boolean baja() {
 		try {
 			DAOe.baja(tEmpleado.getDNI());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de baja el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -46,7 +46,7 @@ public class ControllerEmpleado extends ObjectController {
 	public Boolean modificar(String DNI) {
 		try {
 			DAOe.modificar(tEmpleado, DNI);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificiado el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -59,7 +59,7 @@ public class ControllerEmpleado extends ObjectController {
 		try {
 			tEmpleado = DAOe.listar();
 			mediator.actualizarTabla(tEmpleado.generarTabla(), tEmpleado.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha listado el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -72,7 +72,7 @@ public class ControllerEmpleado extends ObjectController {
 		try {
 			tEmpleado = DAOe.buscar(tEmpleado.getDNI());
 			mediator.actualizarTabla(tEmpleado.generarTabla(), tEmpleado.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha buscado el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -84,7 +84,7 @@ public class ControllerEmpleado extends ObjectController {
 	public Boolean desactivar() {
 		try {
 			DAOe.desactivar(tEmpleado.getDNI());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -98,7 +98,7 @@ public class ControllerEmpleado extends ObjectController {
 		try {
 			tEmpleado = DAOe.MuestraHistorialVentas(tEmpleado.getDNI());
 			mediator.actualizarTabla(tEmpleado.generarTabla(), tEmpleado.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado el empleado");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());

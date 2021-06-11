@@ -21,7 +21,7 @@ import Model.ModeloTablaEditable;
 import Model.Observer;
 import main.Mediator;
 
-public class MostrarHistorialProducto extends JFrame implements Observer{
+public class MostrarHistorialProducto extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -64,8 +64,6 @@ public class MostrarHistorialProducto extends JFrame implements Observer{
 
 		mediator.listar("ControllerProducto");
 
-	
-
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 100));
 
 		botonCancelar.setText("Cancelar");
@@ -87,8 +85,6 @@ public class MostrarHistorialProducto extends JFrame implements Observer{
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-
-		mediator.cancelar();
 		new PantallaPrincipalProducto(mediator);
 		this.dispose();
 
@@ -97,14 +93,14 @@ public class MostrarHistorialProducto extends JFrame implements Observer{
 	@Override
 	public void onCorrectMessage(String msg) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onIncorrectMessage(String msg) {
 		// TODO Auto-generated method stub
 		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		
+
 	}
 
 	@Override
@@ -119,7 +115,7 @@ public class MostrarHistorialProducto extends JFrame implements Observer{
 		this.getContentPane().add(paneScroll, BorderLayout.CENTER);
 
 		this.validate();
-		
+
 	}
 
 }

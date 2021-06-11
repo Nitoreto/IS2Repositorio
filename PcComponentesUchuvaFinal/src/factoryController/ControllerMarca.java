@@ -21,7 +21,7 @@ public class ControllerMarca extends ObjectController {
 	public Boolean alta() {
 		try {
 			DAOm.alta(tMarca);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta la marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -33,7 +33,7 @@ public class ControllerMarca extends ObjectController {
 	public Boolean baja() {
 		try {
 			DAOm.baja(tMarca.getCIFMarca());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de baja el marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -45,7 +45,7 @@ public class ControllerMarca extends ObjectController {
 	public Boolean modificar(String CIFMarca) {
 		try {
 			DAOm.modificar(tMarca, CIFMarca);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificado la marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -58,7 +58,7 @@ public class ControllerMarca extends ObjectController {
 		try {
 			tMarca = DAOm.listar();
 			mediator.actualizarTabla(tMarca.generarTabla(), tMarca.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha lista la marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -71,7 +71,7 @@ public class ControllerMarca extends ObjectController {
 		try {
 			tMarca = DAOm.buscar(tMarca.getCIFMarca());
 			mediator.actualizarTabla(tMarca.generarTabla(), tMarca.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha ha buscado la marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -83,7 +83,7 @@ public class ControllerMarca extends ObjectController {
 	public Boolean desactivar() {
 		try {
 			DAOm.desactivar(tMarca.getCIFMarca());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado la marca");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());

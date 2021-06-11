@@ -22,7 +22,7 @@ public class ControllerCliente extends ObjectController {
 	public Boolean alta() {
 		try {
 			DAOc.alta(tCliente);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de alta el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -34,7 +34,7 @@ public class ControllerCliente extends ObjectController {
 	public Boolean baja() {
 		try {
 			DAOc.baja(tCliente.getDNI());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha dado de baja el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -46,7 +46,7 @@ public class ControllerCliente extends ObjectController {
 	public Boolean modificar(String DNI) {
 		try {
 			DAOc.modificar(tCliente, DNI);
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha modificiado el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -59,7 +59,7 @@ public class ControllerCliente extends ObjectController {
 		try {
 			tCliente = DAOc.listar();
 			mediator.actualizarTabla(tCliente.generarTabla(), tCliente.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha listado el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -72,7 +72,7 @@ public class ControllerCliente extends ObjectController {
 		try {
 			tCliente = DAOc.buscar(tCliente.getDNI());
 			mediator.actualizarTabla(tCliente.generarTabla(), tCliente.generarTitulos());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha buscado el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
@@ -85,7 +85,7 @@ public class ControllerCliente extends ObjectController {
 	public Boolean desactivar() {
 		try {
 			DAOc.desactivar(tCliente.getDNI());
-			mediator.avisarCorrecto();
+			mediator.avisarCorrecto("Se ha desactivado el cliente");
 			return true;
 		} catch (Exception e) {
 			mediator.avisarError(e.getMessage());
