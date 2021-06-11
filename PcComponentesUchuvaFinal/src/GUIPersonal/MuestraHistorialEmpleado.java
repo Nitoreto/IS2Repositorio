@@ -43,9 +43,10 @@ public class MuestraHistorialEmpleado extends JFrame implements Observer{
 
 	private Mediator mediator;
 
-	public MuestraHistorialEmpleado(Mediator controlador) {
+	public MuestraHistorialEmpleado(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

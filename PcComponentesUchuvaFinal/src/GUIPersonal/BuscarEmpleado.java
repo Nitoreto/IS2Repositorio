@@ -45,6 +45,7 @@ public class BuscarEmpleado extends JFrame implements Observer {
 	public BuscarEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.mediator = controlador;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

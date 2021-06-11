@@ -33,6 +33,7 @@ public class ListaEmpleados extends JFrame implements Observer{
 	public ListaEmpleados(Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.mediator = controlador;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

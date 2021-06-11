@@ -45,9 +45,10 @@ public class AltaProducto extends JFrame implements Observer{
 	private JButton botonCancelar;
 	private Mediator mediator;
 
-	public AltaProducto(Mediator controlador) {
+	public AltaProducto(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -112,7 +113,7 @@ public class AltaProducto extends JFrame implements Observer{
 		panelDatos.add(campoNombre);
 		
 		textoNombreMarca.setEditable(false);
-		textoNombreMarca.setText("ControllerMarca");
+		textoNombreMarca.setText("Nombre Marca");
 		textoNombreMarca.setForeground(Color.pink);
 		textoNombreMarca.setFocusable(false);
 		textoNombreMarca.setFont(new Font("Consolas", 4, 80));

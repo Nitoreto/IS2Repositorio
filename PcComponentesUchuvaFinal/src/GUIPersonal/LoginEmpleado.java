@@ -9,13 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import main.Mediator;
+
 public class LoginEmpleado extends JFrame {
 
-    
+    Mediator mediator;
     
     // metodo constructor    
-    public LoginEmpleado() {
-        
+    public LoginEmpleado(Mediator mediator) {
+        this.mediator = mediator;
         initGUI();
         // lo utilizamos para centrar la ventana jframe en pantalla
         this.setLocationRelativeTo(null);
@@ -169,13 +171,4 @@ public class LoginEmpleado extends JFrame {
     public javax.swing.JPasswordField txt_pass;
     public javax.swing.JTextField txt_user;
     // End of variables declaration//GEN-END:variables
-    
-    
-    
-    public static void main(String[] args) {
-
-		LoginEmpleado t1 = new LoginEmpleado();
-		
-
-	}
 }

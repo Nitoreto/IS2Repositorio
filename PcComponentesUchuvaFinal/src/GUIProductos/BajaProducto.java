@@ -35,9 +35,10 @@ public class BajaProducto extends JFrame implements Observer{
 	private JButton botonCancelar;
 	private Mediator mediator;
 
-	public BajaProducto(Mediator controlador) {
+	public BajaProducto(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

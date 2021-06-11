@@ -16,19 +16,21 @@ public class TransferEmpleado extends Transfer {
 	public TransferEmpleado(String[] datos) throws Exception {
 		switch (datos.length) {
 		case 8:
-			try {
-				idSucursal = Integer.parseInt(datos[7]);
-			} catch (NumberFormatException e) {
-				throw new Exception("Formato del sueldo incorrecto, solo numeros");
-			}
-		case 7:
-			if (datos[6].equals("1")) {
+			if (datos[7].equals("1")) {
 				activo = true;
 			} else if (datos[6].equals("0")) {
 				activo = false;
 			} else {
 				throw new Exception("Formato del campo activo incorrecto");
 			}
+			
+		case 7:
+			try {
+				idSucursal = Integer.parseInt(datos[6]);
+			} catch (NumberFormatException e) {
+				throw new Exception("Formato del sueldo incorrecto, solo numeros");
+			}
+			
 		case 6:
 			try {
 				sueldo = Integer.parseInt(datos[5]);

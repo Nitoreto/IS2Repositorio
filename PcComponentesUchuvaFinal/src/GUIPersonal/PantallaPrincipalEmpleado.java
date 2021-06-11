@@ -30,9 +30,10 @@ public class PantallaPrincipalEmpleado extends JFrame implements Observer{
 	private JButton botonMostrarHistorial;
 	private Mediator mediator;
 
-	public PantallaPrincipalEmpleado(Mediator controlador) {
+	public PantallaPrincipalEmpleado(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

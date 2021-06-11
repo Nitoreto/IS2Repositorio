@@ -19,7 +19,7 @@ import javax.swing.WindowConstants;
 import Model.Observer;
 import main.Mediator;
 
-public class AnadirEmpleado extends JFrame implements Observer{
+public class AnadirEmpleado extends JFrame implements Observer {
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JPanel panelDatos;
@@ -29,8 +29,8 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	private JTextField campoDNIEmpleado;
 	private JTextArea textoNombre;
 	private JTextField campoNombre;
-	private JTextArea textoApellido;
-	private JTextField campoApellido;
+	private JTextArea textoIdSucursal;
+	private JTextField campoIdSucursal;
 	private JTextArea textoDireccion;
 	private JTextField campoDireccion;
 	private JTextArea textoTelefono;
@@ -43,9 +43,10 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	private JButton botonCancelar;
 	private Mediator mediator;
 
-	public AnadirEmpleado(Mediator controlador) {
+	public AnadirEmpleado(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -62,9 +63,9 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		textoNombre = new JTextArea();
 		campoNombre = new JTextField();
 
-		textoApellido = new JTextArea();
-		campoApellido = new JTextField();
-		
+		textoIdSucursal = new JTextArea();
+		campoIdSucursal = new JTextField();
+
 		textoSueldo = new JTextArea();
 		campoSueldo = new JTextField();
 
@@ -81,7 +82,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		botonCancelar = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(1750, 650));
+		setPreferredSize(new Dimension(1750, 850));
 
 		textoAltaEmpleado.setEditable(false);
 		textoAltaEmpleado.setText("Alta ControllerEmpleado");
@@ -93,7 +94,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		panelMostrar.setLayout(new BorderLayout());
-		panelDatos.setLayout(new GridLayout(3, 2, 0, 15));
+		panelDatos.setLayout(new GridLayout(4, 2, 0, 15));
 
 		textoSueldo.setEditable(false);
 		textoSueldo.setText("Sueldo: ");
@@ -103,7 +104,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		panelDatos.add(textoSueldo);
 		campoSueldo.setFont(new Font("Consolas", 4, 80));
 		panelDatos.add(campoSueldo);
-		
+
 		textoPassword.setEditable(false);
 		textoPassword.setText("Password");
 		textoPassword.setForeground(Color.cyan);
@@ -124,15 +125,15 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		campoNombre.setFont(new Font("Consolas", 4, 80));
 		panelDatos.add(campoNombre);
 
-		textoApellido.setEditable(false);
-		textoApellido.setText("Apellidos");
-		textoApellido.setForeground(Color.cyan);
-		textoApellido.setFocusable(false);
-		textoApellido.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(textoApellido);
+		textoIdSucursal.setEditable(false);
+		textoIdSucursal.setText("IdSucursal");
+		textoIdSucursal.setForeground(Color.cyan);
+		textoIdSucursal.setFocusable(false);
+		textoIdSucursal.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoIdSucursal);
 
-		campoApellido.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(campoApellido);
+		campoIdSucursal.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(campoIdSucursal);
 
 		textoDNIEmpleado.setEditable(false);
 		textoDNIEmpleado.setText("DNI");
@@ -197,8 +198,8 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	}
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
-		String[] datos = { campoPassword_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
-				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), "1"};
+		String[] datos = { campoDNIEmpleado.getText(), campoNombre.getText(), campoPassword_Empleado.getText(),
+				campoDireccion.getText(), campoTelefono.getText(), campoSueldo.getText(),"1", campoIdSucursal.getText(), "1" };
 		mediator.alta("ControllerEmpleado", datos);
 
 	}
@@ -224,7 +225,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	@Override
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -44,9 +44,10 @@ public class MostrarProducto extends JFrame implements Observer {
 
 	private Mediator mediator;
 
-	public MostrarProducto(Mediator controlador) {
+	public MostrarProducto(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
