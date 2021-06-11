@@ -4,16 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import Transfer.Transfer;
-
 import java.sql.ResultSet;
 
 public class Conexion extends SingletonConexion{
 
 	protected Connection conexion;
 	protected Statement statement;
-	protected Transfer transfer;
 
 	public Conexion()throws SQLException {
 		conexion = DriverManager.getConnection(
