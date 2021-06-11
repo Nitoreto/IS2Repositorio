@@ -15,9 +15,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 
-public class AltaProducto extends JFrame {
+public class AltaProducto extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JPanel panelDatos;
@@ -42,11 +43,11 @@ public class AltaProducto extends JFrame {
 
 	private JButton botonGuardar;
 	private JButton botonCancelar;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public AltaProducto(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -176,18 +177,31 @@ public class AltaProducto extends JFrame {
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] Datos = { campoID.getText(), campoNombre.getText(), campoNombreMarca.getText(),
 				campoDescripcion.getText(), campoPrecio.getText(), };
-		String inf = controlador.alta("ControllerProducto", Datos);
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido añadir a la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-		}
+		mediator.alta("ControllerProducto", Datos);
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalProducto(controlador);
+		new PantallaPrincipalProducto(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido aï¿½adir a la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

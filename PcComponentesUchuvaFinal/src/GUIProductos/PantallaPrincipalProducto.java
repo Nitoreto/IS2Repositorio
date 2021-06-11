@@ -13,10 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
 
-public class PantallaPrincipalProducto extends JFrame {
+public class PantallaPrincipalProducto extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -26,11 +27,11 @@ public class PantallaPrincipalProducto extends JFrame {
 	private JButton botonMostrarHistorial;
 	private JButton botonMostrar;
 	private JButton botonVolver;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public PantallaPrincipalProducto(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -127,30 +128,48 @@ public class PantallaPrincipalProducto extends JFrame {
 	}
 
 	protected void botonVolverActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalPccomponentes(controlador);
+		new PantallaPrincipalPccomponentes(mediator);
 		this.dispose();
 
 	}
 
 	
 	private void botonAltaActionPerformed(ActionEvent evt) {
-		new AltaProducto(controlador);
+		new AltaProducto(mediator);
 		this.dispose();
 	}
 
 	private void botonBajaActionPerformed(ActionEvent evt) {
-		new BajaProducto(controlador);
+		new BajaProducto(mediator);
 		this.dispose();
 	}
 
 	private void botonMostrarHistorialActionPerformed(ActionEvent evt) {
-		new MostrarHistorialProducto(controlador);
+		new MostrarHistorialProducto(mediator);
 		this.dispose();
 	}
 
 	private void botonMostrarActionPerformed(ActionEvent evt) {
-		new MostrarProducto(controlador);
+		new MostrarProducto(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
