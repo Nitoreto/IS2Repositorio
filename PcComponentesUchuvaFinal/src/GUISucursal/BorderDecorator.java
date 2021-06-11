@@ -40,12 +40,16 @@ public class BorderDecorator extends JPanel{
 		
 		this.centerpanel.add(Box.createRigidArea(new Dimension(5, 5)));
 	}
-	public String[] getData() {
+	public ArrayList<String> getData() {
 		Component component[] = this.centerpanel.getComponents();
 		int i = component.length;
-		String[] strings = new String[i-1];
-		for(int j = 1; j < i; j++) {
-			strings[j] = this.getComponent(j).getName();
+		ArrayList<String> strings = new ArrayList<String>();
+		for(int j = 1; j < i -1; j++) {
+			if(component[j].getClass().toString().equals("class javax.swing.JTextField")) {
+				JTextField texto =  (JTextField) component[j];
+				strings.add(texto.getText());
+			}
+			
 		}
 		return strings;
 	}

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,17 +72,11 @@ public class AltaSucursalDec extends JFrame implements Observer{
 		int input = JOptionPane.showConfirmDialog(null, 
                 "Se ha realizado la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
 	}
-	private void botonGuardarActionPerformed(ActionEvent evt) {
-		String[] datos = mainPanel.getData();
-		m.alta("ControllerVenta", datos);
-		new PantallaPrincipalVentas(m);
-		this.dispose();
-	}
+	
 	@Override
 	public void onIncorrectMessage(String msg) {
 		// TODO Auto-generated method stub
-		int input = JOptionPane.showConfirmDialog(null, 
-                "No se ha podido realizar la operacion correctamente", msg,JOptionPane.DEFAULT_OPTION);
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL INSERTAR", JOptionPane.ERROR_MESSAGE);
 		
 	}
 	@Override
@@ -94,9 +89,10 @@ public class AltaSucursalDec extends JFrame implements Observer{
 		this.dispose();
 	}
 	public void botonAltaActionPerformed() {
-		String[] datos = mainPanel.getData();
-		
-		new PantallaPrincipalSucursal(m);
-		this.dispose();
+		ArrayList<String> datos = mainPanel.getData();
+		datos.add("1");
+		String[] arr = new String[datos.size()];
+	    arr = datos.toArray(arr);
+		m.alta("ControllerSucursal", arr);
 	}
 }
