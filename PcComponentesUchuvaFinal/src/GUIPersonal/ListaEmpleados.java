@@ -30,9 +30,9 @@ public class ListaEmpleados extends JFrame implements Observer{
 	private Mediator mediator;
 	private ModeloTablaEditable model;
 
-	public ListaEmpleados(Mediator controlador) {
+	public ListaEmpleados(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
 		mediator.asignarObserver(this);
 		initComponents();
 	}

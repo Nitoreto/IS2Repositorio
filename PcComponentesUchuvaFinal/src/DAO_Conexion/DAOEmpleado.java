@@ -19,12 +19,13 @@ public class DAOEmpleado {
 			throw new Exception("Campo DNI esta vacio");
 		}
 		String query = "INSERT into Personal (DNI, Nombre, Contrasena, Direccion, Telefono, Sueldo, Activo) VALUES ('"
-				+ tEmpleado.getDNI() + "', '" + tEmpleado.getNombre() + "', " + tEmpleado.getPassword() + ", '"
+				+ tEmpleado.getDNI() + "', '" + tEmpleado.getNombre() + "', '" + tEmpleado.getPassword() + "', '"
 				+ tEmpleado.getDir() + "', " + tEmpleado.getNumero() + ", " + tEmpleado.getSueldo() + ", "
 				+ tEmpleado.getActivo() + ")";
 
-		String query1 = "INSERT into Contratado (DNI, IDs) VALUES (' " + tEmpleado.getDNI() + "', "
-				+ tEmpleado.getIdSucursal() + ")";
+		String query1 = "INSERT into Contratado (DNI, IDs) VALUES ('" + tEmpleado.getDNI() + "', "
+				+ tEmpleado.getIdSucursal() + " )";
+		System.out.print(query1);
 		try {
 			conexion.conectarUpdate(query);
 			conexion.conectarUpdate(query1);

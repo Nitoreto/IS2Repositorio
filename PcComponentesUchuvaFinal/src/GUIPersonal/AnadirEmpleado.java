@@ -85,7 +85,7 @@ public class AnadirEmpleado extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1750, 850));
 
 		textoAltaEmpleado.setEditable(false);
-		textoAltaEmpleado.setText("Alta ControllerEmpleado");
+		textoAltaEmpleado.setText("Alta Empleado");
 		textoAltaEmpleado.setBackground(Color.cyan);
 		textoAltaEmpleado.setForeground(Color.white);
 		textoAltaEmpleado.setFocusable(false);
@@ -199,7 +199,7 @@ public class AnadirEmpleado extends JFrame implements Observer {
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoDNIEmpleado.getText(), campoNombre.getText(), campoPassword_Empleado.getText(),
-				campoDireccion.getText(), campoTelefono.getText(), campoSueldo.getText(),"1", campoIdSucursal.getText(), "1" };
+				campoDireccion.getText(), campoTelefono.getText(), campoSueldo.getText(), campoIdSucursal.getText(), "1" };
 		mediator.alta("ControllerEmpleado", datos);
 
 	}
