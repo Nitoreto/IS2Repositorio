@@ -15,10 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+import Model.Observer;
 import main.Mediator;
 import main.PantallaPrincipalPccomponentes;
 
-public class PantallaPrincipalEmpleado extends JFrame {
+public class PantallaPrincipalEmpleado extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 	private JTextArea textoEmpleado;
 	private JButton botonListar;
@@ -27,11 +28,11 @@ public class PantallaPrincipalEmpleado extends JFrame {
 	private JPanel panel;
 	private JButton botonVolver;
 	private JButton botonMostrarHistorial;
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public PantallaPrincipalEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -125,28 +126,46 @@ public class PantallaPrincipalEmpleado extends JFrame {
 	}
 
 	protected void botonVolverActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalPccomponentes(controlador);
+		new PantallaPrincipalPccomponentes(mediator);
 		this.dispose();
 
 	}
 
 	private void botonListarActionPerformed(ActionEvent evt) {
-		new ListaEmpleados(controlador);
+		new ListaEmpleados(mediator);
 		this.dispose();
 	}
 
 	private void botonAltaActionPerformed(ActionEvent evt) {
-		new AñadirEmpleado(controlador);
+		new AnadirEmpleado(mediator);
 		this.dispose();
 	}
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
-		new BuscarEmpleado(controlador);
+		new BuscarEmpleado(mediator);
 		this.dispose();
 	}
 
 	private void botonMostrarHistorialActionPerformed(ActionEvent evt) {
-		new MuestraHistorialEmpleado(controlador);
+		new MuestraHistorialEmpleado(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		
 	}
 }

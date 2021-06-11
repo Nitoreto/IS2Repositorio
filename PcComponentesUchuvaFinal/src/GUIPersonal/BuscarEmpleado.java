@@ -18,9 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class BuscarEmpleado extends JFrame {
+public class BuscarEmpleado extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -28,7 +30,7 @@ public class BuscarEmpleado extends JFrame {
 	private JPanel panelDatos;
 
 	private JTextArea textoBuscarEmpleado;
-
+	private ModeloTablaEditable model;
 	private JTextArea textoID;
 	private JTextField campoID;
 
@@ -38,11 +40,11 @@ public class BuscarEmpleado extends JFrame {
 	private JButton botonModifcar;
 	private JButton botonCancelar;
 
-	private Mediator controlador;
+	private Mediator mediator;
 
 	public BuscarEmpleado(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -122,54 +124,61 @@ public class BuscarEmpleado extends JFrame {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString(), tabla.getValueAt(0, 6).toString() };
-		String inf = controlador.modificar("ControllerEmpleado", datos, campoID.getText());
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-			this.campoID.setText(tabla.getValueAt(0, 0).toString());
-		}
+		mediator.modificar("ControllerEmpleado", datos, campoID.getText());
 
 	}
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoID.getText() };
-		String inf = controlador.buscar("ControllerEmpleado", datos);
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-
-			botonModifcar.setText("Modificar");
-			botonModifcar.setFont(new Font("Consolar", 8, 80));
-			botonModifcar.setForeground(Color.cyan);
-			botonModifcar.setContentAreaFilled(false);
-			botonModifcar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					botonModificarActionPerformed(evt);
-				}
-			});
-			panel.add(botonModifcar);
-
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			panelMostrar.add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-		}
+		mediator.buscar("ControllerEmpleado", datos);
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			this.dispose();
-			new PantallaPrincipalEmpleado(controlador);
-		}
+		mediator.cancelar();
+		
+		this.dispose();
+		new PantallaPrincipalEmpleado(mediator);
+		
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+		this.campoID.setText(tabla.getValueAt(0, 0).toString());
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+
+		botonModifcar.setText("Modificar");
+		botonModifcar.setFont(new Font("Consolar", 8, 80));
+		botonModifcar.setForeground(Color.cyan);
+		botonModifcar.setContentAreaFilled(false);
+		botonModifcar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonModificarActionPerformed(evt);
+			}
+		});
+		panel.add(botonModifcar);
+
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrar.add(paneScroll, BorderLayout.CENTER);
+		this.validate();
+		
 	}
 }
