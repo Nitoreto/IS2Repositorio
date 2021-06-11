@@ -38,6 +38,7 @@ public class EliminarCliente extends JFrame implements Observer{
 	public EliminarCliente(Mediator meditar) {
 		super("PCComponentes Uchuva");
 		this.mediator = meditar;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 

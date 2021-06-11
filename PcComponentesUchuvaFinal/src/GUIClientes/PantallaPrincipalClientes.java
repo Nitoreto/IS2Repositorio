@@ -25,11 +25,11 @@ public class PantallaPrincipalClientes extends JFrame {
 	private JButton botonListarClientes;
 	private JButton botonMostrar;
 	private JButton botonVolver;
-	private Mediator controlador;
+	private Mediator mediator;
 
-	public PantallaPrincipalClientes(Mediator controlador) {
+	public PantallaPrincipalClientes(Mediator meditaor) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = meditaor;
 		initComponents();
 	}
 
@@ -126,29 +126,29 @@ public class PantallaPrincipalClientes extends JFrame {
 	}
 	
 	protected void botonVolverActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalPccomponentes(controlador);
+		new PantallaPrincipalPccomponentes(mediator);
 		this.dispose();
 
 	}
 
 	private void botonListarClientesActionPerformed(ActionEvent evt) {
-		new ListarClientes(controlador);
+		new ListarClientes(mediator);
 		this.dispose();
 
 	}
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
-		new CrearCliente(controlador);
+		new CrearCliente(mediator);
 		this.dispose();
 	}
 
 	private void botonEliminarActionPerformed(ActionEvent evt) {
-		new EliminarCliente(controlador);
+		new EliminarCliente(mediator);
 		this.dispose();
 	}
 
 	private void botonMostrarActionPerformed(ActionEvent evt) {
-		new BuscarCliente(controlador);
+		new BuscarCliente(mediator);
 		this.dispose();
 	}
 

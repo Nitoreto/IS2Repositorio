@@ -31,6 +31,7 @@ public class ListarClientes extends JFrame implements Observer {
 	public ListarClientes(Mediator mediator) {
 		super("PCComponentes Uchuva");
 		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -48,7 +49,7 @@ public class ListarClientes extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoListarClientes.setEditable(false);
-		textoListarClientes.setText("Listar ControllerCliente");
+		textoListarClientes.setText("Listar Cliente");
 		textoListarClientes.setFocusable(false);
 		textoListarClientes.setBackground(Color.lightGray);
 		textoListarClientes.setForeground(Color.white);

@@ -43,6 +43,7 @@ public class CrearCliente extends JFrame implements Observer{
 	public CrearCliente(Mediator mediator) {
 		super("PCComponentes Uchuva");
 		this.mediator = mediator;
+		this.mediator.asignarObserver(this);
 		initComponents();
 	}
 
@@ -70,7 +71,7 @@ public class CrearCliente extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1250, 720));
 
 		textoAltaCliente.setEditable(false);
-		textoAltaCliente.setText("Alta ControllerCliente");
+		textoAltaCliente.setText("Alta Cliente");
 		textoAltaCliente.setBackground(Color.lightGray);
 		textoAltaCliente.setForeground(Color.white);
 		textoAltaCliente.setFocusable(false);
@@ -144,7 +145,7 @@ public class CrearCliente extends JFrame implements Observer{
 	}
 
 	private void botonCrearActionPerformed(ActionEvent evt) {
-		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText() };
+		String[] datos = { campoDNI.getText(), campoNombre.getText(), campoTelefono.getText(), "1" };
 		mediator.alta("ControllerCliente", datos);
 	}
 
