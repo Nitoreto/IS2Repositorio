@@ -18,9 +18,12 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Model.ModeloTabla;
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class ModificarBorrarVenta extends JFrame {
+public class ModificarBorrarVenta extends JFrame implements Observer{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel panelMostrar;
@@ -29,13 +32,14 @@ public class ModificarBorrarVenta extends JFrame {
 	private JButton botonModificar;
 	private JButton botonCancelar;
 	private String idVenta;
-	private Mediator controlador;
+	private Mediator mediator;
 	private JTable tabla;
+	private ModeloTablaEditable model;
 
 	public ModificarBorrarVenta(String idVenta, Mediator controlador) {
 		super("PCComponentes Uchuva");
 		this.idVenta = idVenta;
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponentes();
 	}
 
@@ -95,27 +99,17 @@ public class ModificarBorrarVenta extends JFrame {
 	
 	public void CrearTabla() {
 		String[] datos = {this.idVenta};
-		String inf = controlador.buscar("ControllerVenta", datos);
+		mediator.buscar("ControllerVenta", datos);
 
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		}
 
-		tabla = new JTable(controlador.actualizarTabla());
-		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-		tabla.setRowHeight(50);
-		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-		JScrollPane paneScroll = new JScrollPane(tabla);
-		panelMostrar.add(paneScroll, BorderLayout.CENTER);
-
-		this.validate();
+		
 	}
 
 	private void botonModificarActionPerformed(ActionEvent evt) {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
 				tabla.getValueAt(0, 5).toString() };
-		String inf = controlador.modificar("ControllerVenta", datos, idVenta);
+		String inf = mediator.modificar("ControllerVenta", datos, idVenta);
 
 		if (inf != "Exito") {
 			JOptionPane.showMessageDialog(null, "Error: " + inf, "ID no encontrado", JOptionPane.ERROR_MESSAGE);
@@ -126,8 +120,36 @@ public class ModificarBorrarVenta extends JFrame {
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		new PantallaPrincipalVentas(controlador);
+		new PantallaPrincipalVentas(mediator);
 		this.dispose();
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+		
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrar.add(paneScroll, BorderLayout.CENTER);
+
+		this.validate();
+		
 	}
 
 }
