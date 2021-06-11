@@ -124,7 +124,6 @@ public class ListarMarcas extends JFrame implements Observer{
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		mediator.cancelar();
 		this.dispose();
 		new PantallaPrincipalMarca(mediator);
 	}
