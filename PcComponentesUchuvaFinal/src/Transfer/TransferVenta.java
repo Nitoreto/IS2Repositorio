@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.Random;
 
 public class TransferVenta extends Transfer {
-	private int idVentas, idEmpleado, precioTotal;
-	private String DNICliente, listaProductos;
+	private int idVentas, idEmpleado, idSucursal, precioTotal;
+	private String DNICliente, listaProductos, fecha;
 	private Boolean activo;
 
 	public TransferVenta(ResultSet resultado) throws SQLException {
@@ -15,19 +15,27 @@ public class TransferVenta extends Transfer {
 
 	public TransferVenta(String[] datos) throws Exception {
 		switch (datos.length) {
-		case 6:
-			if (datos[5].equals("1")) {
+		case 8:
+			if (datos[7].equals("1")) {
 				activo = true;
-			} else if (datos[5].equals("0")) {
+			} else if (datos[7].equals("0")) {
 				activo = false;
 			} else {
 				throw new Exception("Formato del campo activo incorrecto");
 			}
+		case 7:
+			try {
+				idSucursal = Integer.parseInt(datos[6]);
+			} catch (NumberFormatException e) {
+				throw new Exception("Formato del id del sucursal incorrecto, solo numeros");
+			}
+		case 6:
+			fecha = datos[5];
 		case 5:
 			try {
 				this.precioTotal = Integer.parseInt(datos[4]);
 			} catch (NumberFormatException e) {
-				throw new Exception("Formato del precio total incorrecto, solo numero");
+				throw new Exception("Formato del precio total incorrecto, solo numeros");
 			}
 		case 4:
 			this.listaProductos = datos[3];
@@ -35,7 +43,7 @@ public class TransferVenta extends Transfer {
 			try {
 				this.idEmpleado = Integer.parseInt(datos[2]);
 			} catch (NumberFormatException e) {
-				throw new Exception("Formato del id de empleado incorrecto, solo numero");
+				throw new Exception("Formato del id de empleado incorrecto, solo numeros");
 			}
 		case 2:
 			this.DNICliente = datos[1];
@@ -46,7 +54,7 @@ public class TransferVenta extends Transfer {
 				try {
 					this.idVentas = Integer.parseInt(datos[0]);
 				} catch (NumberFormatException e) {
-					throw new Exception("Formato del id incorrecto, solo numero");
+					throw new Exception("Formato del id incorrecto, solo numeros");
 				}
 			}
 		}
@@ -66,7 +74,7 @@ public class TransferVenta extends Transfer {
 		return precioTotal;
 	}
 
-	public int getIdVentas() {
+	public int getIdVenta() {
 		return idVentas;
 	}
 
@@ -78,8 +86,16 @@ public class TransferVenta extends Transfer {
 		return listaProductos;
 	}
 
-	public int getActivo() {
+	public int isActivo() {
 		int valor = this.activo ? 1 : 0;
 		return valor;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public int getIdSucursal() {
+		return idSucursal;
 	}
 }

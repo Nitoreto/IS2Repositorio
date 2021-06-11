@@ -1,129 +1,124 @@
 package DAO_Conexion;
 
 import java.sql.SQLException;
-
-import Transfer.Transfer;
-import factoryController.ControllerVenta;
+import Transfer.TransferVenta;
 
 public class DAOVentas {
-	private String DNI, DNIEmpleado;
+	private SingletonConexion conexion;
 
-	public DAOVentas(ControllerVenta venta) {
-		super();
-
-	}
-
-	public String Desactivar() {
-		int row = -1;
+	public DAOVentas() throws Exception {
 		try {
-			String query = "UPDATE Venta SET Activo = 0 WHERE IDv = " + tVenta.getIdVentas();
-			row = super.conectarUpdate();
-		} catch (Exception e) {
-
-			return e.getMessage();
-		}
-		if (row == 0) {
-			return "ID no Encontrado";
-		}
-		return "Exito";
-	}
-
-	public String Eliminar() {
-		int row = -1;
-		try {
-			String query = "DELETE FROM Venta WHERE IDv = " + tVenta.getIdVentas();
-			String query1 = "DELETE FROM Realiza WHERE IDv = " + tVenta.getIdVentas();
-			String query2 = "DELETE FROM Gestiona WHERE IDv = " + tVenta.getIdVentas();
-			row = super.conectarUpdate();
-
-		} catch (Exception e) {
-
-			return e.getMessage();
-		}
-		if (row == 0) {
-			return "No se encuentra la venta con dicho ID";
-		}
-		return "Exito";
-	}
-
-	public String Listar() {
-		try {
-			String query = "SELECT * FROM Realiza WHERE DNI = '" + tVenta.getDNICliente() + "' ";
-			this.transfer = new Transfer(super.conectarExecute());
+			this.conexion = SingletonConexion.obtenerConexion();
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception("Error al conectar con la base de datos.");
 		}
-		return "Exito";
 	}
 
-	public String Modificar() {
-		int row = -1;
-
+	public Boolean desactivar(String ID) throws Exception {
 		try {
-			DNI = tVenta.getDNICliente();
-			idEmpleado = tVenta.getIdEmpleado();
-			String query = "UPDATE Venta SET IDv = " + tVenta.getIdVentas() + ", Importe = " + tVenta.getPrecioTotal()
-					+ ", Fecha = '" + tVenta.getFecha() + "', Activo = " + tVenta.isActivo() + " WHERE IDv = "
-					+ idVenta;
-
-			if (DNI.equals("")) {
-				throw new Exception("El campo DNI de cliente est� vac�o.");
+			int row = -1;
+			String query = "UPDATE Venta SET Activo = 0 WHERE IDv = " + ID;
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception("ID no Encontrado");
 			}
-			if (idEmpleado == -1) {
-				throw new Exception("El campo ID de ControllerEmpleado est� vac�o.");
-			}
-			row = super.conectarUpdate();
+		} catch (SQLException e) {
+			throw new Exception(e.getCause());
+		}
+		return true;
+	}
 
-		} catch (Exception e) {
+	public Boolean baja(String ID) throws Exception {
+		try {
+			int row = -1;
+			String query = "DELETE FROM Venta WHERE IDv = " + ID;
+			String query1 = "DELETE FROM Realiza WHERE IDv = " + ID;
+			String query2 = "DELETE FROM Gestiona WHERE IDv = " + ID;
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception("No se encuentra la venta con dicho ID");
+			}
+			row = conexion.conectarUpdate(query1);
+			row = conexion.conectarUpdate(query2);
+		} catch (SQLException e) {
+			throw new Exception(e.getCause());
+		}
+		return true;
+	}
+
+	public TransferVenta Listar() throws Exception {
+		try {
+			String query = "SELECT * FROM Venta";
+			TransferVenta tVenta = new TransferVenta(conexion.conectarExecute(query));
+			return tVenta;
+		} catch (SQLException e) {
+			throw new Exception(e.getCause());
+		}
+		
+	}
+
+	public Boolean Modificar(TransferVenta tVenta, String ID) throws Exception {
+		try {
+			int row = -1;
+			String query = "UPDATE Venta SET IDv = " + tVenta.getIdVenta() + ", Importe = " + tVenta.getPrecioTotal()
+					+ ", Fecha = '" + tVenta.getFecha() + "', Activo = " + tVenta.isActivo() + " WHERE IDv = " + ID;
+
+			if (tVenta.getDNICliente().equals("")) {
+				throw new Exception("El campo DNI de cliente esta vacio.");
+			}
+			if (tVenta.getIdEmpleado() == -1) {
+				throw new Exception("El campo ID de Empleado esta vacio.");
+			}
+			row = conexion.conectarUpdate(query);
+			if (row == 0) {
+				throw new Exception("No se encuentra dicho id de venta.");
+			}
+
+		} catch (SQLException e) {
 			if (e.getClass().getName()
 					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
-				return "No se encuentra ese cliente o empleado";
+				throw new Exception("No se encuentra ese cliente o empleado");
 			}
-			return e.getMessage();
 		}
-		if (row == 0) {
-			return "No se encuentra dicho id.";
-		}
-		return "Exito";
+
+		return true;
 	}
 
-	public String Mostrar() {
+	public TransferVenta buscar(String ID) throws Exception{
 		try {
-			String query = "SELECT * FROM Venta WHERE IDv = " + tVenta.getIdVentas();
-			this.transfer = new Transfer(super.conectarExecute());
+			String query = "SELECT * FROM Venta WHERE IDv = " + ID;
+			TransferVenta tVenta = new TransferVenta(conexion.conectarExecute(query));
+			return tVenta;
 		} catch (SQLException e) {
-			return e.getMessage();
+			throw new Exception(e.getCause());
 		}
-		return "Exito";
 	}
 
-	public String RegistrarVenta() {
-		int row = -1;
+	public Boolean Alta(TransferVenta tVenta) throws Exception{
+		
 		try {
-			DNI = tVenta.getDNICliente();
-			DNIEmpleado = tVenta.getDni();
+			int row = -1;
 			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVenta() + ", "
-					+ tVenta.getPrecioTotal + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
-			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + DNIEmpleado + "', "
-					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVentas() + ")";
-			String query2 = "INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + DNI + "')";
+					+ tVenta.getPrecioTotal() + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
+			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + tVenta.getIdEmpleado() + "', "
+					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVenta() + ")";
+			String query2 = "INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + tVenta.getDNICliente() + "')";
 			String query3 = "INSERT into Contiene (IDv, IDp) VALUES (" + tVenta.getIdVenta() + ", "
-					+ tVenta.getIdProducto() + ")";
-			if (DNI.equals("")) {
+					+ tVenta.getListaProductos() + ")";
+			if (tVenta.getDNICliente().equals("")) {
 				throw new Exception("El campo DNI cliente est� vac�o. ");
 			}
-			if (idEmpleado == -1) {
+			if (tVenta.getIdEmpleado() == -1) {
 				throw new Exception("El campo ID de ControllerEmpleado est� vac�o.");
 			}
-			row = super.conectarUpdate();
-
-		} catch (Exception e) {
-
-			return e.getMessage();
+			row = conexion.conectarUpdate();
+			if (row == 0) {
+				throw new Exception("Los campos estan vacios.");
+			}
+		} catch (SQLException e) {
+			throw new Exception(e.getCause());
 		}
-		if (row == 0) {
-			return "Los campos estan vacios.";
-		}
-		return "Exito";
+
+		return true;
 	}
 }

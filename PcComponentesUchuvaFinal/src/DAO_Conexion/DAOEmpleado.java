@@ -69,6 +69,8 @@ public class DAOEmpleado {
 			if (row == 0) {
 				throw new Exception("No se ha encontrado un empleado con ese DNI");
 			}
+			row = conexion.conectarUpdate(query1);
+			row = conexion.conectarUpdate(query2);
 			return true;
 		} catch (SQLException e) {
 			if (e.getClass().getName()
