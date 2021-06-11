@@ -18,9 +18,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import Model.ModeloTablaEditable;
+import Model.Observer;
 import main.Mediator;
 
-public class BuscarMarca extends JFrame {
+public class BuscarMarca extends JFrame implements Observer{
 	private static final long serialVersionUID = 1L;
 
 	private JPanel panel;
@@ -37,12 +39,12 @@ public class BuscarMarca extends JFrame {
 	private JButton botonBuscar;
 	private JButton botonModifcar;
 	private JButton botonCancelar;
-
-	private Mediator controlador;
+	private ModeloTablaEditable model;
+	private Mediator mediator;
 
 	public BuscarMarca(Mediator controlador) {
 		super("PCComponentes Uchuva");
-		this.controlador = controlador;
+		this.mediator = controlador;
 		initComponents();
 	}
 
@@ -121,55 +123,60 @@ public class BuscarMarca extends JFrame {
 	private void botonModificarActionPerformed(ActionEvent evt) {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString() };
-		String inf = controlador.modificar("ControllerMarca", datos, campoCIF.getText());
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL Modificar", JOptionPane.ERROR_MESSAGE);
-		} else {
-			JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
-					JOptionPane.INFORMATION_MESSAGE);
-			this.campoCIF.setText((String) tabla.getValueAt(0, 0));
-		}
+		mediator.modificar("ControllerMarca", datos, campoCIF.getText());
 
 	}
 
 	private void botonBuscarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoCIF.getText() };
-		String inf = controlador.buscar("ControllerMarca", datos);
+		mediator.buscar("ControllerMarca", datos);
 
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
-
-			botonModifcar.setText("Modificar");
-			botonModifcar.setFont(new Font("Arial", 1, 80));
-			botonModifcar.setContentAreaFilled(false);
-			botonModifcar.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-					botonModificarActionPerformed(evt);
-				}
-			});
-			panel.add(botonModifcar);
-
-			tabla = new JTable(controlador.actualizarTabla());
-			tabla.setFont(new java.awt.Font("Consolas", 4, 40));
-			tabla.setRowHeight(50);
-			tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
-			JScrollPane paneScroll = new JScrollPane(tabla);
-			panelMostrar.add(paneScroll, BorderLayout.CENTER);
-			this.validate();
-		}
 
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {
-		String inf = controlador.cancelar();
-
-		if (inf != "Exito") {
-			JOptionPane.showMessageDialog(null, "Error: " + inf, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
-		} else {
 			this.dispose();
-			new PantallaPrincipalMarca(controlador);
-		}
+			new PantallaPrincipalMarca(mediator);
+		
+	}
+
+	@Override
+	public void onCorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Se ha podido modificar la base de datos ", "Exito",
+				JOptionPane.INFORMATION_MESSAGE);
+		this.campoCIF.setText((String) tabla.getValueAt(0, 0));
+	}
+
+	@Override
+	public void onIncorrectMessage(String msg) {
+		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Error: " + msg, "ERROR AL CONECTAR", JOptionPane.ERROR_MESSAGE);
+	}
+
+	@Override
+	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
+		// TODO Auto-generated method stub
+
+		botonModifcar.setText("Modificar");
+		botonModifcar.setFont(new Font("Arial", 1, 80));
+		botonModifcar.setContentAreaFilled(false);
+		botonModifcar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonModificarActionPerformed(evt);
+			}
+		});
+		panel.add(botonModifcar);
+		model = new ModeloTablaEditable(generarTabla, generarTitulo);
+
+		tabla = new JTable(model);
+		tabla.setFont(new java.awt.Font("Consolas", 4, 40));
+		tabla.setRowHeight(50);
+		tabla.getTableHeader().setFont(new java.awt.Font("Consolas", 2, 50));
+		JScrollPane paneScroll = new JScrollPane(tabla);
+		panelMostrar.add(paneScroll, BorderLayout.CENTER);
+		this.validate();
+		
 	}
 }
