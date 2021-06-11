@@ -14,7 +14,7 @@ public class DAOVentas {
 		}
 	}
 
-	public Boolean desactivar(String ID) throws Exception {
+	public Boolean desactivar(int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "UPDATE Venta SET Activo = 0 WHERE IDv = " + ID;
@@ -28,7 +28,7 @@ public class DAOVentas {
 		return true;
 	}
 
-	public Boolean baja(String ID) throws Exception {
+	public Boolean baja(int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "DELETE FROM Venta WHERE IDv = " + ID;
@@ -46,7 +46,7 @@ public class DAOVentas {
 		return true;
 	}
 
-	public TransferVenta Listar() throws Exception {
+	public TransferVenta listar() throws Exception {
 		try {
 			String query = "SELECT * FROM Venta";
 			TransferVenta tVenta = new TransferVenta(conexion.conectarExecute(query));
@@ -54,10 +54,9 @@ public class DAOVentas {
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}
-		
 	}
 
-	public Boolean Modificar(TransferVenta tVenta, String ID) throws Exception {
+	public Boolean modificar(TransferVenta tVenta, int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "UPDATE Venta SET IDv = " + tVenta.getIdVenta() + ", Importe = " + tVenta.getPrecioTotal()
@@ -84,7 +83,7 @@ public class DAOVentas {
 		return true;
 	}
 
-	public TransferVenta buscar(String ID) throws Exception{
+	public TransferVenta buscar(int ID) throws Exception{
 		try {
 			String query = "SELECT * FROM Venta WHERE IDv = " + ID;
 			TransferVenta tVenta = new TransferVenta(conexion.conectarExecute(query));
@@ -94,7 +93,7 @@ public class DAOVentas {
 		}
 	}
 
-	public Boolean Alta(TransferVenta tVenta) throws Exception{
+	public Boolean alta(TransferVenta tVenta) throws Exception{
 		
 		try {
 			int row = -1;
@@ -111,10 +110,13 @@ public class DAOVentas {
 			if (tVenta.getIdEmpleado() == -1) {
 				throw new Exception("El campo ID de ControllerEmpleado est� vac�o.");
 			}
-			row = conexion.conectarUpdate();
+			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("Los campos estan vacios.");
 			}
+			conexion.conectarUpdate(query1);
+			conexion.conectarUpdate(query2);
+			conexion.conectarUpdate(query3);
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}

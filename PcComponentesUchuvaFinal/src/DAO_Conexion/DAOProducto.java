@@ -29,7 +29,7 @@ public class DAOProducto {
 		return true;
 	}
 
-	public Boolean baja(String ID) throws Exception {
+	public Boolean baja(int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "DELETE FROM Product WHERE IDp = " + ID;
@@ -61,7 +61,7 @@ public class DAOProducto {
 
 	}
 
-	public Boolean desactivar(String ID) throws Exception {
+	public Boolean desactivar(int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "UPDATE Product SET Activo = 0 WHERE IDp = " + ID;
@@ -75,7 +75,7 @@ public class DAOProducto {
 		return true;
 	}
 
-	public Boolean modificar(TransferProducto tProducto, String ID) throws Exception {
+	public Boolean modificar(TransferProducto tProducto, int ID) throws Exception {
 		try {
 			int row = -1;
 			String query = "UPDATE Product SET IDp = " + tProducto.getID() + ", Marca = '" + tProducto.getNombreMarca()
@@ -106,7 +106,7 @@ public class DAOProducto {
 		}
 	}
 
-	public TransferProducto MostrarHistorialProducto(String ID) throws Exception{
+	public TransferProducto mostrarHistorialProducto(int ID) throws Exception{
 
 		try {
 			String query = "SELECT * FROM Have h JOIN Product p ON h.IDp = p.IDp WHERE IDp = " + ID;
@@ -117,7 +117,7 @@ public class DAOProducto {
 		}
 	}
 
-	public TransferProducto Buscar(String ID) throws Exception{
+	public TransferProducto buscar(int ID) throws Exception{
 		try {
 			String query = "SELECT * FROM Product WHERE IDp = " + ID;
 			TransferProducto tProducto = new TransferProducto(conexion.conectarExecute(query));	

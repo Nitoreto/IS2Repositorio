@@ -19,7 +19,6 @@ public class ControllerProducto extends ObjectController {
 		this.tProducto = new TransferProducto(datos);		
 	}
 	
-
 	@Override
 	public Boolean alta() {
 		try {
@@ -47,7 +46,7 @@ public class ControllerProducto extends ObjectController {
 	@Override
 	public Boolean modificar(String ID) {
 		try {
-			DAOp.modificar(tProducto, ID);
+			DAOp.modificar(tProducto, Integer.parseInt(ID));
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {

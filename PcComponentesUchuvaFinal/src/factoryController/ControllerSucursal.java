@@ -33,7 +33,7 @@ public class ControllerSucursal extends ObjectController{
 	@Override
 	public Boolean baja() {
 		try {
-			DAOs.baja(tSucursal.getDNI());
+			DAOs.baja(tSucursal.getID());
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {
@@ -43,9 +43,9 @@ public class ControllerSucursal extends ObjectController{
 	}
 
 	@Override
-	public Boolean modificar(String DNI) {
+	public Boolean modificar(String ID) {
 		try {
-			DAOs.modificar(tSucursal, DNI);
+			DAOs.modificar(tSucursal, ID);
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class ControllerSucursal extends ObjectController{
 	@Override
 	public Boolean buscar() {
 		try {
-			tSucursal = DAOs.buscar(tSucursal.getDNI());
+			tSucursal = DAOs.buscar(tSucursal.getID());
 			mediator.actualizarTabla(tSucursal.generarTabla(), tSucursal.generarTitulos());
 			mediator.avisarCorrecto();
 			return true;
@@ -84,7 +84,7 @@ public class ControllerSucursal extends ObjectController{
 	@Override
 	public Boolean desactivar() {
 		try {
-			DAOs.desactivar(tSucursal.getDNI());
+			DAOs.desactivar(tSucursal.getID());
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {

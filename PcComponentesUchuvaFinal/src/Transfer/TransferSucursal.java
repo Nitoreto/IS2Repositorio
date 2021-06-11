@@ -31,10 +31,14 @@ public class TransferSucursal extends Transfer {
 		case 2:
 			direccion = datos[1];
 		case 1:
-			try {
-				ID = Integer.parseInt(datos[0]);
-			} catch (NumberFormatException e) {
-				throw new Exception("Formato del telefono incorrecto, solo numero");
+			if (datos[0].equalsIgnoreCase("rand")) {
+				ID = idRandom();
+			} else {
+				try {
+					ID = Integer.parseInt(datos[0]);
+				} catch (NumberFormatException e) {
+					throw new Exception("Formato del telefono incorrecto, solo numero");
+				}
 			}
 		}
 	}

@@ -17,25 +17,21 @@ public class DAOSucursal {
 	public TransferSucursal buscar(int id) throws Exception {
 		try {
 			String query = "SELECT * FROM Cliente WHERE DNI = '" + id + "'";
-			TransferCliente tCliente = new TransferCliente(conexion.conectarExecute(query));
-			return tCliente;
+			TransferSucursal tSucursal = new TransferSucursal(conexion.conectarExecute(query));
+			return tSucursal;
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}
 	}
 
-	public Boolean alta(TransferSucursal tCSucursal) throws Exception {
-		if (tCliente.equals("")) {
-			throw new Exception("Campo ID esta vacio");
-		}
-		String query = "INSERT into Sucursal (IDs, Direccion, Telefono, Activo) VALUES (" + tCliente.getId() + ", '"
-				+ tCliente.getDireccion() + "', " + tCliente.getTelefono() + ", " + tCliente.isActivo() + ")";
+	public Boolean alta(TransferSucursal tSucursal) throws Exception {
+		String query = "INSERT into Sucursal (IDs, Direccion, Telefono, Activo) VALUES (" + tSucursal.getID() + ", '"
+				+ tSucursal.getDireccion() + "', " + tSucursal.getTelefono() + ", " + tSucursal.isActivo() + ")";
 		try {
 			conexion.conectarUpdate(query);
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}
-
 		return true;
 	}
 
@@ -57,7 +53,6 @@ public class DAOSucursal {
 			}
 			return false;
 		}
-
 	}
 
 	public Boolean desactivar(int id) throws Exception {
@@ -77,19 +72,19 @@ public class DAOSucursal {
 	public TransferSucursal listar() throws Exception {
 		try {
 			String query = "SELECT * FROM Sucursal";
-			TransferCliente tCliente = new TransferCliente(conexion.conectarExecute(query));
-			return tCliente;
+			TransferSucursal tSucursal = new TransferSucursal(conexion.conectarExecute(query));
+			return tSucursal;
 		} catch (SQLException e) {
 			throw new Exception(e.getCause());
 		}
 	}
 
-	public Boolean modificar(TransferSucursal tSucursal, int id) throws Exception {
+	public Boolean modificar(TransferSucursal tSucursal, String ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Sucursal SET Ids = " + tSucursal.getId() + ", Direccion = '"
+			String query = "UPDATE Sucursal SET Ids = " + tSucursal.getID() + ", Direccion = '"
 					+ tSucursal.getDireccion() + "', Telefono = " + tSucursal.getTelefono() + ", Activo = "
-					+ tSucursal.isActivo() + " WHERE DNI = '" + id + "'";
+					+ tSucursal.isActivo() + " WHERE DNI = '" + ID + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("Sucursal no encontrada");

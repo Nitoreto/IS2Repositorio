@@ -3,6 +3,7 @@ package Transfer;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class Transfer {
 
@@ -53,5 +54,10 @@ public class Transfer {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	protected int idRandom() {
+		Random r = new Random();
+		return r.nextInt(1000000);
 	}
 }

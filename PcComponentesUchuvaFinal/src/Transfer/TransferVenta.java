@@ -61,11 +61,6 @@ public class TransferVenta extends Transfer {
 
 	}
 
-	private int idRandom() {
-		Random r = new Random();
-		return r.nextInt(1000000);
-	}
-
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}

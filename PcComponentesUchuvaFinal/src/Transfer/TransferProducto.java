@@ -15,7 +15,7 @@ public class TransferProducto extends Transfer {
 
 	public TransferProducto(String[] datos) throws Exception {
 		switch (datos.length) {
-		case 7: 
+		case 7:
 			idSucursal = Integer.parseInt(datos[6]);
 		case 6:
 			if (datos[5].equals("1")) {
@@ -38,11 +38,14 @@ public class TransferProducto extends Transfer {
 		case 2:
 			nombre = datos[1];
 		case 1:
-			try {
-				ID = Integer.parseInt(datos[0]);
-			} catch (NumberFormatException e) {
-				throw new Exception("Formato del sueldo incorrecto, solo numeros");
-			}
+			if (datos[0].equalsIgnoreCase("rand")) {
+				ID = idRandom();
+			} else
+				try {
+					ID = Integer.parseInt(datos[0]);
+				} catch (NumberFormatException e) {
+					throw new Exception("Formato del sueldo incorrecto, solo numeros");
+				}
 		}
 	}
 

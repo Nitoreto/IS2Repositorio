@@ -33,7 +33,7 @@ public class ControllerVenta extends ObjectController {
 	@Override
 	public Boolean baja() {
 		try {
-			DAOv.baja(tVenta.getDNI());
+			DAOv.baja(tVenta.getIdVenta());
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {
@@ -43,9 +43,9 @@ public class ControllerVenta extends ObjectController {
 	}
 
 	@Override
-	public Boolean modificar(String DNI) {
+	public Boolean modificar(String ID) {
 		try {
-			DAOv.modificar(tVenta, DNI);
+			DAOv.modificar(tVenta, Integer.parseInt(ID));
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {
@@ -70,7 +70,7 @@ public class ControllerVenta extends ObjectController {
 	@Override
 	public Boolean buscar() {
 		try {
-			tVenta = DAOv.buscar(tVenta.getDNI());
+			tVenta = DAOv.buscar(tVenta.getIdVenta());
 			mediator.actualizarTabla(tVenta.generarTabla(), tVenta.generarTitulos());
 			mediator.avisarCorrecto();
 			return true;
@@ -84,7 +84,7 @@ public class ControllerVenta extends ObjectController {
 	@Override
 	public Boolean desactivar() {
 		try {
-			DAOv.desactivar(tVenta.getDNI());
+			DAOv.desactivar(tVenta.getIdVenta());
 			mediator.avisarCorrecto();
 			return true;
 		} catch (Exception e) {
