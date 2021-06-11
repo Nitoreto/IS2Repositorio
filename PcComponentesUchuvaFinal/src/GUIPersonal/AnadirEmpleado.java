@@ -35,6 +35,8 @@ public class AnadirEmpleado extends JFrame implements Observer{
 	private JTextField campoDireccion;
 	private JTextArea textoTelefono;
 	private JTextField campoTelefono;
+	private JTextArea textoSueldo;
+	private JTextField campoSueldo;
 	private JTextArea textoPassword;
 	private JTextField campoPassword_Empleado;
 	private JButton botonGuardar;
@@ -62,6 +64,9 @@ public class AnadirEmpleado extends JFrame implements Observer{
 
 		textoApellido = new JTextArea();
 		campoApellido = new JTextField();
+		
+		textoSueldo = new JTextArea();
+		campoSueldo = new JTextField();
 
 		textoDireccion = new JTextArea();
 		campoDireccion = new JTextField();
@@ -90,6 +95,15 @@ public class AnadirEmpleado extends JFrame implements Observer{
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(3, 2, 0, 15));
 
+		textoSueldo.setEditable(false);
+		textoSueldo.setText("Sueldo: ");
+		textoSueldo.setForeground(Color.cyan);
+		textoSueldo.setFocusable(false);
+		textoSueldo.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoSueldo);
+		campoSueldo.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(campoSueldo);
+		
 		textoPassword.setEditable(false);
 		textoPassword.setText("Password");
 		textoPassword.setForeground(Color.cyan);
@@ -184,7 +198,7 @@ public class AnadirEmpleado extends JFrame implements Observer{
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { campoPassword_Empleado.getText(), campoNombre.getText(), campoApellido.getText(),
-				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), };
+				campoDNIEmpleado.getText(), campoDireccion.getText(), campoTelefono.getText(), "1"};
 		mediator.alta("ControllerEmpleado", datos);
 
 	}

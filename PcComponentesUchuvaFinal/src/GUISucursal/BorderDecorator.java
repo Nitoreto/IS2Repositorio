@@ -8,12 +8,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import GUIVenta.PantallaPrincipalVentas;
 
 public class BorderDecorator extends JPanel{
 	JPanel centerpanel;
@@ -35,6 +39,15 @@ public class BorderDecorator extends JPanel{
 		this.centerpanel.add(c);
 		
 		this.centerpanel.add(Box.createRigidArea(new Dimension(5, 5)));
+	}
+	public String[] getData() {
+		Component component[] = this.centerpanel.getComponents();
+		int i = component.length;
+		String[] strings = new String[i-1];
+		for(int j = 1; j < i; j++) {
+			strings[j] = this.getComponent(j).getName();
+		}
+		return strings;
 	}
 	public void addJtext(String s) {
 		JTextField textoSucursal = new JTextField(s);

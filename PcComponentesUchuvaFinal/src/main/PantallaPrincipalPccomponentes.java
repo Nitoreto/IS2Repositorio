@@ -14,6 +14,7 @@ import GUIClientes.PantallaPrincipalClientes;
 import GUIMarca.PantallaPrincipalMarca;
 import GUIPersonal.PantallaPrincipalEmpleado;
 import GUIProductos.PantallaPrincipalProducto;
+import GUISucursal.PantallaPrincipalSucursal;
 import GUIVenta.PantallaPrincipalVentas;
 import main.Mediator;
 
@@ -27,6 +28,7 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 	private JButton botonMarcas;
 	private JButton botonClientes;
 	private JButton botonPersonal;
+	private JButton botonSucursal;
 	
 	private Mediator controlador;
 	
@@ -118,6 +120,18 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 			}
 		});
 		panel.add(botonVentas);
+		
+		botonSucursal.setText("Sucursal");
+		botonSucursal.setBackground(Color.white);
+		botonSucursal.setForeground(Color.orange);
+		botonSucursal.setFont(new Font("Consolas", 4, 80));
+		botonSucursal.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonSucursalActionPerformed(evt);
+			}
+		});
+		panel.add(botonSucursal);
 
 		this.getContentPane().add(panel);
 		this.pack();
@@ -125,6 +139,12 @@ public class PantallaPrincipalPccomponentes extends JFrame {
 		this.setVisible(true);
 
 	}
+	private void botonSucursalActionPerformed(ActionEvent evt) {
+		// llamar a ventas
+		new PantallaPrincipalSucursal(controlador);
+		this.dispose();
+	}
+
 
 	private void botonVentasActionPerformed(ActionEvent evt) {
 		// llamar a ventas
