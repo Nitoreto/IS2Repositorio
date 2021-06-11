@@ -1,7 +1,10 @@
 package GUISucursal;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -9,7 +12,9 @@ import Model.Observer;
 import main.Mediator;
 
 public class BajaSucursalDec extends JFrame implements Observer{
+	Mediator m;
 	public BajaSucursalDec(Mediator m) {
+		this.m = m;
 		initComponentes();
 		m.asignarObserver(this);
 	}
@@ -26,7 +31,16 @@ public class BajaSucursalDec extends JFrame implements Observer{
 		mainPanel.addTopLabel("Baja de sucursal");
 		mainPanel.addCp(new ButtonU("Dar De Baja"));
 		mainPanel.addJtext("ID");
-		mainPanel.addCp(new ButtonU("Volver"));
+
+		JButton volverButton = new JButton();
+		volverButton.setText("volver");
+		volverButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonCancelarActionPerformed();
+			}
+		});
+		mainPanel.addCp(volverButton);
 		
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
@@ -52,6 +66,10 @@ public class BajaSucursalDec extends JFrame implements Observer{
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void botonCancelarActionPerformed() {
+		new PantallaPrincipalSucursal(m);
+		this.dispose();
 	}
 
 }

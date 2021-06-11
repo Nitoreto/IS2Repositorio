@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
@@ -20,8 +21,9 @@ public class AltaSucursalDec extends JFrame implements Observer{
 	BorderDecorator mainPanel;
 	Mediator m;
 	public AltaSucursalDec(Mediator m) {
-		initComponentes();
 		this.m = m;
+		initComponentes();
+		
 		m.asignarObserver(this);
 	}
 	public void initComponentes() {
@@ -33,16 +35,29 @@ public class AltaSucursalDec extends JFrame implements Observer{
 		backGround.add(mainPanel, BorderLayout.CENTER);
 		this.setContentPane(backGround);
 		mainPanel.addTopLabel("Alta de sucursal");
-		ButtonU btn = new Button("Dar De Alta").addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				botonGuardarActionPerformed(evt);
-			}});
-		mainPanel.addCp();
+		
 		mainPanel.addJtext("Telefono");
 		mainPanel.addJtext("Ciudad");
 		mainPanel.addJtext("ID");
-		mainPanel.addCp(new ButtonU("Volver"));
+		JButton altaButton = new JButton();
+		altaButton.setText("alta");
+		altaButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonAltaActionPerformed();
+			}
+		});
+		mainPanel.addCp(altaButton);
+		JButton volverButton = new JButton();
+		volverButton.setText("volver");
+		volverButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonCancelarActionPerformed();
+			}
+		});
+		mainPanel.addCp(volverButton);
+		
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
 		this.setVisible(true);
@@ -73,5 +88,15 @@ public class AltaSucursalDec extends JFrame implements Observer{
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void botonCancelarActionPerformed() {
+		new PantallaPrincipalSucursal(m);
+		this.dispose();
+	}
+	public void botonAltaActionPerformed() {
+		String[] datos = mainPanel.getData();
+		
+		new PantallaPrincipalSucursal(m);
+		this.dispose();
 	}
 }

@@ -1,7 +1,10 @@
 package GUISucursal;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -16,7 +19,9 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 	private ModeloTablaEditable model;
 	private JTable _eventsTable;
 	BorderDecorator mainPanel;
+	Mediator m;
 	public listarEmpleadoSucursal(Mediator m) {
+		 this.m = m;
 		backGroundDecorator backGround = new backGroundDecorator();
 		backGround.setLayout(new BorderLayout());
 		mainPanel = new BorderDecorator();
@@ -39,7 +44,16 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 		mainPanel.addJtext("Id");
 		mainPanel.addCp(new ButtonU("Buscar"));
 		
-		mainPanel.addCp(new ButtonU("Volver"));
+
+		JButton volverButton = new JButton();
+		volverButton.setText("volver");
+		volverButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				botonCancelarActionPerformed();
+			}
+		});
+		mainPanel.addCp(volverButton);
 		mainPanel.setAlignmentX(CENTER_ALIGNMENT);
 		mainPanel.setAlignmentY(CENTER_ALIGNMENT);
 		this.setVisible(true);
@@ -66,6 +80,10 @@ public class listarEmpleadoSucursal extends JFrame implements Observer{
 		// TODO Auto-generated method stub
 		initComponentes(generarTabla, generarTitulo);
 		
+	}
+	public void botonCancelarActionPerformed() {
+		new PantallaPrincipalSucursal(m);
+		this.dispose();
 	}
 
 }
