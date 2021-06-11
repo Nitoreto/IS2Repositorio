@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Label;
 import java.awt.Rectangle;
 
@@ -12,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class BorderDecorator extends JPanel{
 	JPanel centerpanel;
@@ -33,6 +35,13 @@ public class BorderDecorator extends JPanel{
 		this.centerpanel.add(c);
 		
 		this.centerpanel.add(Box.createRigidArea(new Dimension(5, 5)));
+	}
+	public void addJtext(String s) {
+		JTextField textoSucursal = new JTextField(s);
+		textoSucursal.setOpaque(false);
+		textoSucursal.setFont(new Font("Consolas", 2, 50));
+		addCp(textoSucursal);
+		
 	}
 	public void addTopLabel(String s) {
 		JLabel label = new JLabel(s);
