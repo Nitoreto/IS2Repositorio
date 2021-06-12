@@ -62,7 +62,7 @@ public class BajaProducto extends JFrame implements Observer{
 		
 
 		textoBajaProducto.setEditable(false);
-		textoBajaProducto.setText("Baja ControllerProducto");
+		textoBajaProducto.setText("Baja Producto");
 		textoBajaProducto.setBackground(Color.pink);
 		textoBajaProducto.setForeground(Color.white);
 		textoBajaProducto.setFocusable(false);

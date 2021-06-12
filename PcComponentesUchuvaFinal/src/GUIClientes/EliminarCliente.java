@@ -60,7 +60,7 @@ public class EliminarCliente extends JFrame implements Observer{
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoCliente.setEditable(false);
-		textoCliente.setText("Baja ControllerCliente");
+		textoCliente.setText("Baja Cliente");
 		textoCliente.setBackground(Color.lightGray);
 		textoCliente.setForeground(Color.white);
 		textoCliente.setFocusable(false);
@@ -116,7 +116,7 @@ public class EliminarCliente extends JFrame implements Observer{
 	private void botonEliminarActionPerformed(ActionEvent evt) {
 		String[] opciones = { "Eliminar", "Desactivar" };
 		String[] Datos = { campoDNI.getText() };
-		int elecion = JOptionPane.showOptionDialog(null, "¿ Deseas borrarlo o desactivarlo ?", "Eliminar",
+		int elecion = JOptionPane.showOptionDialog(null, "ï¿½ Deseas borrarlo o desactivarlo ?", "Eliminar",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		if (elecion == 0) {
 			mediator.baja("ControllerCliente", Datos);

@@ -70,7 +70,7 @@ public class AltaMarca extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1280, 720));
 		
 		textoAltaMarca.setEditable(false);
-		textoAltaMarca.setText("Alta ControllerMarca");
+		textoAltaMarca.setText("Alta Marca");
 		textoAltaMarca.setFocusable(false);
 		textoAltaMarca.setBackground(Color.orange);
 		textoAltaMarca.setForeground(Color.white);
@@ -82,7 +82,7 @@ public class AltaMarca extends JFrame implements Observer{
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 
 		textoCifMarca.setEditable(false);
-		textoCifMarca.setText("CIF ControllerMarca");
+		textoCifMarca.setText("CIF Marca");
 		textoCifMarca.setForeground(Color.orange);
 		textoCifMarca.setFocusable(false);
 		textoCifMarca.setFont(new Font("Consolas", 4, 80));

@@ -128,7 +128,6 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoFecha.setFont(new Font("Consolas", 4, 80));
 
 		panelDatos.add(textoCampoFecha);
-
 		textoIdEmpleado.setText("ID Empleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);

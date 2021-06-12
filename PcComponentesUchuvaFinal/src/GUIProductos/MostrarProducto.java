@@ -71,7 +71,7 @@ public class MostrarProducto extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1920, 900));
 
 		textoMostrarProducto.setEditable(false);
-		textoMostrarProducto.setText("Mostrar ControllerProducto");
+		textoMostrarProducto.setText("Mostrar Producto");
 		textoMostrarProducto.setFocusable(false);
 		textoMostrarProducto.setFont(new Font("Consolas", 4, 80));
 		textoMostrarProducto.setBackground(Color.pink);

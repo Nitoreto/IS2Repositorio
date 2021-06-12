@@ -81,7 +81,7 @@ public class AltaProducto extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1250, 850));
 
 		textoAltaProducto.setEditable(false);
-		textoAltaProducto.setText("Alta ControllerProducto");
+		textoAltaProducto.setText("Alta Producto");
 		textoAltaProducto.setBackground(Color.pink);
 		textoAltaProducto.setForeground(Color.white);
 		textoAltaProducto.setFocusable(false);

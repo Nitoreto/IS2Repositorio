@@ -69,7 +69,7 @@ public class BuscarEmpleado extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarEmpleado.setEditable(false);
-		textoBuscarEmpleado.setText("Buscar ControllerEmpleado");
+		textoBuscarEmpleado.setText("Buscar Empleado");
 		textoBuscarEmpleado.setBackground(Color.cyan);
 		textoBuscarEmpleado.setForeground(Color.white);
 		textoBuscarEmpleado.setFocusable(false);

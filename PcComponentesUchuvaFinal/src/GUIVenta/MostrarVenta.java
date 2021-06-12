@@ -60,7 +60,7 @@ public class MostrarVenta extends JFrame implements Observer{
 		this.getContentPane().setLayout(new BorderLayout());
 
 		textoMostrarVenta.setEditable(false);
-		textoMostrarVenta.setText("Mostrar ControllerVenta");
+		textoMostrarVenta.setText("Mostrar Venta");
 		textoMostrarVenta.setBackground(Color.green);
 		textoMostrarVenta.setForeground(Color.white);
 		textoMostrarVenta.setFocusable(false);
@@ -70,7 +70,7 @@ public class MostrarVenta extends JFrame implements Observer{
 		panelMostrarVenta.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(1, 2, 0, 100));
 
-		textoIdVenta.setText("ID ControllerVenta");
+		textoIdVenta.setText("ID Venta");
 		textoIdVenta.setFont(new Font("Consolas", 4, 80));
 		textoIdVenta.setForeground(Color.green);
 		textoIdVenta.setEditable(false);

@@ -70,7 +70,7 @@ public class MuestraHistorialEmpleado extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1500, 720));
 
 		textoBuscarHistorialEmpleado.setEditable(false);
-		textoBuscarHistorialEmpleado.setText("Mostrar Historial ControllerEmpleado");
+		textoBuscarHistorialEmpleado.setText("Mostrar Historial Empleado");
 		textoBuscarHistorialEmpleado.setBackground(Color.cyan);
 		textoBuscarHistorialEmpleado.setForeground(Color.white);
 		textoBuscarHistorialEmpleado.setFocusable(false);

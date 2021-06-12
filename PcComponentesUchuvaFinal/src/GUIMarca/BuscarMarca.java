@@ -69,7 +69,7 @@ public class BuscarMarca extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1750, 720));
 
 		textoBuscarMarca.setEditable(false);
-		textoBuscarMarca.setText("Buscar ControllerMarca");
+		textoBuscarMarca.setText("Buscar Marca");
 		textoBuscarMarca.setBackground(Color.orange);
 		textoBuscarMarca.setForeground(Color.white);
 		textoBuscarMarca.setFocusable(false);
