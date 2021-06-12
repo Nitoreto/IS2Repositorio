@@ -199,8 +199,6 @@ public class RegistrarVenta extends JFrame implements Observer {
 				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText(), textoCampoFecha.getText(),
 				textoCampoSucursal.getText(), "1" };
 		mediator.alta("ControllerVenta", datos);
-		new PantallaPrincipalVentas(mediator);
-		this.dispose();
 	}
 
 	private void botonCancelarActionPerformed(ActionEvent evt) {

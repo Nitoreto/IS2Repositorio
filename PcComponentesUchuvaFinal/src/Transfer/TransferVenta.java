@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.Random;
 
 public class TransferVenta extends Transfer {
-	private int idVentas, idEmpleado, idSucursal, precioTotal;
-	private String DNICliente, listaProductos, fecha;
+	private int idVentas, idSucursal, IdProducto, precioTotal;
+	private String DNIEmpleado, DNICliente, fecha;
 	private Boolean activo;
 
 	public TransferVenta(ResultSet resultado) throws SQLException {
@@ -38,31 +38,32 @@ public class TransferVenta extends Transfer {
 				throw new Exception("Formato del precio total incorrecto, solo numeros");
 			}
 		case 4:
-			this.listaProductos = datos[3];
-		case 3:
-			try {
-				this.idEmpleado = Integer.parseInt(datos[2]);
+			try{
+				this.IdProducto = Integer.parseInt(datos[3]);
 			} catch (NumberFormatException e) {
 				throw new Exception("Formato del id de empleado incorrecto, solo numeros");
 			}
-		case 2:
-			this.DNICliente = datos[1];
-		case 1:
-			if (datos[0].equalsIgnoreCase("rand")) {
-				idVentas = idRandom();
-			} else {
-				try {
-					this.idVentas = Integer.parseInt(datos[0]);
-				} catch (NumberFormatException e) {
-					throw new Exception("Formato del id incorrecto, solo numeros");
+		case 3:
+				this.DNIEmpleado = datos[2];
+
+			case 2:
+				this.DNICliente = datos[1];
+			case 1:
+				if (datos[0].equalsIgnoreCase("rand")) {
+					idVentas = idRandom();
+				} else {
+					try {
+						this.idVentas = Integer.parseInt(datos[0]);
+					} catch (NumberFormatException e) {
+						throw new Exception("Formato del id incorrecto, solo numeros");
+					}
 				}
 			}
+
 		}
 
-	}
-
-	public int getIdEmpleado() {
-		return idEmpleado;
+	public String getDNIEmpleado() {
+		return this.DNIEmpleado;
 	}
 
 	public int getPrecioTotal() {
@@ -77,8 +78,8 @@ public class TransferVenta extends Transfer {
 		return DNICliente;
 	}
 
-	public String getListaProductos() {
-		return listaProductos;
+	public int getIdProducto() {
+		return IdProducto;
 	}
 
 	public int isActivo() {

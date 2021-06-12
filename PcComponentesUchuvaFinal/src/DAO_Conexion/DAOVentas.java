@@ -65,7 +65,7 @@ public class DAOVentas {
 			if (tVenta.getDNICliente().equals("")) {
 				throw new Exception("El campo DNI de cliente esta vacio.");
 			}
-			if (tVenta.getIdEmpleado() == -1) {
+			if (tVenta.getDNIEmpleado().equals("")) {
 				throw new Exception("El campo ID de Empleado esta vacio.");
 			}
 			row = conexion.conectarUpdate(query);
@@ -98,16 +98,16 @@ public class DAOVentas {
 		try {
 			int row = -1;
 			String query = "INSERT into Venta (IDv, Importe, Fecha, Activo) VALUES (" + tVenta.getIdVenta() + ", "
-					+ tVenta.getPrecioTotal() + ",'" + tVenta.getFecha() + ", " + tVenta.isActivo() + " )";
-			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + tVenta.getIdEmpleado() + "', "
+					+ tVenta.getPrecioTotal() + ",'" + tVenta.getFecha() + "', " + tVenta.isActivo() + " )";
+			String query1 = "INSERT into Gestiona(DNI, IDs, IDv) VALUES ('" + tVenta.getDNIEmpleado() + "', "
 					+ tVenta.getIdSucursal() + ", " + tVenta.getIdVenta() + ")";
 			String query2 = "INSERT into Realiza (IDv, DNI) VALUES (" + tVenta.getIdVenta() + ", '" + tVenta.getDNICliente() + "')";
 			String query3 = "INSERT into Contiene (IDv, IDp) VALUES (" + tVenta.getIdVenta() + ", "
-					+ tVenta.getListaProductos() + ")";
+					+ tVenta.getIdProducto() + ")";
 			if (tVenta.getDNICliente().equals("")) {
 				throw new Exception("El campo DNI cliente est� vac�o. ");
 			}
-			if (tVenta.getIdEmpleado() == -1) {
+			if (tVenta.getDNIEmpleado().equals("")) {
 				throw new Exception("El campo ID de ControllerEmpleado est� vac�o.");
 			}
 			row = conexion.conectarUpdate(query);
