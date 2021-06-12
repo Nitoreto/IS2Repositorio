@@ -23,7 +23,7 @@ public class DAOEmpleado {
 				+ tEmpleado.getDir() + "', " + tEmpleado.getNumero() + ", " + tEmpleado.getSueldo() + ", "
 				+ tEmpleado.getActivo() + ")";
 
-		String query1 = "INSERT into Contratado (DNI, IDs) VALUES ('" + tEmpleado.getDNI() + "', "
+		String query1 = "INSERT into Contratado (DNIp, IDs) VALUES ('" + tEmpleado.getDNI() + "', "
 				+ tEmpleado.getIdSucursal() + " )";
 		System.out.print(query1);
 		try {
@@ -37,7 +37,7 @@ public class DAOEmpleado {
 
 	public TransferEmpleado buscar(String DNI) throws Exception {
 		try {
-			String query = "SELECT * FROM Personal WHERE DNI = '" + DNI + "'";
+			String query = "SELECT DNI, Nombre, Contrasena, Direccion, Telefono, Sueldo, IDs, Activo FROM Personal p JOIN Contratado c ON p.DNI = c.DNIp WHERE DNI = '" + DNI + "'";
 			TransferEmpleado tEmpleado = new TransferEmpleado(conexion.conectarExecute(query));
 			return tEmpleado;
 		} catch (SQLException e) {
@@ -64,7 +64,7 @@ public class DAOEmpleado {
 		try {
 			int row = -1;
 			String query = "DELETE FROM Personal WHERE DNI = '" + DNI + "'";
-			String query1 = "DELETE FROM Contratado  WHERE DNI = '" + DNI + "'";
+			String query1 = "DELETE FROM Contratado  WHERE DNIp = '" + DNI + "'";
 			String query2 = "DELETE FROM Gestiona  WHERE DNI = '" + DNI + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
@@ -98,14 +98,14 @@ public class DAOEmpleado {
 			String query = "UPDATE Personal SET DNI = '" + tEmpleado.getDNI() + "'," + " Nombre = '"
 					+ tEmpleado.getNombre() + "', " + " Contrasena = " + tEmpleado.getPassword() + ",  "
 					+ " Direccion = '" + tEmpleado.getDir() + "', " + " Telefono = " + tEmpleado.getNumero()
-					+ " Sueldo = " + tEmpleado.getSueldo() + ", " + " Activo = " + tEmpleado.getActivo()
+					+ ", Sueldo = " + tEmpleado.getSueldo() + ", " + " Activo = " + tEmpleado.getActivo()
 					+ " WHERE DNI = '" + DNI + "'";
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
 				throw new Exception("No hay un Empleado con ese DNI");
 			}
 			return true;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			if (e.getClass().getName()
 					.equals("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException")) {
 				throw new Exception("No se puede modificar el DNI de un empleado con ventas");

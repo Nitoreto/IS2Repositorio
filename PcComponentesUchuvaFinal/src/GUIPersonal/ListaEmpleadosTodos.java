@@ -141,8 +141,6 @@ public class ListaEmpleadosTodos extends JFrame implements Observer{
 	@Override
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
-		mediator.listar("ControllerEmpleado");
-
 		model = new ModeloTablaEditable(generarTabla, generarTitulo);
 		tabla = new JTable(model);
 		tabla.setFont(new java.awt.Font("Consolas", 4, 40));

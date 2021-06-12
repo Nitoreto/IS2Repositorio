@@ -124,7 +124,7 @@ public class BuscarEmpleado extends JFrame implements Observer {
 	private void botonModificarActionPerformed(ActionEvent evt) {
 		String[] datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
-				tabla.getValueAt(0, 5).toString(), tabla.getValueAt(0, 6).toString() };
+				tabla.getValueAt(0, 5).toString(), tabla.getValueAt(0, 6).toString(),  tabla.getValueAt(0, 7).toString() };
 		mediator.modificar("ControllerEmpleado", datos, campoID.getText());
 
 	}
