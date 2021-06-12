@@ -37,9 +37,10 @@ public class MostrarVenta extends JFrame implements Observer{
 	private Mediator mediator;
 	private ModeloTabla model;
 
-	public MostrarVenta(Mediator controlador) {
+	public MostrarVenta(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponentes();
 	}
 

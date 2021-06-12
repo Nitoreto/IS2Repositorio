@@ -36,10 +36,11 @@ public class ModificarBorrarVenta extends JFrame implements Observer{
 	private JTable tabla;
 	private ModeloTablaEditable model;
 
-	public ModificarBorrarVenta(String idVenta, Mediator controlador) {
+	public ModificarBorrarVenta(String idVenta, Mediator mediator) {
 		super("PCComponentes Uchuva");
 		this.idVenta = idVenta;
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponentes();
 	}
 

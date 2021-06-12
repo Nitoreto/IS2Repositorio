@@ -28,9 +28,9 @@ public class PantallaPrincipalVentas extends JFrame implements Observer{
 	private JButton botonVolver;
 	private Mediator mediator;
 
-	public PantallaPrincipalVentas(Mediator controlador) {
+	public PantallaPrincipalVentas(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
 		initComponentes();
 	}
 

@@ -52,9 +52,10 @@ public class RegistrarVenta extends JFrame implements Observer {
 	private JTextField textoCampoListaProductos;
 	private Mediator mediator;
 
-	public RegistrarVenta(Mediator controlador) {
+	public RegistrarVenta(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponentes();
 	}
 

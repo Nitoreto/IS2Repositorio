@@ -35,9 +35,10 @@ public class ModificarVenta extends JFrame implements Observer {
 	JTextArea textoIdVenta;
 	JTextField textoCampoIdVenta;
 
-	public ModificarVenta(Mediator controlador) {
+	public ModificarVenta(Mediator mediator) {
 		super("PCComponentes Uchuva");
-		this.mediator = controlador;
+		this.mediator = mediator;
+		mediator.asignarObserver(this);
 		initComponentes();
 	}
 
