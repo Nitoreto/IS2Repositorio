@@ -56,7 +56,7 @@ public class MostrarHistorialProducto extends JFrame implements Observer {
 		setPreferredSize(new Dimension(1920, 1080));
 
 		textoMostrarHistorialProducto.setEditable(false);
-		textoMostrarHistorialProducto.setText("Mostrar Historial ControllerProducto");
+		textoMostrarHistorialProducto.setText("Mostrar Historial Producto");
 		textoMostrarHistorialProducto.setFocusable(false);
 		textoMostrarHistorialProducto.setFont(new Font("Consolas", 4, 80));
 		textoMostrarHistorialProducto.setBackground(Color.pink);

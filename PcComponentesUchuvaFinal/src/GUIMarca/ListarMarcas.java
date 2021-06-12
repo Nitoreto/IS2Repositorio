@@ -53,7 +53,7 @@ public class ListarMarcas extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1920, 1080));
 		CrearTabla();
 		textoListarMarca.setEditable(false);
-		textoListarMarca.setText("Listar ControllerMarca");
+		textoListarMarca.setText("Listar Marca");
 		textoListarMarca.setFocusable(false);
 		textoListarMarca.setFont(new Font("Consolas", 2, 100));
 		textoListarMarca.setBackground(Color.orange);

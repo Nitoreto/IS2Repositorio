@@ -69,7 +69,7 @@ public class ModificarVenta extends JFrame implements Observer {
 		panelMostrar.setLayout(new BorderLayout());
 
 		textoIdVenta.setEditable(false);
-		textoIdVenta.setText("ID ControllerVenta a modificar");
+		textoIdVenta.setText("ID Venta a modificar");
 		textoIdVenta.setForeground(Color.green);
 		textoIdVenta.setFont(new Font("Consolas", 4, 80));
 		textoIdVenta.setFocusable(false);

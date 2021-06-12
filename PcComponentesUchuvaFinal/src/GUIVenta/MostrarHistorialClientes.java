@@ -66,7 +66,7 @@ public class MostrarHistorialClientes extends JFrame implements Observer{
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(1, 2, 0, 15));
 
-		textoIdCliente.setText("DNI ControllerCliente");
+		textoIdCliente.setText("DNI Cliente");
 		textoIdCliente.setFont(new Font("Consolas", 4, 80));
 		textoIdCliente.setForeground(Color.green);
 		textoIdCliente.setEditable(false);

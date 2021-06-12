@@ -72,7 +72,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1750, 800));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Registrar ControllerVenta");
+		textoVenta.setText("Registrar Venta");
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -95,7 +95,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 
 		panelDatos.add(textoCampoDNICliente);
 
-		textoIdEmpleado.setText("ID ControllerEmpleado");
+		textoIdEmpleado.setText("ID Empleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);
 		textoIdEmpleado.setEditable(false);

@@ -56,7 +56,7 @@ public class ModificarBorrarVenta extends JFrame implements Observer{
 		setPreferredSize(new Dimension(1920, 720));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Modificar ControllerVenta" + idVenta);
+		textoVenta.setText("Modificar Venta" + idVenta);
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
