@@ -20,7 +20,7 @@ import javax.swing.WindowConstants;
 import Model.Observer;
 import main.Mediator;
 
-public class RegistrarVenta extends JFrame implements Observer{
+public class RegistrarVenta extends JFrame implements Observer {
 	/**
 	 * 
 	 */
@@ -38,10 +38,10 @@ public class RegistrarVenta extends JFrame implements Observer{
 
 	private JTextArea textoIdEmpleado;
 	private JTextField textoCampoIdEmpleado;
-	
+
 	private JTextArea textoSucursal;
 	private JTextField textoCampoSucursal;
-	
+
 	private JTextArea textoFecha;
 	private JTextField textoCampoFecha;
 
@@ -73,13 +73,13 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoIdEmpleado = new JTextArea();
 		textoPrecioTotal = new JTextArea();
 		textoCampoPrecioTotal = new JTextField();
-		textoSucursal =  new JTextArea();
+		textoSucursal = new JTextArea();
 		textoCampoSucursal = new JTextField();
 		textoFecha = new JTextArea();
 		textoCampoFecha = new JTextField();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(1750, 800));
+		setPreferredSize(new Dimension(1750, 950));
 
 		textoVenta.setEditable(false);
 		textoVenta.setText("Registrar Venta");
@@ -93,7 +93,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		panelMostrar.setLayout(new BorderLayout());
 		panelDatos.setLayout(new GridLayout(6, 1, 0, 15));
 
-		textoDNICliente.setText("DNI");
+		textoDNICliente.setText("DNI Cliente");
 		textoDNICliente.setFont(new Font("Consolas", 4, 80));
 		textoDNICliente.setForeground(Color.green);
 		textoDNICliente.setEditable(false);
@@ -104,7 +104,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoDNICliente.setFont(new Font("Consolas", 4, 80));
 
 		panelDatos.add(textoCampoDNICliente);
-		
+
 		textoSucursal.setText("Id Sucursal");
 		textoSucursal.setFont(new Font("Consolas", 4, 80));
 		textoSucursal.setForeground(Color.green);
@@ -116,7 +116,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoSucursal.setFont(new Font("Consolas", 4, 80));
 
 		panelDatos.add(textoCampoSucursal);
-		
+
 		textoFecha.setText("Fecha");
 		textoFecha.setFont(new Font("Consolas", 4, 80));
 		textoFecha.setForeground(Color.green);
@@ -128,7 +128,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoFecha.setFont(new Font("Consolas", 4, 80));
 
 		panelDatos.add(textoCampoFecha);
-		textoIdEmpleado.setText("ID Empleado");
+		textoIdEmpleado.setText("DNI Empleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);
 		textoIdEmpleado.setEditable(false);
@@ -139,7 +139,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		panelDatos.add(textoCampoIdEmpleado);
 
-		textoListaProducos.setText("Lista de Productos");
+		textoListaProducos.setText("ID Producto");
 		textoListaProducos.setFont(new Font("Consolas", 4, 80));
 		textoListaProducos.setForeground(Color.green);
 		textoListaProducos.setEditable(false);
@@ -195,7 +195,8 @@ public class RegistrarVenta extends JFrame implements Observer{
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
 		String[] datos = { "rand", textoCampoDNICliente.getText(), textoCampoIdEmpleado.getText(),
-				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText() };
+				textoCampoListaProductos.getText(), textoCampoPrecioTotal.getText(), textoCampoFecha.getText(),
+				textoCampoSucursal.getText(), "1" };
 		mediator.alta("ControllerVenta", datos);
 		new PantallaPrincipalVentas(mediator);
 		this.dispose();
@@ -222,7 +223,7 @@ public class RegistrarVenta extends JFrame implements Observer{
 	@Override
 	public void onTableChange(Object[][] generarTabla, String[] generarTitulo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

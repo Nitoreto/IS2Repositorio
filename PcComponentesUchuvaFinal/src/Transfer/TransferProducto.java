@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TransferProducto extends Transfer {
-	private String nombre, descripcion, nombreMarca;
+	private String nombre, descripcion, CifMarca;
 	private int ID, idSucursal;
 	private float precio;
 	private Boolean activo;
@@ -16,15 +16,16 @@ public class TransferProducto extends Transfer {
 	public TransferProducto(String[] datos) throws Exception {
 		switch (datos.length) {
 		case 7:
-			idSucursal = Integer.parseInt(datos[6]);
-		case 6:
-			if (datos[5].equals("1")) {
+			if (datos[6].equals("1")) {
 				activo = true;
-			} else if (datos[5].equals("0")) {
+			} else if (datos[6].equals("0")) {
 				activo = false;
 			} else {
 				throw new Exception("Formato del campo activo incorrecto");
 			}
+		case 6:
+			idSucursal = Integer.parseInt(datos[5]);
+			
 		case 5:
 			try {
 				precio = Float.parseFloat(datos[4]);
@@ -34,7 +35,7 @@ public class TransferProducto extends Transfer {
 		case 4:
 			descripcion = datos[3];
 		case 3:
-			nombreMarca = datos[2];
+			CifMarca = datos[2];
 		case 2:
 			nombre = datos[1];
 		case 1:
@@ -53,8 +54,8 @@ public class TransferProducto extends Transfer {
 		return ID;
 	}
 
-	public String getNombreMarca() {
-		return nombreMarca;
+	public String getCifMarca() {
+		return CifMarca;
 	}
 
 	public float getPrecio() {

@@ -15,8 +15,8 @@ public class DAOProducto {
 	}
 
 	public Boolean alta(TransferProducto tProducto) throws Exception {
-		String query = "INSERT into Producto (IDpr, NombreMarca, Nombre, Precio, Descripcion, Activop) VALUES ( "
-				+ tProducto.getID() + ", '" + tProducto.getNombreMarca() + "' ,'" + tProducto.getNombre() + "', "
+		String query = "INSERT into Producto (IDpr, CIFm, Nombre, Precio, Descripcion, Activop) VALUES ( "
+				+ tProducto.getID() + ", '" + tProducto.getCifMarca() + "' ,'" + tProducto.getNombre() + "', "
 				+ tProducto.getPrecio() + ", '" + tProducto.getDescripcion() + "'," + tProducto.isActivo() + ")";
 		String query1 = "INSERT into Tiene (IDp, IDs) VALUES (" + tProducto.getID() + ", " + tProducto.getIdSucursal()
 				+ ")";
@@ -78,9 +78,9 @@ public class DAOProducto {
 	public Boolean modificar(TransferProducto tProducto, int ID) throws Exception {
 		try {
 			int row = -1;
-			String query = "UPDATE Producto SET IDpr = " + tProducto.getID() + ", Marca = '" + tProducto.getNombreMarca()
+			String query = "UPDATE Producto SET IDpr = " + tProducto.getID() + ", CIFm = '" + tProducto.getCifMarca()
 					+ "', Nombre = '" + tProducto.getNombre() + "' , Precio = " + tProducto.getPrecio()
-					+ ", Descripcion = '" + tProducto.getDescripcion() + "', Activo = " + tProducto.isActivo()
+					+ ", Descripcion = '" + tProducto.getDescripcion() + "', Activop = " + tProducto.isActivo()
 					+ " WHERE IDpr = " + ID;
 			row = conexion.conectarUpdate(query);
 			if (row == 0) {
@@ -120,7 +120,7 @@ public class DAOProducto {
 
 	public TransferProducto buscar(int ID) throws Exception {
 		try {
-			String query = "SELECT * FROM Producto WHERE IDpr = " + ID;
+			String query = "SELECT IDpr, Nombre, CIFm, Descripcion, Precio, IDs  FROM Producto p JOIN Tiene t ON p.IDpr = t.IDp WHERE IDpr = " + ID;
 			TransferProducto tProducto = new TransferProducto(conexion.conectarExecute(query));
 			return tProducto;
 		} catch (SQLException e) {

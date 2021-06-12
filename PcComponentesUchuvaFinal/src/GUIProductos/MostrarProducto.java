@@ -133,7 +133,7 @@ public class MostrarProducto extends JFrame implements Observer {
 	private void botonModificarActionPerformed(ActionEvent evt) {
 		String[] Datos = { tabla.getValueAt(0, 0).toString(), tabla.getValueAt(0, 1).toString(),
 				tabla.getValueAt(0, 2).toString(), tabla.getValueAt(0, 3).toString(), tabla.getValueAt(0, 4).toString(),
-				tabla.getValueAt(0, 5).toString() };
+				tabla.getValueAt(0, 5).toString(),"1" };
 		mediator.modificar("ControllerProducto", Datos, campoID.getText());
 	}
 

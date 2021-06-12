@@ -28,6 +28,9 @@ public class AltaProducto extends JFrame implements Observer{
 
 	private JTextArea textoID;
 	private JTextField campoID;
+	
+	private JTextArea textoIdSucursal;
+	private JTextField campoIdSucursal;
 
 	private JTextArea textoPrecio;
 	private JTextField campoPrecio;
@@ -35,8 +38,8 @@ public class AltaProducto extends JFrame implements Observer{
 	private JTextArea textoNombre;
 	private JTextField campoNombre;
 	
-	private JTextArea textoNombreMarca;
-	private JTextField campoNombreMarca;
+	private JTextArea textoCifMarca;
+	private JTextField campoCifMarca;
 
 	private JTextArea textoDescripcion;
 	private JTextField campoDescripcion;
@@ -68,17 +71,20 @@ public class AltaProducto extends JFrame implements Observer{
 		textoNombre = new JTextArea();
 		campoNombre = new JTextField();
 		
-		textoNombreMarca = new JTextArea();
-		campoNombreMarca = new JTextField();
+		textoCifMarca = new JTextArea();
+		campoCifMarca = new JTextField();
 
 		textoDescripcion = new JTextArea();
 		campoDescripcion = new JTextField();
+		
+		textoIdSucursal = new JTextArea();
+		campoIdSucursal = new JTextField();
 
 		botonGuardar = new JButton();
 		botonCancelar = new JButton();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(1250, 850));
+		setPreferredSize(new Dimension(1250, 1000));
 
 		textoAltaProducto.setEditable(false);
 		textoAltaProducto.setText("Alta Producto");
@@ -90,10 +96,10 @@ public class AltaProducto extends JFrame implements Observer{
 		
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		panelMostrar.setLayout(new BorderLayout());
-		panelDatos.setLayout(new GridLayout(6, 1, 0, 15));
+		panelDatos.setLayout(new GridLayout(7, 1, 0, 15));
 
 		textoID.setEditable(false);
-		textoID.setText("ID");
+		textoID.setText("ID Producto");
 		textoID.setForeground(Color.pink);
 		textoID.setFocusable(false);
 		textoID.setFont(new Font("Consolas", 4, 80));
@@ -103,7 +109,7 @@ public class AltaProducto extends JFrame implements Observer{
 		panelDatos.add(campoID);
 
 		textoNombre.setEditable(false);
-		textoNombre.setText("Nombre");
+		textoNombre.setText("Nombre Producto");
 		textoNombre.setForeground(Color.pink);
 		textoNombre.setFocusable(false);
 		textoNombre.setFont(new Font("Consolas", 4, 80));
@@ -112,15 +118,25 @@ public class AltaProducto extends JFrame implements Observer{
 		campoNombre.setFont(new Font("Consolas", 4, 80));
 		panelDatos.add(campoNombre);
 		
-		textoNombreMarca.setEditable(false);
-		textoNombreMarca.setText("Nombre Marca");
-		textoNombreMarca.setForeground(Color.pink);
-		textoNombreMarca.setFocusable(false);
-		textoNombreMarca.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(textoNombreMarca);
+		textoIdSucursal.setEditable(false);
+		textoIdSucursal.setText("Id Sucursal");
+		textoIdSucursal.setForeground(Color.pink);
+		textoIdSucursal.setFocusable(false);
+		textoIdSucursal.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoIdSucursal);
 
-		campoNombreMarca.setFont(new Font("Consolas", 4, 80));
-		panelDatos.add(campoNombreMarca);
+		campoIdSucursal.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(campoIdSucursal);
+		
+		textoCifMarca.setEditable(false);
+		textoCifMarca.setText("Cif Marca");
+		textoCifMarca.setForeground(Color.pink);
+		textoCifMarca.setFocusable(false);
+		textoCifMarca.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(textoCifMarca);
+
+		campoCifMarca.setFont(new Font("Consolas", 4, 80));
+		panelDatos.add(campoCifMarca);
 
 		textoDescripcion.setEditable(false);
 		textoDescripcion.setText("Descripcion");
@@ -176,8 +192,8 @@ public class AltaProducto extends JFrame implements Observer{
 	}
 
 	private void botonGuardarActionPerformed(ActionEvent evt) {
-		String[] Datos = { campoID.getText(), campoNombre.getText(), campoNombreMarca.getText(),
-				campoDescripcion.getText(), campoPrecio.getText(), "1"};
+		String[] Datos = { campoID.getText(), campoNombre.getText(), campoCifMarca.getText(),
+				campoDescripcion.getText(), campoPrecio.getText(), campoIdSucursal.getText(), "1"};
 		mediator.alta("ControllerProducto", Datos);
 	}
 
