@@ -38,6 +38,12 @@ public class RegistrarVenta extends JFrame implements Observer{
 
 	private JTextArea textoIdEmpleado;
 	private JTextField textoCampoIdEmpleado;
+	
+	private JTextArea textoSucursal;
+	private JTextField textoCampoSucursal;
+	
+	private JTextArea textoFecha;
+	private JTextField textoCampoFecha;
 
 	private JTextArea textoPrecioTotal;
 	private JTextField textoCampoPrecioTotal;
@@ -67,12 +73,16 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoIdEmpleado = new JTextArea();
 		textoPrecioTotal = new JTextArea();
 		textoCampoPrecioTotal = new JTextField();
+		textoSucursal =  new JTextArea();
+		textoCampoSucursal = new JTextField();
+		textoFecha = new JTextArea();
+		textoCampoFecha = new JTextField();
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(1750, 800));
 
 		textoVenta.setEditable(false);
-		textoVenta.setText("Registrar ControllerVenta");
+		textoVenta.setText("Registrar Venta");
 		textoVenta.setBackground(Color.green);
 		textoVenta.setForeground(Color.white);
 		textoVenta.setFocusable(false);
@@ -81,9 +91,9 @@ public class RegistrarVenta extends JFrame implements Observer{
 
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		panelMostrar.setLayout(new BorderLayout());
-		panelDatos.setLayout(new GridLayout(4, 1, 0, 15));
+		panelDatos.setLayout(new GridLayout(6, 1, 0, 15));
 
-		textoDNICliente.setText("DNI ControllerCliente");
+		textoDNICliente.setText("DNI");
 		textoDNICliente.setFont(new Font("Consolas", 4, 80));
 		textoDNICliente.setForeground(Color.green);
 		textoDNICliente.setEditable(false);
@@ -94,8 +104,32 @@ public class RegistrarVenta extends JFrame implements Observer{
 		textoCampoDNICliente.setFont(new Font("Consolas", 4, 80));
 
 		panelDatos.add(textoCampoDNICliente);
+		
+		textoSucursal.setText("Id Sucursal");
+		textoSucursal.setFont(new Font("Consolas", 4, 80));
+		textoSucursal.setForeground(Color.green);
+		textoSucursal.setEditable(false);
+		textoSucursal.setFocusable(false);
 
-		textoIdEmpleado.setText("ID ControllerEmpleado");
+		panelDatos.add(textoSucursal);
+
+		textoCampoSucursal.setFont(new Font("Consolas", 4, 80));
+
+		panelDatos.add(textoCampoSucursal);
+		
+		textoFecha.setText("Fecha");
+		textoFecha.setFont(new Font("Consolas", 4, 80));
+		textoFecha.setForeground(Color.green);
+		textoFecha.setEditable(false);
+		textoFecha.setFocusable(false);
+
+		panelDatos.add(textoFecha);
+
+		textoCampoFecha.setFont(new Font("Consolas", 4, 80));
+
+		panelDatos.add(textoCampoFecha);
+
+		textoIdEmpleado.setText("ID Empleado");
 		textoIdEmpleado.setFont(new Font("Consolas", 4, 80));
 		textoIdEmpleado.setForeground(Color.green);
 		textoIdEmpleado.setEditable(false);
